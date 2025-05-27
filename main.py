@@ -29,9 +29,9 @@ def get_search_url(query, page):
 
 
 # Scraping function ( using bp4 )
-def scrape_page(query, page):
+def scrape_page(session, query, page):
     url = get_search_url(query, page)
-    response = requests.get(url)
+    response = session.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
 
     articles = []
@@ -62,17 +62,18 @@ def scrape_page(query, page):
 
 
 # Download articles in desired format ( either pdf or html )
-def download_article(article, format, folder="output"):
+def download_article(session, article, format, folder="output"):
     safe_title = clean_filename(article["title"])[:100]
     filename = os.path.join(folder, f"{safe_title}.{format}")
 
     try:
-        if format == "pdf" and article["pdfUrl"]:
-            content = requests.get(article["pdfUrl"]).content
-        elif format == "html" and article["htmlUrl"]:
-            content = requests.get(article["htmlUrl"]).content
+        if format == "pdf" and article["pdf_url"]:
+            url = article["pdf_url"]
+        elif format == "html" and article["html_url"]:
+            url = article["html_url"]
         else:
             return False
+        content = session.get(url).content
         with open(filename, "wb") as f:
             f.write(content)
         return True
@@ -82,13 +83,13 @@ def download_article(article, format, folder="output"):
 
 
 # Parallel scraping method
-def parallel_scrape(query, amount):
+def parallel_scrape(session, query, amount):
     total_pages = math.ceil(amount / 50)
     pages_per_process = list(range(total_pages))[rank::size]
     collected = []
 
     for page in pages_per_process:
-        articles = scrape_page(query, page)
+        articles = scrape_page(session, query, page)
         collected.extend(articles)
         if len(collected) >= amount:
             collected = collected[:amount]
@@ -117,32 +118,37 @@ def main():
 
     create_output_folder("output")
 
-    local_articles = parallel_scrape(query, amount)
+    session = requests.Session()
 
-    gathered = comm.gather(local_articles, root=0)
+    local_articles = parallel_scrape(session, query, amount)
+
+    failed_articles = []
+
+    for article in local_articles:
+        success = download_article(session, article, format=format_choice, folder="output")
+        if not success:
+            failed_articles.append(article)
+
+    if format_choice == "html" and failed_articles:
+        print(
+            f"\033[31m{len(failed_articles)} research papers couldn't be downloaded due to missing HTML URL.\033[0m")
+        answer = input("Do you want to download them as PDF instead? (y/n): ").lower()
+        if answer == "y":
+            for article in failed_articles:
+                success = download_article(article, format="pdf", folder="output")
+                if not success:
+                    print(f"Also failed to download PDF for: {article['title']}")
+        else:
+            print("Skipping papers without HTML version.")
+
+    gathered_metadata = comm.gather(local_articles, root=0)
 
     if rank == 0:
-        all_articles = [article for sublist in gathered for article in sublist][:amount]
-
-        failed_articles = []
-
-        for article in all_articles:
-            success = download_article(article, format=format_choice, folder="output")
-            if not success:
-                failed_articles.append(article)
-
-            if format_choice == "html" and failed_articles:
-                print(
-                    f"\033[31m{len(failed_articles)} research papers couldn't be downloaded due to missing HTML URL.\033[0m")
-                answer = input("Do you want to download them as PDF instead? (y/n): ").lower()
-                if answer == "y":
-                    for article in failed_articles:
-                        success = download_article(article, format="pdf", folder="output")
-                        if not success:
-                            print(f"Also failed to download PDF for: {article['title']}")
-                else:
-                    print("Skipping papers without HTML version.")
-
+        all_articles = [item for sublist in gathered_metadata for item in sublist][:amount]
+        if len(all_articles) == 0:
+            print(
+                f"\033[31mNo result for: \"{query}\". Check grammar or use a more general term.\033[0m")
+            return
         save_metadata(all_articles)
         print(f"\033[35mMetadata saved and files downloaded in \"output\" folder\033[0m")
 

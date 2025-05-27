@@ -42,8 +42,8 @@ def scrape_page(query, page):
         authors = [a.text.strip() for a in result.find("p", {"class": "authors"}).find_all("a")]
         abstract = result.find("span", attrs={"class": "abstract-full"}).text.strip().replace("\n", "")[
                     :-7].strip()
-        pdfLink = result.find("p", class_="list-title").find("a", string="pdf")
-        pdfUrl = f"{pdfLink['href']}" if pdfLink else None
+        pdf_link = result.find("p", class_="list-title").find("a", string="pdf")
+        pdf_url = f"{pdf_link['href']}" if pdf_link else None
 
         abs_link = result.find("p", class_="list-title").find("a", href=True)["href"]
         arxiv_id = abs_link.split("/abs/")[1]
@@ -54,13 +54,14 @@ def scrape_page(query, page):
             "title": title,
             "authors": authors,
             "abstract": abstract,
-            "pdfUrl": pdfUrl,
-            "htmlUrl": html_url
+            "pdf_url": pdf_url,
+            "html_url": html_url
             })
 
     return articles
 
 
+# Download articles in desired format ( either pdf or html )
 def download_article(article, format, folder="output"):
     safe_title = clean_filename(article["title"])[:100]
     filename = os.path.join(folder, f"{safe_title}.{format}")
@@ -80,6 +81,7 @@ def download_article(article, format, folder="output"):
         return False
 
 
+# Parallel scraping method
 def parallel_scrape(query, amount):
     total_pages = math.ceil(amount / 50)
     pages_per_process = list(range(total_pages))[rank::size]
@@ -95,6 +97,7 @@ def parallel_scrape(query, amount):
     return collected
 
 
+# Save JSON metadata
 def save_metadata(articles, filename="articles.json"):
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(articles, f, ensure_ascii=False, indent=4)
@@ -121,8 +124,24 @@ def main():
     if rank == 0:
         all_articles = [article for sublist in gathered for article in sublist][:amount]
 
+        failed_articles = []
+
         for article in all_articles:
-            download_article(article, format=format_choice, folder="output")
+            success = download_article(article, format=format_choice, folder="output")
+            if not success:
+                failed_articles.append(article)
+
+            if format_choice == "html" and failed_articles:
+                print(
+                    f"\033[31m{len(failed_articles)} research papers couldn't be downloaded due to missing HTML URL.\033[0m")
+                answer = input("Do you want to download them as PDF instead? (y/n): ").lower()
+                if answer == "y":
+                    for article in failed_articles:
+                        success = download_article(article, format="pdf", folder="output")
+                        if not success:
+                            print(f"Also failed to download PDF for: {article['title']}")
+                else:
+                    print("Skipping papers without HTML version.")
 
         save_metadata(all_articles)
         print(f"\033[35mMetadata saved and files downloaded in \"output\" folder\033[0m")
@@ -133,5 +152,6 @@ if __name__ == "__main__":
     main()
     end = time.time()
 
+    # Print time ( for analysis )
     if rank == 0:
         print(f"Total time: {end - start:.2f} seconds")

@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations</title>
+<!--Generated on Mon May 26 14:39:53 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2505.20052v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S1" title="In Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S2" title="In Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Pre-training Configuration</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S2.SS1" title="In 2 Pre-training Configuration ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>Modeling</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S2.SS2" title="In 2 Pre-training Configuration ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Architecture</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S2.SS3" title="In 2 Pre-training Configuration ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.3 </span>Pre-training Data</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S2.SS4" title="In 2 Pre-training Configuration ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.4 </span>Compute Infrastructure</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S2.SS5" title="In 2 Pre-training Configuration ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.5 </span>Training Setup</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S3" title="In Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Downstream Tasks Evaluation</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S3.SS1" title="In 3 Downstream Tasks Evaluation ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Evaluation Details</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S4" title="In Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Discussion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S5" title="In Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Conclusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S6" title="In Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Data Availability</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<div class="ltx_para" id="p1">
+<span class="ltx_ERROR undefined" id="p1.1">\addbibresource</span>
+<p class="ltx_p" id="p1.2">sample.bib <span class="ltx_ERROR undefined" id="p1.2.1">\DeclareLanguageMapping</span>britishbritish-apa <span class="ltx_ERROR undefined" id="p1.2.2">\DeclareFieldFormat</span>[article]volume<span class="ltx_ERROR undefined" id="p1.2.3">\apanum</span>#1 
+ 
+
+
+
+
+
+
+
+
+
+</p>
+</div>
+<h1 class="ltx_title ltx_title_document">Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Hazem Alsamkary <span class="ltx_ERROR undefined" id="id1.1.id1">\orcidlink</span>0009-0006-6966-9687
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation">Proteinea Inc.
+</span></span></span>
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Mohamed Elshaffei <span class="ltx_ERROR undefined" id="id2.1.id1">\orcidlink</span>0009-0008-4484-1668
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation">Proteinea Inc.
+</span></span></span>
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Mohamed Elkerdawy
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation">Proteinea Inc.
+</span></span></span>
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Ahmed Elnaggar
+</span><span class="ltx_author_notes">Correspondence: <span class="ltx_text ltx_font_typewriter" id="id3.1.id1">publications@proteinea.com</span>
+<span class="ltx_contact ltx_role_affiliation">Proteinea Inc.
+</span></span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id4.id1">Protein language models (PLMs) have emerged as powerful tools to detect complex patterns of protein sequences. However, the capability of PLMs to fully capture information on protein sequences might be limited by focusing on single pre-training tasks. Although adding data modalities or supervised objectives can improve the performance of PLMs, pre-training often remains focused on denoising corrupted sequences. To push the boundaries of PLMs, our research investigated a multi-task pre-training strategy. We developed Ankh3, a model jointly optimized on two objectives: masked language modeling with multiple masking probabilities and protein sequence completion relying only on protein sequences as input. This multi-task pre-training demonstrated that PLMs can learn richer and more generalizable representations solely from protein sequences. The results demonstrated improved performance in downstream tasks, such as secondary structure prediction, fluorescence, GB1 fitness, and contact prediction. The integration of multiple tasks gave the model a more comprehensive understanding of protein properties, leading to more robust and accurate predictions.</p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.2">Protein language models (PLMs) have led to a paradigm shift in the field of synthetic biology, enabling effective modeling of diverse tasks and the generation of novel proteins. Current language models typically undergo training on a single task, masked language modeling (MLM) utilizing bi-directional encoder models <span class="ltx_ERROR undefined" id="S1.p1.2.1">\parencite</span>rives2019biological, encoder-decoder models <span class="ltx_ERROR undefined" id="S1.p1.2.2">\parencite</span>elnaggar2023ankh,elnaggar2021prottrans, or decoder-only models <span class="ltx_ERROR undefined" id="S1.p1.2.3">\parencite</span>madani2020progen. In the present research, we introduce Ankh3, a PLM pre-trained on only two tasks out of three from the UL2 objective <span class="ltx_ERROR undefined" id="S1.p1.2.4">\parencite</span>tay2022ul2. The UL2 objective contains three tasks: R-denoiser [NLU] that focuses on high corruption of short spans, S-denoiser [S2S] that is a sequential denoiser, and X-denoiser [NLG] that focuses on extreme denoising of a mix of short and long spans with high and low denoising. X-denoiser was not used due to previous experiences of long span masking in former Ankh models that resulted in poor performance. Hence, this research only focuses on short-span sequence variable denoising/demasking [NLU] and sequence completion/sequential denoising [S2S]. Sequence denoising aligns with the regular T5 denoising objective in which sentinel tokens are incorporated and sequence completion is modeled as completing the remaining half of a given protein sequence presented to the model. Two sizes of Ankh3 are provided (Table <a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S1" title="1 Introduction ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_tag">1</span></a>), Ankh3-Large and Ankh3-XL having the following configurations:</p>
+<div class="ltx_pagination ltx_role_newpage"></div>
+<div class="ltx_logical-block" id="S1.p1.1">
+<figure class="ltx_table ltx_align_center" id="S1.T1">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 1: </span>Overview of the main model parameters and design choices</figcaption>
+</figure>
+<div class="ltx_para" id="S1.p1.1.p1">
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S1.p1.1.p1.1">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S1.p1.1.p1.1.1.1">
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.1.1.1" style="padding-bottom:2.15277pt;">
+Parameters</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.1.1.2" style="padding-bottom:2.15277pt;">Large</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.1.1.3" style="padding-bottom:2.15277pt;">XL</td>
+</tr>
+<tr class="ltx_tr" id="S1.p1.1.p1.1.2.2">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.p1.1.p1.1.2.2.1">Embedding dim</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.p1.1.p1.1.2.2.2">1536</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.p1.1.p1.1.2.2.3">2560</td>
+</tr>
+<tr class="ltx_tr" id="S1.p1.1.p1.1.3.3">
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.3.3.1">Layers</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.3.3.2">72</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.3.3.3">72</td>
+</tr>
+<tr class="ltx_tr" id="S1.p1.1.p1.1.4.4">
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.4.4.1">Encoder layers</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.4.4.2">48</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.4.4.3">48</td>
+</tr>
+<tr class="ltx_tr" id="S1.p1.1.p1.1.5.5">
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.5.5.1">Decoder layers</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.5.5.2">24</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.5.5.3">24</td>
+</tr>
+<tr class="ltx_tr" id="S1.p1.1.p1.1.6.6">
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.6.6.1">Tie word embeddings</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.6.6.2">no</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.6.6.3">no</td>
+</tr>
+<tr class="ltx_tr" id="S1.p1.1.p1.1.7.7">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.p1.1.p1.1.7.7.1">Feedforward dim</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.p1.1.p1.1.7.7.2">3840</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.p1.1.p1.1.7.7.3">6720</td>
+</tr>
+<tr class="ltx_tr" id="S1.p1.1.p1.1.8.8">
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.8.8.1">Non-linearity</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.8.8.2">SwiGLU</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.8.8.3">SwiGLU</td>
+</tr>
+<tr class="ltx_tr" id="S1.p1.1.p1.1.9.9">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.p1.1.p1.1.9.9.1">Num heads</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.p1.1.p1.1.9.9.2">16</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.p1.1.p1.1.9.9.3">32</td>
+</tr>
+<tr class="ltx_tr" id="S1.p1.1.p1.1.10.10">
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.10.10.1">KV dim</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.10.10.2">64</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.10.10.3">64</td>
+</tr>
+<tr class="ltx_tr" id="S1.p1.1.p1.1.11.11">
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.11.11.1">Relative attention max distance</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.11.11.2">128</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.11.11.3">128</td>
+</tr>
+<tr class="ltx_tr" id="S1.p1.1.p1.1.12.12">
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.12.12.1">Relative attention num buckets</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.12.12.2">64</td>
+<td class="ltx_td ltx_align_center" id="S1.p1.1.p1.1.12.12.3">64</td>
+</tr>
+<tr class="ltx_tr" id="S1.p1.1.p1.1.13.13">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.p1.1.p1.1.13.13.1">Num sentinel tokens</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.p1.1.p1.1.13.13.2">225</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.p1.1.p1.1.13.13.3">225</td>
+</tr>
+<tr class="ltx_tr" id="S1.p1.1.p1.1.14.14">
+<td class="ltx_td ltx_align_center ltx_border_b" id="S1.p1.1.p1.1.14.14.1">Vocab size</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S1.p1.1.p1.1.14.14.2">256</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S1.p1.1.p1.1.14.14.3">256</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Pre-training Configuration</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>Modeling</h3>
+<div class="ltx_para ltx_noindent" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">In contrast to using the conventional masked language modeling method, as implemented in Ankh <span class="ltx_ERROR undefined" id="S2.SS1.p1.1.1">\parencite</span>elnaggar2023ankh, ESM2 <span class="ltx_ERROR undefined" id="S2.SS1.p1.1.2">\parencite</span>rives2019biological and ESM3 <span class="ltx_ERROR undefined" id="S2.SS1.p1.1.3">\parencite</span>hayes2024simulating models or autoregressive models as implemented in ProGen2 <span class="ltx_ERROR undefined" id="S2.SS1.p1.1.4">\parencite</span>[]nijkamp2022progen2exploringboundariesprotein, we added another pre-training task where the model is tasked to complete the remaining 50% of an input sequence. The first 50% of the sequence was given to the model as input to the encoder, and the remaining 50% of the sequence was generated by the decoder conditioned on the output representation of the first half. This approach aims to enhance the understanding of the models for protein sequences in terms of generation and performance on downstream tasks. Although variable completion percentages may enhance the performance of the model, it was not experimented in this work due to the limited computation power. However, in inference, the model can generate the whole protein sequence with a variable sequence length input. Finally, because one more task was added during the pre-training, the increase in the capacity of Ankh3-XL model did not lead to performance degradation as in ProtT5 <span class="ltx_ERROR undefined" id="S2.SS1.p1.1.5">\parencite</span>[]elnaggar2021prottrans when scaled from ProtT5-XL to ProtT5-XXL while all hyperparameters were fixed, including the dataset.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Architecture</h3>
+<div class="ltx_para ltx_noindent" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">As in preceding Ankh models, Ankh3 is based on T5 architecture <span class="ltx_ERROR undefined" id="S2.SS2.p1.1.1">\parencite</span>2020t5 with the model configuration mentioned in table <a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S1" title="1 Introduction ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_tag">1</span></a>, an encoder-decoder transformer model with T5 relative positional bias. Table <a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S2.SS2" title="2.2 Architecture ‣ 2 Pre-training Configuration ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_tag">2.2</span></a> presents the total number of parameters for each model.</p>
+</div>
+<div class="ltx_logical-block" id="S2.SS2.1">
+<figure class="ltx_table ltx_align_center" id="S2.T2">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 2: </span>Number of parameters for each Ankh3 model</figcaption>
+</figure>
+<div class="ltx_para" id="S2.SS2.1.p1">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S2.SS2.1.p1.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S2.SS2.1.p1.1.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column" id="S2.SS2.1.p1.1.1.1.1" style="padding-bottom:2.15277pt;">
+Model</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column" id="S2.SS2.1.p1.1.1.1.2" style="padding-bottom:2.15277pt;">Encoder parameters</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column" id="S2.SS2.1.p1.1.1.1.3" style="padding-bottom:2.15277pt;">Decoder Parameters</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column" id="S2.SS2.1.p1.1.1.1.4" style="padding-bottom:2.15277pt;">Total Parameters</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S2.SS2.1.p1.1.2.1">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S2.SS2.1.p1.1.2.1.1">Ankh3-Large</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S2.SS2.1.p1.1.2.1.2">1,151,879,680</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S2.SS2.1.p1.1.2.1.3">727,169,536</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S2.SS2.1.p1.1.2.1.4">1,879,049,216</td>
+</tr>
+<tr class="ltx_tr" id="S2.SS2.1.p1.1.3.2">
+<td class="ltx_td ltx_align_center ltx_border_b" id="S2.SS2.1.p1.1.3.2.1">Ankh3-XL</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S2.SS2.1.p1.1.3.2.2">3,484,799,488</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S2.SS2.1.p1.1.3.2.3">2,246,107,648</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S2.SS2.1.p1.1.3.2.4">5,730,907,136</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.3 </span>Pre-training Data</h3>
+<div class="ltx_para ltx_noindent" id="S2.SS3.p1">
+<p class="ltx_p" id="S2.SS3.p1.1">Inspired by its predecessors Ankh <span class="ltx_ERROR undefined" id="S2.SS3.p1.1.1">\parencite</span>elnaggar2023ankh and ProtTrans <span class="ltx_ERROR undefined" id="S2.SS3.p1.1.2">\parencite</span>elnaggar2021prottrans, the protein language model Ankh3 underwent pre-training with a substantial dataset comprising 59,130,945 distinct sequences sourced from UniRef50. The UniProt Reference Clusters (UniRef) are a collection of databases that offer comprehensively clustered sets of protein sequences from the UniProt Knowledgebase (UniProtKB), which includes isoforms, along with chosen records from UniParc as detailed in <span class="ltx_ERROR undefined" id="S2.SS3.p1.1.3">\parencite</span>[]suzek2015uniref. 
+<br class="ltx_break"/>This clustering methodology employs varying sequence similarity thresholds to ensure that the resulting clusters are non-redundant and maintain homogeneity among the sequences within each cluster. Specifically, in the UniRef100 database, every entry or cluster consists of identical sequences, including sub-fragments, irrespective of the organism from which they originate. Subsequently, the UniRef50 database is created by further clustering the representative sequences from UniRef90 (which is built by clustering UniRef100 sequences at a 90% identity threshold) using a 50% sequence identity cutoff <span class="ltx_ERROR undefined" id="S2.SS3.p1.1.4">\parencite</span>[]suzek2015uniref. This hierarchical approach ensures a reduced redundancy dataset ideal for training large-scale protein models. <span class="ltx_ERROR undefined" id="S2.SS3.p1.1.5">\parencite</span>suzek2015uniref.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.4 </span>Compute Infrastructure</h3>
+<div class="ltx_para ltx_noindent" id="S2.SS4.p1">
+<p class="ltx_p" id="S2.SS4.p1.1">Both Ankh3 models were trained utilizing TPUv4 with 64 chips. The T5x library <span class="ltx_ERROR undefined" id="S2.SS4.p1.1.1">\parencite</span>roberts2022t5x, developed in JAX <span class="ltx_ERROR undefined" id="S2.SS4.p1.1.2">\parencite</span>[]jax2018github, served as the implementation platform. Ankh3-Large was trained without replication or sharding, while Ankh3-XL employed both 2-way data sharding and 2-way model sharding. Optimizer states were not sharded in either model.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.5 </span>Training Setup</h3>
+<div class="ltx_para ltx_noindent" id="S2.SS5.p1">
+<p class="ltx_p" id="S2.SS5.p1.1">While conventional masked language modeling traditionally utilizes a single masking probability, the training here employed three distinct masking probabilities: 15%, 20%, and 30%. These probabilities governed the proportion of masked tokens and were sampled uniformly to ensure that each masking level had an equal chance of selection in every training step. This uniform distribution facilitated the exposure of the model to a varied range of masking conditions. In the previous Ankh model <span class="ltx_ERROR undefined" id="S2.SS5.p1.1.1">\parencite</span>[]elnaggar2023ankh, different denoising probabilities were explored before reaching the final masking probability, and it was concluded that some tasks performed better when Ankh was trained on higher denoising probabilities, while other tasks performed better with lower denoising probabilities. Therefore, MLM was utilized here with multiple masking probabilities during pre-training so that a good performance is achieved in most of the tasks. For the multi-task training setup, each sequence from the dataset was randomly assigned to either the MLM or sequence completion task each time it was selected for a training batch. This random assignment strategy ensured that when a sequence was sampled multiple times over the course of training, the model could be exposed to that same sequence under different task objectives—for instance, processing it for MLM in one training step and for sequence completion in another. This allowed the model to learn diverse aspects from the identical input data by experiencing it through varied task contexts. In sequence completion, the sequence was divided into two segments: the first half was given to the encoder as input, and the second segment was predicted by the decoder, conditioned on the representation of the first segment that was output by the encoder model. The training hyperparameters for each model are shown in Table <a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S2.SS5" title="2.5 Training Setup ‣ 2 Pre-training Configuration ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_tag">2.5</span></a>.</p>
+</div>
+<div class="ltx_logical-block" id="S2.SS5.3">
+<figure class="ltx_table ltx_align_center" id="S2.T3">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 3: </span>Training hyperparameters of the Ankh3 models</figcaption>
+</figure>
+<div class="ltx_para" id="S2.SS5.3.p1">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S2.SS5.2.2">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S2.SS5.2.2.3.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S2.SS5.2.2.3.1.1" style="padding-bottom:2.15277pt;">
+Hyperparameters</th>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.3.1.2" style="padding-bottom:2.15277pt;">Ankh3 Large</td>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.3.1.3" style="padding-bottom:2.15277pt;">Ankh3-XL</td>
+</tr>
+<tr class="ltx_tr" id="S2.SS5.2.2.4.2">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_t" id="S2.SS5.2.2.4.2.1">Sequence length</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S2.SS5.2.2.4.2.2">512</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S2.SS5.2.2.4.2.3">512</td>
+</tr>
+<tr class="ltx_tr" id="S2.SS5.2.2.5.3">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S2.SS5.2.2.5.3.1">Masking probability</th>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.5.3.2">15% 20% 30%</td>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.5.3.3">15% 20% 30%</td>
+</tr>
+<tr class="ltx_tr" id="S2.SS5.2.2.6.4">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S2.SS5.2.2.6.4.1">Warmup scheduler</th>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.6.4.2">rsqrt_decay</td>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.6.4.3">rsqrt_decay</td>
+</tr>
+<tr class="ltx_tr" id="S2.SS5.2.2.7.5">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S2.SS5.2.2.7.5.1">Warmup steps</th>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.7.5.2">10K</td>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.7.5.3">10K</td>
+</tr>
+<tr class="ltx_tr" id="S2.SS5.2.2.8.6">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S2.SS5.2.2.8.6.1">Learning rate</th>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.8.6.2">1e-2</td>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.8.6.3">1e-2</td>
+</tr>
+<tr class="ltx_tr" id="S2.SS5.2.2.9.7">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S2.SS5.2.2.9.7.1">Optimizer</th>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.9.7.2">Adafactor</td>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.9.7.3">Adafactor</td>
+</tr>
+<tr class="ltx_tr" id="S2.SS5.2.2.2">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S2.SS5.2.2.2.3">Num steps</th>
+<td class="ltx_td ltx_align_center" id="S2.SS5.1.1.1.1">
+<math alttext="\approx" class="ltx_Math" display="inline" id="S2.SS5.1.1.1.1.m1.1"><semantics id="S2.SS5.1.1.1.1.m1.1a"><mo id="S2.SS5.1.1.1.1.m1.1.1" xref="S2.SS5.1.1.1.1.m1.1.1.cmml">≈</mo><annotation-xml encoding="MathML-Content" id="S2.SS5.1.1.1.1.m1.1b"><approx id="S2.SS5.1.1.1.1.m1.1.1.cmml" xref="S2.SS5.1.1.1.1.m1.1.1"></approx></annotation-xml><annotation encoding="application/x-tex" id="S2.SS5.1.1.1.1.m1.1c">\approx</annotation><annotation encoding="application/x-llamapun" id="S2.SS5.1.1.1.1.m1.1d">≈</annotation></semantics></math> 4M</td>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.2.2">
+<math alttext="\approx" class="ltx_Math" display="inline" id="S2.SS5.2.2.2.2.m1.1"><semantics id="S2.SS5.2.2.2.2.m1.1a"><mo id="S2.SS5.2.2.2.2.m1.1.1" xref="S2.SS5.2.2.2.2.m1.1.1.cmml">≈</mo><annotation-xml encoding="MathML-Content" id="S2.SS5.2.2.2.2.m1.1b"><approx id="S2.SS5.2.2.2.2.m1.1.1.cmml" xref="S2.SS5.2.2.2.2.m1.1.1"></approx></annotation-xml><annotation encoding="application/x-tex" id="S2.SS5.2.2.2.2.m1.1c">\approx</annotation><annotation encoding="application/x-llamapun" id="S2.SS5.2.2.2.2.m1.1d">≈</annotation></semantics></math> 5M</td>
+</tr>
+<tr class="ltx_tr" id="S2.SS5.2.2.10.8">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S2.SS5.2.2.10.8.1">Batch size</th>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.10.8.2">1024</td>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.10.8.3">1024</td>
+</tr>
+<tr class="ltx_tr" id="S2.SS5.2.2.11.9">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S2.SS5.2.2.11.9.1">Weight decay</th>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.11.9.2">0.0</td>
+<td class="ltx_td ltx_align_center" id="S2.SS5.2.2.11.9.3">0.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Downstream Tasks Evaluation</h2>
+<div class="ltx_para ltx_noindent" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">The performance of the two Ankh3 models was assessed based on four benchmarking tasks: secondary structure prediction, fluorescence prediction, GB1, and contact prediction. The benchmark settings were freezing the backbone model, extracting the representation of each sequence, pooling the representation using average pooling in sequence prediction tasks (e.g., fluorescence prediction and GB1), and finally, these representations are passed to a ConvBERT model <span class="ltx_ERROR undefined" id="S3.p1.1.1">\parencite</span>jiang2020convbert. ConvBERT hyperparameters were fixed across all tasks. The hyperparameters of the ConvBERT model are summarized in Table <a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S3" title="3 Downstream Tasks Evaluation ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
+</div>
+<div class="ltx_logical-block" id="S3.1">
+<figure class="ltx_table ltx_align_center" id="S3.T4">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 4: </span>ConvBERT hyperparameters during benchmarking</figcaption>
+</figure>
+<div class="ltx_para" id="S3.1.p1">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S3.1.p1.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S3.1.p1.1.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row" id="S3.1.p1.1.1.1.1">
+Hyperparameters</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column" id="S3.1.p1.1.1.1.2">ConvBERT</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.1.p1.1.2.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_t" id="S3.1.p1.1.2.1.1">Num layers</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.1.p1.1.2.1.2">1</td>
+</tr>
+<tr class="ltx_tr" id="S3.1.p1.1.3.2">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S3.1.p1.1.3.2.1">Feedforward dim</th>
+<td class="ltx_td ltx_align_center" id="S3.1.p1.1.3.2.2">Embedding dim / 2</td>
+</tr>
+<tr class="ltx_tr" id="S3.1.p1.1.4.3">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S3.1.p1.1.4.3.1">Num heads</th>
+<td class="ltx_td ltx_align_center" id="S3.1.p1.1.4.3.2">4</td>
+</tr>
+<tr class="ltx_tr" id="S3.1.p1.1.5.4">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S3.1.p1.1.5.4.1">Dropout</th>
+<td class="ltx_td ltx_align_center" id="S3.1.p1.1.5.4.2">0.1</td>
+</tr>
+<tr class="ltx_tr" id="S3.1.p1.1.6.5">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S3.1.p1.1.6.5.1">Kernel size</th>
+<td class="ltx_td ltx_align_center" id="S3.1.p1.1.6.5.2">7</td>
+</tr>
+<tr class="ltx_tr" id="S3.1.p1.1.7.6">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S3.1.p1.1.7.6.1">Pooling (if needed)</th>
+<td class="ltx_td ltx_align_center" id="S3.1.p1.1.7.6.2">Global average pooling</td>
+</tr>
+<tr class="ltx_tr" id="S3.1.p1.1.8.7">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S3.1.p1.1.8.7.1">Learning rate</th>
+<td class="ltx_td ltx_align_center" id="S3.1.p1.1.8.7.2">1e-2</td>
+</tr>
+<tr class="ltx_tr" id="S3.1.p1.1.9.8">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S3.1.p1.1.9.8.1">Warmup steps</th>
+<td class="ltx_td ltx_align_center" id="S3.1.p1.1.9.8.2">1000</td>
+</tr>
+<tr class="ltx_tr" id="S3.1.p1.1.10.9">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S3.1.p1.1.10.9.1">Num epochs</th>
+<td class="ltx_td ltx_align_center" id="S3.1.p1.1.10.9.2">20</td>
+</tr>
+<tr class="ltx_tr" id="S3.1.p1.1.11.10">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S3.1.p1.1.11.10.1">Gradient accumulation steps</th>
+<td class="ltx_td ltx_align_center" id="S3.1.p1.1.11.10.2">16</td>
+</tr>
+<tr class="ltx_tr" id="S3.1.p1.1.12.11">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S3.1.p1.1.12.11.1">Batch Size</th>
+<td class="ltx_td ltx_align_center" id="S3.1.p1.1.12.11.2">1</td>
+</tr>
+<tr class="ltx_tr" id="S3.1.p1.1.13.12">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S3.1.p1.1.13.12.1">Weight Decay</th>
+<td class="ltx_td ltx_align_center" id="S3.1.p1.1.13.12.2">0.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.p2">
+<ul class="ltx_itemize" id="S3.I1">
+<li class="ltx_item" id="S3.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para ltx_noindent" id="S3.I1.i1.p1">
+<p class="ltx_p" id="S3.I1.i1.p1.2"><span class="ltx_text ltx_font_bold" id="S3.I1.i1.p1.2.1">Secondary structure prediction:</span>
+Secondary structures are the conformational arrangements of the polypeptide backbone in either <math alttext="\alpha" class="ltx_Math" display="inline" id="S3.I1.i1.p1.1.m1.1"><semantics id="S3.I1.i1.p1.1.m1.1a"><mi id="S3.I1.i1.p1.1.m1.1.1" xref="S3.I1.i1.p1.1.m1.1.1.cmml">α</mi><annotation-xml encoding="MathML-Content" id="S3.I1.i1.p1.1.m1.1b"><ci id="S3.I1.i1.p1.1.m1.1.1.cmml" xref="S3.I1.i1.p1.1.m1.1.1">𝛼</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.I1.i1.p1.1.m1.1c">\alpha</annotation><annotation encoding="application/x-llamapun" id="S3.I1.i1.p1.1.m1.1d">italic_α</annotation></semantics></math>-helix, <math alttext="\beta" class="ltx_Math" display="inline" id="S3.I1.i1.p1.2.m2.1"><semantics id="S3.I1.i1.p1.2.m2.1a"><mi id="S3.I1.i1.p1.2.m2.1.1" xref="S3.I1.i1.p1.2.m2.1.1.cmml">β</mi><annotation-xml encoding="MathML-Content" id="S3.I1.i1.p1.2.m2.1b"><ci id="S3.I1.i1.p1.2.m2.1.1.cmml" xref="S3.I1.i1.p1.2.m2.1.1">𝛽</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.I1.i1.p1.2.m2.1c">\beta</annotation><annotation encoding="application/x-llamapun" id="S3.I1.i1.p1.2.m2.1d">italic_β</annotation></semantics></math>-strand, or coils <span class="ltx_ERROR undefined" id="S3.I1.i1.p1.2.2">\parencite</span>ma2018protein. This task gives insights into the quality of the protein sequence representation of the model being tested. It has two levels of granularity: the first level involves predicting one of three states of the secondary structure (SSP-3) for each amino acid, and the second level involves predicting one of eight states (SSP-8) of the secondary structure for each amino acid, which is more challenging. Accuracy was used as the primary metric to measure the proportion of correctly predicted states. To test the model’s performance, CASP12 <span class="ltx_ERROR undefined" id="S3.I1.i1.p1.2.3">\parencite</span>[]https://doi.org/10.1002/prot.25423 and CASP14 <span class="ltx_ERROR undefined" id="S3.I1.i1.p1.2.4">\parencite</span>[]https://doi.org/10.1002/prot.26237 were used, and DSSP was used to compute the labels for each sequence.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para ltx_noindent" id="S3.I1.i2.p1">
+<p class="ltx_p" id="S3.I1.i2.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I1.i2.p1.1.1">Fluorescence prediction:</span>
+Fluorescence is a phenomenon where certain proteins, like Green Fluorescent Protein (GFP), emit light after absorbing it. The light intensity can be highly sensitive to the amino acid sequence due to the change in structure and the efficiency of the light-emitting machinery <span class="ltx_ERROR undefined" id="S3.I1.i2.p1.1.2">\parencite</span>sample2009structure. Each PLM was trained on a fluorescence dataset <span class="ltx_ERROR undefined" id="S3.I1.i2.p1.1.3">\parencite</span>[]rao2019evaluatingproteintransferlearning, where the model is tasked to map a protein sequence to its corresponding fluorescence value. The fluorescence value is a single continuous value; hence, all sequence information was aggregated into a single vector using global average pooling. Spearman correlation was used as the primary metric to measure how well the model is able to order the sequences based on their predicted fluorescence.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para ltx_noindent" id="S3.I1.i3.p1">
+<p class="ltx_p" id="S3.I1.i3.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I1.i3.p1.1.1">GB1 fitness:</span>
+GB1 is the binding part of Protein G that binds to immunoglobulins, and it is important for purifying antibodies <span class="ltx_ERROR undefined" id="S3.I1.i3.p1.1.2">\parencite</span>sommer2012fast. The study of mutations in GB1 is considered the benchmark for understanding how mutations interact in non-additive ways, a phenomenon known as epistasis <span class="ltx_ERROR undefined" id="S3.I1.i3.p1.1.3">\parencite</span>[]10.7554/eLife.16965. This task uses regression to assess how well variants of the GB1 protein bind after mutations were introduced at four specific locations. The GB1 dataset for this task was sourced using the FLIP benchmark <span class="ltx_ERROR undefined" id="S3.I1.i3.p1.1.4">\parencite</span>[]Dallago2021.11.09.467890. The model aims to predict a continuous fitness score for a given protein sequence. To achieve this, information from the protein sequence as understood by the model was condensed into a single vector by global average pooling. The performance of the model was assessed using Spearman correlation to indicate how accurately the model can rank the protein sequences according to their predicted GB1 binding fitness.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para ltx_noindent" id="S3.I1.i4.p1">
+<p class="ltx_p" id="S3.I1.i4.p1.10"><span class="ltx_text ltx_font_bold" id="S3.I1.i4.p1.10.1">Contact prediction:</span>
+Contact prediction assesses the ability of the model to infer the spatial proximity between pairs of amino acids from their sequence. Contacts were defined based on the Euclidean distance between the C<sub class="ltx_sub" id="S3.I1.i4.p1.10.2"><span class="ltx_text ltx_font_italic" id="S3.I1.i4.p1.10.2.1">α</span></sub> atoms of residue pairs. A contact is assumed if this C<sub class="ltx_sub" id="S3.I1.i4.p1.10.3"><span class="ltx_text ltx_font_italic" id="S3.I1.i4.p1.10.3.1">α</span></sub>-C<sub class="ltx_sub" id="S3.I1.i4.p1.10.4"><span class="ltx_text ltx_font_italic" id="S3.I1.i4.p1.10.4.1">α</span></sub> distance is less than 8.0 Ångströms, resulting in an <math alttext="N\times N" class="ltx_Math" display="inline" id="S3.I1.i4.p1.4.m4.1"><semantics id="S3.I1.i4.p1.4.m4.1a"><mrow id="S3.I1.i4.p1.4.m4.1.1" xref="S3.I1.i4.p1.4.m4.1.1.cmml"><mi id="S3.I1.i4.p1.4.m4.1.1.2" xref="S3.I1.i4.p1.4.m4.1.1.2.cmml">N</mi><mo id="S3.I1.i4.p1.4.m4.1.1.1" lspace="0.222em" rspace="0.222em" xref="S3.I1.i4.p1.4.m4.1.1.1.cmml">×</mo><mi id="S3.I1.i4.p1.4.m4.1.1.3" xref="S3.I1.i4.p1.4.m4.1.1.3.cmml">N</mi></mrow><annotation-xml encoding="MathML-Content" id="S3.I1.i4.p1.4.m4.1b"><apply id="S3.I1.i4.p1.4.m4.1.1.cmml" xref="S3.I1.i4.p1.4.m4.1.1"><times id="S3.I1.i4.p1.4.m4.1.1.1.cmml" xref="S3.I1.i4.p1.4.m4.1.1.1"></times><ci id="S3.I1.i4.p1.4.m4.1.1.2.cmml" xref="S3.I1.i4.p1.4.m4.1.1.2">𝑁</ci><ci id="S3.I1.i4.p1.4.m4.1.1.3.cmml" xref="S3.I1.i4.p1.4.m4.1.1.3">𝑁</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.I1.i4.p1.4.m4.1c">N\times N</annotation><annotation encoding="application/x-llamapun" id="S3.I1.i4.p1.4.m4.1d">italic_N × italic_N</annotation></semantics></math> binary contact map for each protein of length <math alttext="N" class="ltx_Math" display="inline" id="S3.I1.i4.p1.5.m5.1"><semantics id="S3.I1.i4.p1.5.m5.1a"><mi id="S3.I1.i4.p1.5.m5.1.1" xref="S3.I1.i4.p1.5.m5.1.1.cmml">N</mi><annotation-xml encoding="MathML-Content" id="S3.I1.i4.p1.5.m5.1b"><ci id="S3.I1.i4.p1.5.m5.1.1.cmml" xref="S3.I1.i4.p1.5.m5.1.1">𝑁</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.I1.i4.p1.5.m5.1c">N</annotation><annotation encoding="application/x-llamapun" id="S3.I1.i4.p1.5.m5.1d">italic_N</annotation></semantics></math>. For this task, ProteinNet <span class="ltx_ERROR undefined" id="S3.I1.i4.p1.10.5">\parencite</span>[]ProteinNet19 and CASP14 <span class="ltx_ERROR undefined" id="S3.I1.i4.p1.10.6">\parencite</span>[]https://doi.org/10.1002/prot.26237 were used. For evaluation, the predicted contacts between residue pairs <math alttext="(i,j)" class="ltx_Math" display="inline" id="S3.I1.i4.p1.6.m6.2"><semantics id="S3.I1.i4.p1.6.m6.2a"><mrow id="S3.I1.i4.p1.6.m6.2.3.2" xref="S3.I1.i4.p1.6.m6.2.3.1.cmml"><mo id="S3.I1.i4.p1.6.m6.2.3.2.1" stretchy="false" xref="S3.I1.i4.p1.6.m6.2.3.1.cmml">(</mo><mi id="S3.I1.i4.p1.6.m6.1.1" xref="S3.I1.i4.p1.6.m6.1.1.cmml">i</mi><mo id="S3.I1.i4.p1.6.m6.2.3.2.2" xref="S3.I1.i4.p1.6.m6.2.3.1.cmml">,</mo><mi id="S3.I1.i4.p1.6.m6.2.2" xref="S3.I1.i4.p1.6.m6.2.2.cmml">j</mi><mo id="S3.I1.i4.p1.6.m6.2.3.2.3" stretchy="false" xref="S3.I1.i4.p1.6.m6.2.3.1.cmml">)</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.I1.i4.p1.6.m6.2b"><interval closure="open" id="S3.I1.i4.p1.6.m6.2.3.1.cmml" xref="S3.I1.i4.p1.6.m6.2.3.2"><ci id="S3.I1.i4.p1.6.m6.1.1.cmml" xref="S3.I1.i4.p1.6.m6.1.1">𝑖</ci><ci id="S3.I1.i4.p1.6.m6.2.2.cmml" xref="S3.I1.i4.p1.6.m6.2.2">𝑗</ci></interval></annotation-xml><annotation encoding="application/x-tex" id="S3.I1.i4.p1.6.m6.2c">(i,j)</annotation><annotation encoding="application/x-llamapun" id="S3.I1.i4.p1.6.m6.2d">( italic_i , italic_j )</annotation></semantics></math> were specifically considered with a sequence separation of <math alttext="|i-j|\geq 6" class="ltx_Math" display="inline" id="S3.I1.i4.p1.7.m7.1"><semantics id="S3.I1.i4.p1.7.m7.1a"><mrow id="S3.I1.i4.p1.7.m7.1.1" xref="S3.I1.i4.p1.7.m7.1.1.cmml"><mrow id="S3.I1.i4.p1.7.m7.1.1.1.1" xref="S3.I1.i4.p1.7.m7.1.1.1.2.cmml"><mo id="S3.I1.i4.p1.7.m7.1.1.1.1.2" stretchy="false" xref="S3.I1.i4.p1.7.m7.1.1.1.2.1.cmml">|</mo><mrow id="S3.I1.i4.p1.7.m7.1.1.1.1.1" xref="S3.I1.i4.p1.7.m7.1.1.1.1.1.cmml"><mi id="S3.I1.i4.p1.7.m7.1.1.1.1.1.2" xref="S3.I1.i4.p1.7.m7.1.1.1.1.1.2.cmml">i</mi><mo id="S3.I1.i4.p1.7.m7.1.1.1.1.1.1" xref="S3.I1.i4.p1.7.m7.1.1.1.1.1.1.cmml">−</mo><mi id="S3.I1.i4.p1.7.m7.1.1.1.1.1.3" xref="S3.I1.i4.p1.7.m7.1.1.1.1.1.3.cmml">j</mi></mrow><mo id="S3.I1.i4.p1.7.m7.1.1.1.1.3" stretchy="false" xref="S3.I1.i4.p1.7.m7.1.1.1.2.1.cmml">|</mo></mrow><mo id="S3.I1.i4.p1.7.m7.1.1.2" xref="S3.I1.i4.p1.7.m7.1.1.2.cmml">≥</mo><mn id="S3.I1.i4.p1.7.m7.1.1.3" xref="S3.I1.i4.p1.7.m7.1.1.3.cmml">6</mn></mrow><annotation-xml encoding="MathML-Content" id="S3.I1.i4.p1.7.m7.1b"><apply id="S3.I1.i4.p1.7.m7.1.1.cmml" xref="S3.I1.i4.p1.7.m7.1.1"><geq id="S3.I1.i4.p1.7.m7.1.1.2.cmml" xref="S3.I1.i4.p1.7.m7.1.1.2"></geq><apply id="S3.I1.i4.p1.7.m7.1.1.1.2.cmml" xref="S3.I1.i4.p1.7.m7.1.1.1.1"><abs id="S3.I1.i4.p1.7.m7.1.1.1.2.1.cmml" xref="S3.I1.i4.p1.7.m7.1.1.1.1.2"></abs><apply id="S3.I1.i4.p1.7.m7.1.1.1.1.1.cmml" xref="S3.I1.i4.p1.7.m7.1.1.1.1.1"><minus id="S3.I1.i4.p1.7.m7.1.1.1.1.1.1.cmml" xref="S3.I1.i4.p1.7.m7.1.1.1.1.1.1"></minus><ci id="S3.I1.i4.p1.7.m7.1.1.1.1.1.2.cmml" xref="S3.I1.i4.p1.7.m7.1.1.1.1.1.2">𝑖</ci><ci id="S3.I1.i4.p1.7.m7.1.1.1.1.1.3.cmml" xref="S3.I1.i4.p1.7.m7.1.1.1.1.1.3">𝑗</ci></apply></apply><cn id="S3.I1.i4.p1.7.m7.1.1.3.cmml" type="integer" xref="S3.I1.i4.p1.7.m7.1.1.3">6</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.I1.i4.p1.7.m7.1c">|i-j|\geq 6</annotation><annotation encoding="application/x-llamapun" id="S3.I1.i4.p1.7.m7.1d">| italic_i - italic_j | ≥ 6</annotation></semantics></math>. Performance for these contacts was assessed using precision. The primary metrics were Precision@L (P@L) and Precision@L/5 (P@L/5), where <math alttext="L" class="ltx_Math" display="inline" id="S3.I1.i4.p1.8.m8.1"><semantics id="S3.I1.i4.p1.8.m8.1a"><mi id="S3.I1.i4.p1.8.m8.1.1" xref="S3.I1.i4.p1.8.m8.1.1.cmml">L</mi><annotation-xml encoding="MathML-Content" id="S3.I1.i4.p1.8.m8.1b"><ci id="S3.I1.i4.p1.8.m8.1.1.cmml" xref="S3.I1.i4.p1.8.m8.1.1">𝐿</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.I1.i4.p1.8.m8.1c">L</annotation><annotation encoding="application/x-llamapun" id="S3.I1.i4.p1.8.m8.1d">italic_L</annotation></semantics></math> is the sequence length. P@L measures the precision among the <math alttext="L" class="ltx_Math" display="inline" id="S3.I1.i4.p1.9.m9.1"><semantics id="S3.I1.i4.p1.9.m9.1a"><mi id="S3.I1.i4.p1.9.m9.1.1" xref="S3.I1.i4.p1.9.m9.1.1.cmml">L</mi><annotation-xml encoding="MathML-Content" id="S3.I1.i4.p1.9.m9.1b"><ci id="S3.I1.i4.p1.9.m9.1.1.cmml" xref="S3.I1.i4.p1.9.m9.1.1">𝐿</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.I1.i4.p1.9.m9.1c">L</annotation><annotation encoding="application/x-llamapun" id="S3.I1.i4.p1.9.m9.1d">italic_L</annotation></semantics></math> highest-scoring predicted contacts satisfying this separation criterion, while P@L/5 evaluates this precision for the top <math alttext="L/5" class="ltx_Math" display="inline" id="S3.I1.i4.p1.10.m10.1"><semantics id="S3.I1.i4.p1.10.m10.1a"><mrow id="S3.I1.i4.p1.10.m10.1.1" xref="S3.I1.i4.p1.10.m10.1.1.cmml"><mi id="S3.I1.i4.p1.10.m10.1.1.2" xref="S3.I1.i4.p1.10.m10.1.1.2.cmml">L</mi><mo id="S3.I1.i4.p1.10.m10.1.1.1" xref="S3.I1.i4.p1.10.m10.1.1.1.cmml">/</mo><mn id="S3.I1.i4.p1.10.m10.1.1.3" xref="S3.I1.i4.p1.10.m10.1.1.3.cmml">5</mn></mrow><annotation-xml encoding="MathML-Content" id="S3.I1.i4.p1.10.m10.1b"><apply id="S3.I1.i4.p1.10.m10.1.1.cmml" xref="S3.I1.i4.p1.10.m10.1.1"><divide id="S3.I1.i4.p1.10.m10.1.1.1.cmml" xref="S3.I1.i4.p1.10.m10.1.1.1"></divide><ci id="S3.I1.i4.p1.10.m10.1.1.2.cmml" xref="S3.I1.i4.p1.10.m10.1.1.2">𝐿</ci><cn id="S3.I1.i4.p1.10.m10.1.1.3.cmml" type="integer" xref="S3.I1.i4.p1.10.m10.1.1.3">5</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.I1.i4.p1.10.m10.1c">L/5</annotation><annotation encoding="application/x-llamapun" id="S3.I1.i4.p1.10.m10.1d">italic_L / 5</annotation></semantics></math> such contacts.</p>
+</div>
+</li>
+</ul>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Evaluation Details</h3>
+<div class="ltx_para ltx_noindent" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">The performance of the PLMs was tested in two different settings: the first setting is concatenating the [NLU] token at the beginning of each sequence, and the second setting is concatenating the [S2S] token at the beginning of each sequence. Table <a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S3.T5" title="Table 5 ‣ 3.1 Evaluation Details ‣ 3 Downstream Tasks Evaluation ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_tag">5</span></a> illustrates the average performance of each model with both [NLU] and [S2S] tokens. Three different seeds (7, 0, and 42) were run for each task, and the average performance was reported. The results of the previous Ankh and ESM2 models were concluded from the original paper <span class="ltx_ERROR undefined" id="S3.SS1.p1.1.1">\parencite</span>[]elnaggar2023ankh.</p>
+</div>
+<figure class="ltx_table" id="S3.T5">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 5: </span>Average performance of models is reported in percentage (%). For Ankh3 models, [NLU] and [S2S] tokens are concatenated at the beginning of the sequence. The exceptions to percentage-based reporting are Fluorescence (FL) and GB1, for which the reported metric is Spearman correlation. Other metrics include accuracy for SSP and Precision@K for CP. SSP: Secondary structure prediction; FL: Fluorescence; CP: Contact prediction. Models under the protein sequence only input category were pre-trained using only protein sequences, while multimodal models utilized protein sequences and other modalities during pre-training (e.g. secondary structure and structure tokens).</figcaption>
+<div class="ltx_inline-block ltx_align_center ltx_transformed_outer" id="S3.T5.1" style="width:433.6pt;height:156.8pt;vertical-align:-13.6pt;"><span class="ltx_transformed_inner" style="transform:translate(-164.9pt,54.4pt) scale(0.568060065357736,0.568060065357736) ;">
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S3.T5.1.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S3.T5.1.1.1.1">
+<th class="ltx_td ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.1.1.1" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.1.1.2" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T5.1.1.1.1.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" colspan="9" id="S3.T5.1.1.1.1.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">Protein Sequence Only Input</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.1.1.5" style="padding-top:2.5pt;padding-bottom:2.5pt;">Multimodal</th>
+</tr>
+<tr class="ltx_tr" id="S3.T5.1.1.2.2">
+<th class="ltx_td ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.2.2.1" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.2.2.2" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T5.1.1.2.2.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" colspan="4" id="S3.T5.1.1.2.2.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">Multi-task</th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T5.1.1.2.2.5" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" colspan="4" id="S3.T5.1.1.2.2.6" style="padding-top:2.5pt;padding-bottom:2.5pt;">Single-task</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.2.2.7" style="padding-top:2.5pt;padding-bottom:2.5pt;">Multi-task</th>
+</tr>
+<tr class="ltx_tr" id="S3.T5.1.1.3.3">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.3.3.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">Task</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.3.3.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">Dataset</th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T5.1.1.3.3.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" colspan="2" id="S3.T5.1.1.3.3.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">Ankh3-L</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" colspan="2" id="S3.T5.1.1.3.3.5" style="padding-top:2.5pt;padding-bottom:2.5pt;">Ankh3-XL</th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T5.1.1.3.3.6" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.3.3.7" style="padding-top:2.5pt;padding-bottom:2.5pt;">Ankh Base*</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.3.3.8" style="padding-top:2.5pt;padding-bottom:2.5pt;">Ankh Large*</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.3.3.9" style="padding-top:2.5pt;padding-bottom:2.5pt;">ESM2-650M*</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T5.1.1.3.3.10" style="padding-top:2.5pt;padding-bottom:2.5pt;">ESM2-15B*</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.3.3.11" style="padding-top:2.5pt;padding-bottom:2.5pt;">ESM3-open</th>
+</tr>
+<tr class="ltx_tr" id="S3.T5.1.1.4.4">
+<th class="ltx_td ltx_th ltx_th_column" id="S3.T5.1.1.4.4.1" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_th ltx_th_column" id="S3.T5.1.1.4.4.2" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_r" id="S3.T5.1.1.4.4.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.4.4.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">NLU</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.4.4.5" style="padding-top:2.5pt;padding-bottom:2.5pt;">S2S</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.4.4.6" style="padding-top:2.5pt;padding-bottom:2.5pt;">NLU</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.4.4.7" style="padding-top:2.5pt;padding-bottom:2.5pt;">S2S</th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T5.1.1.4.4.8" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.4.4.9" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.4.4.10" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.4.4.11" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T5.1.1.4.4.12" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+<th class="ltx_td ltx_th ltx_th_column ltx_border_t" id="S3.T5.1.1.4.4.13" style="padding-top:2.5pt;padding-bottom:2.5pt;"></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.T5.1.1.5.1">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T5.1.1.5.1.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">SSP-3</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T5.1.1.5.1.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">CASP-12</td>
+<td class="ltx_td ltx_border_r ltx_border_t" id="S3.T5.1.1.5.1.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T5.1.1.5.1.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">78.03 ± 0.11</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T5.1.1.5.1.5" style="padding-top:2.5pt;padding-bottom:2.5pt;">75.49 ± 0.21</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T5.1.1.5.1.6" style="padding-top:2.5pt;padding-bottom:2.5pt;"><span class="ltx_text ltx_font_bold" id="S3.T5.1.1.5.1.6.1">84.40 ± 0.05</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T5.1.1.5.1.7" style="padding-top:2.5pt;padding-bottom:2.5pt;">83.76 ± 0.10</td>
+<td class="ltx_td ltx_border_r ltx_border_t" id="S3.T5.1.1.5.1.8" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T5.1.1.5.1.9" style="padding-top:2.5pt;padding-bottom:2.5pt;">80.81</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T5.1.1.5.1.10" style="padding-top:2.5pt;padding-bottom:2.5pt;">83.59</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T5.1.1.5.1.11" style="padding-top:2.5pt;padding-bottom:2.5pt;">82.43</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T5.1.1.5.1.12" style="padding-top:2.5pt;padding-bottom:2.5pt;">83.16</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T5.1.1.5.1.13" style="padding-top:2.5pt;padding-bottom:2.5pt;">83.43 ± 0.02</td>
+</tr>
+<tr class="ltx_tr" id="S3.T5.1.1.6.2">
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.6.2.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">SSP-8</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.6.2.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">CASP-12</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.6.2.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.6.2.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">65.29 ± 0.05</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.6.2.5" style="padding-top:2.5pt;padding-bottom:2.5pt;">62.74 ± 0.22</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.6.2.6" style="padding-top:2.5pt;padding-bottom:2.5pt;">72.53 ± 0.17</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.6.2.7" style="padding-top:2.5pt;padding-bottom:2.5pt;">72.25 ± 0.16</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.6.2.8" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.6.2.9" style="padding-top:2.5pt;padding-bottom:2.5pt;">68.85</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.6.2.10" style="padding-top:2.5pt;padding-bottom:2.5pt;">71.69</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.6.2.11" style="padding-top:2.5pt;padding-bottom:2.5pt;">70.50</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T5.1.1.6.2.12" style="padding-top:2.5pt;padding-bottom:2.5pt;">71.17</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.6.2.13" style="padding-top:2.5pt;padding-bottom:2.5pt;"><span class="ltx_text ltx_font_bold" id="S3.T5.1.1.6.2.13.1">73.50 ± 0.37</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T5.1.1.7.3">
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.7.3.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">SSP-3</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.7.3.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">CASP-14</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.7.3.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.7.3.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">79.28 ± 0.15</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.7.3.5" style="padding-top:2.5pt;padding-bottom:2.5pt;">77.96 ± 0.09</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.7.3.6" style="padding-top:2.5pt;padding-bottom:2.5pt;">82.19 ± 0.13</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.7.3.7" style="padding-top:2.5pt;padding-bottom:2.5pt;">82.30 ± 0.35</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.7.3.8" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.7.3.9" style="padding-top:2.5pt;padding-bottom:2.5pt;">76.67</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.7.3.10" style="padding-top:2.5pt;padding-bottom:2.5pt;">77.48</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.7.3.11" style="padding-top:2.5pt;padding-bottom:2.5pt;">76.97</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T5.1.1.7.3.12" style="padding-top:2.5pt;padding-bottom:2.5pt;">76.56</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.7.3.13" style="padding-top:2.5pt;padding-bottom:2.5pt;"><span class="ltx_text ltx_font_bold" id="S3.T5.1.1.7.3.13.1">83.20 ± 0.16</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T5.1.1.8.4">
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.8.4.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">SSP-8</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.8.4.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">CASP-14</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.8.4.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.8.4.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">65.50 ± 0.22</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.8.4.5" style="padding-top:2.5pt;padding-bottom:2.5pt;">65.88 ± 0.10</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.8.4.6" style="padding-top:2.5pt;padding-bottom:2.5pt;">69.85 ± 0.09</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.8.4.7" style="padding-top:2.5pt;padding-bottom:2.5pt;">69.51 ± 0.30</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.8.4.8" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.8.4.9" style="padding-top:2.5pt;padding-bottom:2.5pt;">62.33</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.8.4.10" style="padding-top:2.5pt;padding-bottom:2.5pt;">63.17</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.8.4.11" style="padding-top:2.5pt;padding-bottom:2.5pt;">62.10</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T5.1.1.8.4.12" style="padding-top:2.5pt;padding-bottom:2.5pt;">61.81</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.8.4.13" style="padding-top:2.5pt;padding-bottom:2.5pt;"><span class="ltx_text ltx_font_bold" id="S3.T5.1.1.8.4.13.1">71.70 ± 0.11</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T5.1.1.9.5">
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.9.5.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">FL</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.9.5.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">TAPE</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.9.5.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.9.5.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">64.56 ± 0.23</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.9.5.5" style="padding-top:2.5pt;padding-bottom:2.5pt;">64.89 ± 0.36</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.9.5.6" style="padding-top:2.5pt;padding-bottom:2.5pt;">64.23 ± 0.48</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.9.5.7" style="padding-top:2.5pt;padding-bottom:2.5pt;"><span class="ltx_text ltx_font_bold" id="S3.T5.1.1.9.5.7.1">65.43 ± 0.30</span></td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.9.5.8" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.9.5.9" style="padding-top:2.5pt;padding-bottom:2.5pt;">62.0</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.9.5.10" style="padding-top:2.5pt;padding-bottom:2.5pt;">62.0</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.9.5.11" style="padding-top:2.5pt;padding-bottom:2.5pt;">48.0</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T5.1.1.9.5.12" style="padding-top:2.5pt;padding-bottom:2.5pt;">56.0</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.9.5.13" style="padding-top:2.5pt;padding-bottom:2.5pt;">58.78 ± 0.57</td>
+</tr>
+<tr class="ltx_tr" id="S3.T5.1.1.10.6">
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.10.6.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">GB1</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.10.6.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">FLIP</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.10.6.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.10.6.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">90.30 ± 0.39</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.10.6.5" style="padding-top:2.5pt;padding-bottom:2.5pt;">89.44 ± 0.77</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.10.6.6" style="padding-top:2.5pt;padding-bottom:2.5pt;">89.62 ± 1.55</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.10.6.7" style="padding-top:2.5pt;padding-bottom:2.5pt;"><span class="ltx_text ltx_font_bold" id="S3.T5.1.1.10.6.7.1">90.44 ± 0.89</span></td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.10.6.8" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.10.6.9" style="padding-top:2.5pt;padding-bottom:2.5pt;">85.0</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.10.6.10" style="padding-top:2.5pt;padding-bottom:2.5pt;">84.0</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.10.6.11" style="padding-top:2.5pt;padding-bottom:2.5pt;">82.0</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T5.1.1.10.6.12" style="padding-top:2.5pt;padding-bottom:2.5pt;">57.0</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.10.6.13" style="padding-top:2.5pt;padding-bottom:2.5pt;">82.91 ± 2.53</td>
+</tr>
+<tr class="ltx_tr" id="S3.T5.1.1.11.7">
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.11.7.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">CP</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.11.7.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">ProteinNet (L/1)</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.11.7.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.11.7.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">46.35 ± 0.49</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.11.7.5" style="padding-top:2.5pt;padding-bottom:2.5pt;">43.39 ± 0.44</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.11.7.6" style="padding-top:2.5pt;padding-bottom:2.5pt;"><span class="ltx_text ltx_font_bold" id="S3.T5.1.1.11.7.6.1">60.95 ± 0.35</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.11.7.7" style="padding-top:2.5pt;padding-bottom:2.5pt;">60.76 ± 0.21</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.11.7.8" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.11.7.9" style="padding-top:2.5pt;padding-bottom:2.5pt;">43.21</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.11.7.10" style="padding-top:2.5pt;padding-bottom:2.5pt;">48.93</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.11.7.11" style="padding-top:2.5pt;padding-bottom:2.5pt;">29.36</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T5.1.1.11.7.12" style="padding-top:2.5pt;padding-bottom:2.5pt;">31.62</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.11.7.13" style="padding-top:2.5pt;padding-bottom:2.5pt;">56.46 ± 8.78</td>
+</tr>
+<tr class="ltx_tr" id="S3.T5.1.1.12.8">
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.12.8.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">CP</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.12.8.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">ProteinNet (L/5)</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.12.8.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.12.8.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">69.42 ± 0.76</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.12.8.5" style="padding-top:2.5pt;padding-bottom:2.5pt;">66.60 ± 0.87</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.12.8.6" style="padding-top:2.5pt;padding-bottom:2.5pt;"><span class="ltx_text ltx_font_bold" id="S3.T5.1.1.12.8.6.1">83.89± 0.47</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.12.8.7" style="padding-top:2.5pt;padding-bottom:2.5pt;">83.31 ± 1.21</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.12.8.8" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.12.8.9" style="padding-top:2.5pt;padding-bottom:2.5pt;">66.63</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.12.8.10" style="padding-top:2.5pt;padding-bottom:2.5pt;">73.49</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.12.8.11" style="padding-top:2.5pt;padding-bottom:2.5pt;">50.74</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T5.1.1.12.8.12" style="padding-top:2.5pt;padding-bottom:2.5pt;">52.97</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.12.8.13" style="padding-top:2.5pt;padding-bottom:2.5pt;">77.40 ± 5.80</td>
+</tr>
+<tr class="ltx_tr" id="S3.T5.1.1.13.9">
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.13.9.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">CP</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.13.9.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">CASP-14 (L/1)</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.13.9.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.13.9.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">16.94 ± 0.56</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.13.9.5" style="padding-top:2.5pt;padding-bottom:2.5pt;">18.59 ± 0.31</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.13.9.6" style="padding-top:2.5pt;padding-bottom:2.5pt;"><span class="ltx_text ltx_font_bold" id="S3.T5.1.1.13.9.6.1">29.23 ± 0.36</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.13.9.7" style="padding-top:2.5pt;padding-bottom:2.5pt;">28.68 ± 0.31</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.13.9.8" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.13.9.9" style="padding-top:2.5pt;padding-bottom:2.5pt;">13.50</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.13.9.10" style="padding-top:2.5pt;padding-bottom:2.5pt;">16.01</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.13.9.11" style="padding-top:2.5pt;padding-bottom:2.5pt;">13.71</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T5.1.1.13.9.12" style="padding-top:2.5pt;padding-bottom:2.5pt;">14.44</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.13.9.13" style="padding-top:2.5pt;padding-bottom:2.5pt;">28.65 ± 1.38</td>
+</tr>
+<tr class="ltx_tr" id="S3.T5.1.1.14.10">
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.14.10.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">CP</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.14.10.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">CASP-14 (L/5)</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.14.10.3" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.14.10.4" style="padding-top:2.5pt;padding-bottom:2.5pt;">26.65 ± 0.49</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.14.10.5" style="padding-top:2.5pt;padding-bottom:2.5pt;">29.96 ± 2.09</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.14.10.6" style="padding-top:2.5pt;padding-bottom:2.5pt;">46.17 ± 1.72</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.14.10.7" style="padding-top:2.5pt;padding-bottom:2.5pt;">47.30 ± 2.09</td>
+<td class="ltx_td ltx_border_r" id="S3.T5.1.1.14.10.8" style="padding-top:2.5pt;padding-bottom:2.5pt;"></td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.14.10.9" style="padding-top:2.5pt;padding-bottom:2.5pt;">28.65</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.14.10.10" style="padding-top:2.5pt;padding-bottom:2.5pt;">29.91</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.14.10.11" style="padding-top:2.5pt;padding-bottom:2.5pt;">22.25</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T5.1.1.14.10.12" style="padding-top:2.5pt;padding-bottom:2.5pt;">26.61</td>
+<td class="ltx_td ltx_align_center" id="S3.T5.1.1.14.10.13" style="padding-top:2.5pt;padding-bottom:2.5pt;"><span class="ltx_text ltx_font_bold" id="S3.T5.1.1.14.10.13.1">47.35 ± 4.60</span></td>
+</tr>
+</tbody>
+</table>
+<ul class="ltx_itemize" id="S3.I2">
+<li class="ltx_item" id="S3.I2.ix1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">*</span>
+<div class="ltx_para ltx_noindent" id="S3.I2.ix1.p1">
+<p class="ltx_p" id="S3.I2.ix1.p1.1">Sourced from the Ankh paper; standard deviation is not provided here as the original publication reported error bars for these specific entries instead.</p>
+</div>
+</li>
+</ul>
+</span></div>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Discussion</h2>
+<div class="ltx_para ltx_noindent" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">While NLU and S2S tasks are different, neither of them consistently performed better than the other across all the tasks and model sizes. The preferred objective seems to be task-dependent. One interesting observation that requires deeper investigation is that Ankh3-XL performed better with S2S in sequence classification tasks, such as GB1 and fluorescence (Table <a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S3.T5" title="Table 5 ‣ 3.1 Evaluation Details ‣ 3 Downstream Tasks Evaluation ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_tag">5</span></a>). However, this pattern should be tested with more tasks to confirm its consistency.
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S4.p2">
+<p class="ltx_p" id="S4.p2.1">In the context of scaling Ankh3-Large to Ankh3-XL, Ankh3-XL performed significantly better in both NLU and S2S tasks, indicating that the capacity of Ankh3-Large was insufficient to handle both tasks. As previously discussed in Section <a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S2.SS1" title="2.1 Modeling ‣ 2 Pre-training Configuration ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_tag">2.1</span></a> and demonstrated by experiments in ProtT5 <span class="ltx_ERROR undefined" id="S4.p2.1.1">\parencite</span>elnaggar2021prottrans, no improvement in performance is achieved by solely increasing the model size and using protein sequences as the only input while keeping all other factors constant (including the dataset), for example, CASP12 reached 84.4% in Ankh3-XL compared to 79.2% in ProtT5-XXL (4.8B encoder parameters) and 81.4% in ProtT5-XL (1.2B encoder parameters), this indicates that the addition of multiple masking probabilities and sequence completion were the main contributors to the performance boost while using protein sequences as the only input. Ankh3 performed better in all tasks compared to protein sequence-only models like ESM2 and Ankh. When compared to ESM3, Ankh3 has competitive performance on tasks such as SSP and CP. However, in tasks that neither Ankh3 nor ESM3 encountered during pre-training, Ankh3-XL performed significantly better, which indicates that Ankh3-XL may have better generalization, especially in tasks like fluorescence and GB1 fitness prediction.
+
+<br class="ltx_break"/>
+<br class="ltx_break"/>ESM3 was primarily trained on masked language modeling, which processes multiple discrete inputs and outputs; these inputs included secondary structure tokens with eight states, structure tokens, and other different modalities. Since ESM3 was already trained with such secondary structure inputs, it was expected to outperform Ankh3 in tasks evaluating this feature, as reported in Table <a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S3.T5" title="Table 5 ‣ 3.1 Evaluation Details ‣ 3 Downstream Tasks Evaluation ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_tag">5</span></a>. It was also hypothesized that ESM3 would outperform Ankh3 in contact prediction, as its training included structure tokens that can enhance contact prediction accuracy. This hypothesis was confirmed with seeds 7 and 0, where ESM3 performed noticeably better than Ankh3. However, with seed 42, ESM3’s performance was significantly lower and also exhibited a large standard deviation (Table <a class="ltx_ref" href="https://arxiv.org/html/2505.20052v1#S3.T5" title="Table 5 ‣ 3.1 Evaluation Details ‣ 3 Downstream Tasks Evaluation ‣ Ankh3: Multi-Task Pretraining with Sequence Denoising and Completion Enhances Protein Representations"><span class="ltx_text ltx_ref_tag">5</span></a>). For example, when run with seed 42 on ProteinNet (L/1), ESM3 showed a standard deviation of 8.78%. This high variability observed with seed 42 likely contributed to ESM3’s overall poorer performance metrics when compared to Ankh3, which demonstrated stability across all three seeds in all tasks.</p>
+</div>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Conclusion</h2>
+<div class="ltx_para ltx_noindent" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">In this work, we presented Ankh3, the latest version of the Ankh family. Ankh3 performance was demonstrated in the setting of multi-task pre-training. Sequence completion was explored as an additional task, and masked language modeling with multiple masking probabilities was shown to enhance the performance of the model. These results highlight the continued potential for advancing sequence-only protein language models through innovative multi-task learning, yielding more robust and versatile protein representations without immediate reliance on additional data modalities. To foster reproducibility and further research, we shared all of our work and details, including pre-training hyperparameters, along with the dataset on Huggingface. Finally, the weights of both Ankh3 models are available open source on Huggingface. Our future research directions include scaling Ankh3 to incorporate multiple modalities and further exploring sequence completion with variable completion percentages. 
+<br class="ltx_break"/></p>
+</div>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Data Availability</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p" id="S6.p1.1">The dataset used for pre-training is available at <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://huggingface.co/datasets/agemagician/uniref50" title="">https://huggingface.co/datasets/agemagician/uniref50</a>.
+Model weights of both Ankh3-Large and Ankh3-XL models are available at <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://huggingface.co/ElnaggarLab/ankh3-large" title="">https://huggingface.co/ElnaggarLab/ankh3-large</a> and <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://huggingface.co/ElnaggarLab/ankh3-xl" title="">https://huggingface.co/ElnaggarLab/ankh3-xl</a>.</p>
+</div>
+<section class="ltx_subsection" id="S6.SSx1">
+<h3 class="ltx_title ltx_title_subsection">Acknowledgment</h3>
+<div class="ltx_para" id="S6.SSx1.p1">
+<p class="ltx_p" id="S6.SSx1.p1.1">The authors gratefully acknowledge the significant contributions of Proteinea’s team, especially Nehal Adel Abdelsalam, for the invaluable guidance and for ensuring that the quality of this research paper meets the standards. We also gratefully acknowledge Proteinea’s deep learning and bioinformatics teams, who provided essential assistance with hardware, software, and numerous other project facets. We are indebted to Google for their comprehensive support, including Jonathan Caton, Shira Genauer, Astitva Chopra, and the Google Cloud, Google Innovator, JAX, and TRC Teams, for their help in configuring the project on Google Cloud and troubleshooting technical challenges. This research was also financially supported by Google through the Google Research Innovator and Google TPU Cloud Research Credits Programs. We also extend our thanks to the HuggingFace team, particularly Patrick von Platen, Julien Chaumond, and Clement Delangue, whose support was crucial for making the trained models publicly accessible. Lastly, we express our gratitude to the global research community for making the datasets utilized in this study freely available.
+
+<span class="ltx_ERROR undefined" id="S6.SSx1.p1.1.1">\printbibliography</span></p>
+</div>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</section>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Mon May 26 14:39:53 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

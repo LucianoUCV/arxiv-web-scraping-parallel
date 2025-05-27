@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>1 Introduction</title>
+<!--Generated on Mon May 26 15:36:33 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2505.20137v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2505.20137v1#S1" title=""><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2505.20137v1#S1.SS0.SSS0.Px1" title="In 1 Introduction"><span class="ltx_text ltx_ref_title">Our contributions</span></a></li>
+</ol>
+</li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document">
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Neural networks have revolutionized machine learning, yet their learning algorithms often diverge from biological reality <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_ref ltx_missing_citation ltx_ref_self">whittington2019backprop_brain</span>; <span class="ltx_ref ltx_missing_citation ltx_ref_self">stork1989backpropagation</span>)</cite>.
+Predictive Coding (PC) stands as a prominent neuroscience theory aiming to explain how the brain processes sensory information through hierarchical prediction and error propagation <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_ref ltx_missing_citation ltx_ref_self">friston2009pc</span>; <span class="ltx_ref ltx_missing_citation ltx_ref_self">millidge2021pc_review</span>)</cite>.
+In recent years, researchers have reformulated PC as a general machine learning algorithm, offering a biologically plausible alternative to backpropagation for training neural networks <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_ref ltx_missing_citation ltx_ref_self">bogacz2017tutorial</span>; <span class="ltx_ref ltx_missing_citation ltx_ref_self">whittington2017approximation</span>; <span class="ltx_ref ltx_missing_citation ltx_ref_self">whittington2019backprop_brain</span>; <span class="ltx_ref ltx_missing_citation ltx_ref_self">millidge2022pc_beyond_backprop</span>)</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">Its theoretical appeal is significant: through purely local learning rules, PC is able to approximate backpropagation, with mathematical equivalence established under specific conditions <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_ref ltx_missing_citation ltx_ref_self">Song2020pc_exact_backprop</span>; <span class="ltx_ref ltx_missing_citation ltx_ref_self">millidge2022pcapproxbackprop</span>)</cite>.
+However, despite this promising connection, PC has struggled to scale beyond simple problems and baseline architectures <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_ref ltx_missing_citation ltx_ref_self">millidge2022pc_beyond_backprop</span>)</cite>.
+A particularly concerning observation is that deeper PC models often perform worse than shallower ones <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_ref ltx_missing_citation ltx_ref_self">pinchetti2025benchmarking</span>)</cite>, contrary to the pattern seen with backpropagation, where depth typically improves representational capacity.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">Computational demands further complicate PC’s scaling challenges.
+During training, PC requires an internal energy minimization process that converges to equilibrium states through iterative updates.
+While ideally suited for neuromorphic hardware with parallel, local updates, PC research has predominantly relied on conventional GPU implementations, with a significant computational overhead compared to backpropagation’s direct gradient calculation.
+This hardware-algorithm mismatch presents a practical barrier to widespread adoption, hindering progress in the field.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">The PC community has pursued several approaches to address these computational inefficiencies.
+Some have focused on improving the optimization process itself through different optimizers and JIT-compiled implementations <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_ref ltx_missing_citation ltx_ref_self">pinchetti2025benchmarking</span>; <span class="ltx_ref ltx_missing_citation ltx_ref_self">innocenti2024jpc</span>)</cite>.
+Others have explored fast approximate one-step regimes <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_ref ltx_missing_citation ltx_ref_self">Salvatori2024iPC</span>)</cite>, modified update orders from parallel to sequential <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_ref ltx_missing_citation ltx_ref_self">alonso2024understanding</span>)</cite>, or amortized inference to estimate the equilibrium states using auxiliary networks <cite class="ltx_cite ltx_citemacro_citep">(<span class="ltx_ref ltx_missing_citation ltx_ref_self">tschantz2023hybridpc</span>)</cite>.
+Despite these advances, substantial gaps remain in both computational efficiency and theoretical understanding of PC.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">In this paper, we address the fundamental limitations of PC’s digital simulation–which currently represents nearly all practical PC research.
+Our work connects the seemingly disparate problems of depth scaling and computational efficiency in PC networks, uncovering a common underlying cause and providing an elegant solution.</p>
+</div>
+<section class="ltx_paragraph" id="S1.SS0.SSS0.Px1">
+<h3 class="ltx_title ltx_title_paragraph">Our contributions</h3>
+<div class="ltx_para" id="S1.SS0.SSS0.Px1.p1">
+<ul class="ltx_itemize" id="S1.I1">
+<li class="ltx_item" id="S1.I1.1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item"></span>
+<div class="ltx_para" id="S1.I1.1.p1">
+<p class="ltx_p" id="S1.I1.1.p1.1">[leftmargin=30pt]</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i1.p1">
+<p class="ltx_p" id="S1.I1.i1.p1.1">We identify a fundamental mechanism of exponential signal decay in traditional PC, whereby signals attenuate as they propagate through the network. This previously undetected issue explains why deeper PC networks underperform and require excessive computation.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i2.p1">
+<p class="ltx_p" id="S1.I1.i2.p1.1">We introduce Error Optimization (EO), a novel reparameterization of PC that preserves theoretical equivalence while resolving the signal decay problem.
+By optimizing over prediction errors rather than neural states, EO restructures the computational graph from locally to globally connected, enabling signals to propagate unattenuated to all layers simultaneously, while preserving PC’s defining property of local weight updates.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i3.p1">
+<p class="ltx_p" id="S1.I1.i3.p1.1">We empirically demonstrate that EO converges orders of magnitude faster than traditional PC on deep networks, resolving a major computational bottleneck in
+PC research.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i4.p1">
+<p class="ltx_p" id="S1.I1.i4.p1.1">Through comprehensive experiments across architectures of varying depths, we demonstrate that EO consistently achieves performance comparable to backpropagation, providing a definitive solution to PC’s depth scaling issues.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i5" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i5.p1">
+<p class="ltx_p" id="S1.I1.i5.p1.1">With computational limitations addressed through EO, we argue for a shift in PC research, focussing on long-term impact beyond proof-of-concepts. We point out two promising research directions enabled by EO, each from a different hardware perspective.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Mon May 26 15:36:33 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Optimizing edge AI models on HPC systems with the edge in the loop</title>
+<!--Generated on Mon May 26 13:44:41 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<meta content="Hyperparameter Optimization Edge Computing High-Performance Computing Deep Learning Computer Vision" lang="en" name="keywords"/>
+<base href="/html/2505.19995v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S1" title="In Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S2" title="In Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Work on Hardware-Aware <span class="ltx_ERROR undefined">\ac</span>NAS</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3" title="In Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Design and Implementation</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.SS1" title="In 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Database Schema</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.SS2" title="In 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>AI Model</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.SS3" title="In 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Workflow Setup</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S4" title="In Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Empirical Results</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S5" title="In Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Summary and Conclusion</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S5.SS0.SSS1" title="In 5 Summary and Conclusion ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.0.1 </span>Acknowledgements.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S5.SS0.SSS2" title="In 5 Summary and Conclusion ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.0.2 </span>Disclosure of Interests.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S5.SS0.SSS3" title="In 5 Summary and Conclusion ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.0.3 </span>Venue and Manuscript Version.</span></a></li>
+</ol>
+</li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<div class="ltx_para" id="p1">
+<span class="ltx_ERROR undefined" id="p1.1">\DeclareAcronym</span>
+<p class="ltx_p" id="p1.2">AM
+short = AM,
+long = Additive Manufacturing
+
+<span class="ltx_ERROR undefined" id="p1.2.1">\DeclareAcronym</span>API
+short = API,
+long = Application Programming Interface
+
+<span class="ltx_ERROR undefined" id="p1.2.2">\DeclareAcronym</span>DDL
+short = DDL,
+long = Data Definition Language
+
+<span class="ltx_ERROR undefined" id="p1.2.3">\DeclareAcronym</span>FBNet
+short = FBNet,
+long = Facebook-Berkeley-Net
+
+<span class="ltx_ERROR undefined" id="p1.2.4">\DeclareAcronym</span>MCUNet
+short = MCUNet,
+long = Microcontroller Unit Network
+
+<span class="ltx_ERROR undefined" id="p1.2.5">\DeclareAcronym</span>MLP
+short = MLP,
+long = Multilayer Perceptron
+
+<span class="ltx_ERROR undefined" id="p1.2.6">\DeclareAcronym</span>CV
+short = CV,
+long = Computer Vision
+
+<span class="ltx_ERROR undefined" id="p1.2.7">\DeclareAcronym</span>NAS
+short = NAS,
+long = Neural Architecture Search
+
+<span class="ltx_ERROR undefined" id="p1.2.8">\DeclareAcronym</span>NN
+short = NN,
+long = Neural Network
+
+<span class="ltx_ERROR undefined" id="p1.2.9">\DeclareAcronym</span>FPGA
+short = FPGA,
+long = Field Programmable Gate Array
+
+<span class="ltx_ERROR undefined" id="p1.2.10">\DeclareAcronym</span>FLOP
+short = FLOP,
+long = Floating Point Operation
+
+<span class="ltx_ERROR undefined" id="p1.2.11">\DeclareAcronym</span>LPBF
+short = LPBF,
+long = Laser Powder Bed Fusion
+
+<span class="ltx_ERROR undefined" id="p1.2.12">\DeclareAcronym</span>GPU
+short = GPU,
+long = Graphics Processing Unit
+
+<span class="ltx_ERROR undefined" id="p1.2.13">\DeclareAcronym</span>CPU
+short = CPU,
+long = Central Processing Unit
+
+<span class="ltx_ERROR undefined" id="p1.2.14">\DeclareAcronym</span>CNN
+short = CNN,
+long = Convolutional Neural Network
+
+<span class="ltx_ERROR undefined" id="p1.2.15">\DeclareAcronym</span>ML
+short = ML,
+long = Machine Learning
+
+<span class="ltx_ERROR undefined" id="p1.2.16">\DeclareAcronym</span>NIC
+short = NIC,
+long = Network Interface Card
+
+<span class="ltx_ERROR undefined" id="p1.2.17">\DeclareAcronym</span>PCIe
+short = PCIe,
+long = Peripheral Component Interconnect Express
+
+<span class="ltx_ERROR undefined" id="p1.2.18">\DeclareAcronym</span>HPC
+short = HPC,
+long = High-Performance Computing
+
+<span class="ltx_ERROR undefined" id="p1.2.19">\DeclareAcronym</span>HPO
+short = HPO,
+long = Hyperparameter Optimization
+
+<span class="ltx_ERROR undefined" id="p1.2.20">\DeclareAcronym</span>AI
+short = AI,
+long = Artificial Intelligence
+
+<span class="ltx_ERROR undefined" id="p1.2.21">\DeclareAcronym</span>RSME
+short = RSME,
+long = Root Mean Square Error
+
+<span class="ltx_ERROR undefined" id="p1.2.22">\DeclareAcronym</span>EA
+short = EA,
+long = Evolutionary Algorithms
+
+
+
+
+
+
+
+<span class="ltx_note ltx_role_institutetext" id="p1.2.23"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_note_type">institutetext: </span>Jülich Supercomputing Centre, Jülich, Germany
+<span class="ltx_note ltx_role_email" id="p1.2.23.1"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_note_type">email: </span>m.aach@fz-juelich.de, a.lintermann@fz-juelich.de</span></span></span>
+<br class="ltx_break"/></span></span></span><span class="ltx_note ltx_role_institutetext" id="p1.2.24"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_note_type">institutetext: </span>ProductionS core lab, Flanders Make, Lommel/Leuven, Belgium
+
+<br class="ltx_break"/><span class="ltx_note ltx_role_email" id="p1.2.24.1"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_note_type">email: </span>cyril.blanc@flandersmake.be, kurt.degrave@flandersmake.be</span></span></span></span></span></span></p>
+</div>
+<h1 class="ltx_title ltx_title_document">Optimizing edge AI models on HPC systems with the
+edge in the loop</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Marcel Aach
+</span><span class="ltx_author_notes">11
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0002-7861-0672" title="ORCID identifier">0000-0002-7861-0672</a></span>
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Cyril Blanc
+</span><span class="ltx_author_notes">22
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0003-3271-2398" title="ORCID identifier">0000-0003-3271-2398</a></span>
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Andreas Lintermann
+</span><span class="ltx_author_notes">11
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0003-3321-6599" title="ORCID identifier">0000-0003-3321-6599</a></span>
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Kurt De Grave
+</span><span class="ltx_author_notes">22
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0001-9116-6986" title="ORCID identifier">0000-0001-9116-6986</a></span>
+</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<span class="ltx_ERROR undefined" id="id3.id1">\ac</span>
+<p class="ltx_p" id="id2.2">AI and <span class="ltx_ERROR undefined" id="id2.2.1">\ac</span>ML models deployed on edge devices, e.g., for quality control in <span class="ltx_ERROR undefined" id="id2.2.2">\ac</span>AM, are frequently small in size. Such models usually have to deliver highly accurate results within a short time frame. Methods that are commonly employed in literature start out with larger trained models and try to reduce their memory and latency footprint by structural pruning, knowledge distillation, or quantization. It is, however, also possible to leverage hardware-aware <span class="ltx_ERROR undefined" id="id2.2.3">\ac</span>NAS, an approach that seeks to systematically explore the architecture space to find optimized configurations. In this study, a hardware-aware <span class="ltx_ERROR undefined" id="id2.2.4">\ac</span>NAS workflow is introduced that couples an edge device located in Belgium with a powerful <span class="ltx_ERROR undefined" id="id2.2.5">\ac</span>HPC system in Germany, to train possible architecture candidates as fast as possible while performing real-time latency measurements on the target hardware. The approach is verified on a use case in the <span class="ltx_ERROR undefined" id="id2.2.6">\ac</span>AM domain, based on the open RAISE-LPBF dataset, achieving <math alttext="\approx 8.8" class="ltx_Math" display="inline" id="id1.1.m1.1"><semantics id="id1.1.m1.1a"><mrow id="id1.1.m1.1.1" xref="id1.1.m1.1.1.cmml"><mi id="id1.1.m1.1.1.2" xref="id1.1.m1.1.1.2.cmml"></mi><mo id="id1.1.m1.1.1.1" xref="id1.1.m1.1.1.1.cmml">≈</mo><mn id="id1.1.m1.1.1.3" xref="id1.1.m1.1.1.3.cmml">8.8</mn></mrow><annotation-xml encoding="MathML-Content" id="id1.1.m1.1b"><apply id="id1.1.m1.1.1.cmml" xref="id1.1.m1.1.1"><approx id="id1.1.m1.1.1.1.cmml" xref="id1.1.m1.1.1.1"></approx><csymbol cd="latexml" id="id1.1.m1.1.1.2.cmml" xref="id1.1.m1.1.1.2">absent</csymbol><cn id="id1.1.m1.1.1.3.cmml" type="float" xref="id1.1.m1.1.1.3">8.8</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="id1.1.m1.1c">\approx 8.8</annotation><annotation encoding="application/x-llamapun" id="id1.1.m1.1d">≈ 8.8</annotation></semantics></math> times faster inference speed while simultaneously enhancing model quality by a factor of <math alttext="\approx 1.35" class="ltx_Math" display="inline" id="id2.2.m2.1"><semantics id="id2.2.m2.1a"><mrow id="id2.2.m2.1.1" xref="id2.2.m2.1.1.cmml"><mi id="id2.2.m2.1.1.2" xref="id2.2.m2.1.1.2.cmml"></mi><mo id="id2.2.m2.1.1.1" xref="id2.2.m2.1.1.1.cmml">≈</mo><mn id="id2.2.m2.1.1.3" xref="id2.2.m2.1.1.3.cmml">1.35</mn></mrow><annotation-xml encoding="MathML-Content" id="id2.2.m2.1b"><apply id="id2.2.m2.1.1.cmml" xref="id2.2.m2.1.1"><approx id="id2.2.m2.1.1.1.cmml" xref="id2.2.m2.1.1.1"></approx><csymbol cd="latexml" id="id2.2.m2.1.1.2.cmml" xref="id2.2.m2.1.1.2">absent</csymbol><cn id="id2.2.m2.1.1.3.cmml" type="float" xref="id2.2.m2.1.1.3">1.35</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="id2.2.m2.1c">\approx 1.35</annotation><annotation encoding="application/x-llamapun" id="id2.2.m2.1d">≈ 1.35</annotation></semantics></math>, compared to a human-designed baseline.</p>
+</div>
+<div class="ltx_keywords">
+<h6 class="ltx_title ltx_title_keywords">Keywords: </h6>Hyperparameter Optimization Edge Computing High-Performance Computing Deep Learning Computer Vision
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para ltx_noindent" id="S1.p1">
+<span class="ltx_ERROR undefined" id="S1.p1.1">\acresetall</span>
+<p class="ltx_p" id="S1.p1.2">Deploying <span class="ltx_ERROR undefined" id="S1.p1.2.1">\ac</span>ML models on edge devices presents unique challenges, as these systems must deliver high accuracy while operating under strict memory and latency constraints. Edge <span class="ltx_ERROR undefined" id="S1.p1.2.2">\ac</span>AI is widely used in applications requiring real-time decision-making. This includes industrial automation and process monitoring, where traditionally post-training optimization approaches like pruning and quantization are applied. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">An alternative is hardware-aware <span class="ltx_ERROR undefined" id="S1.p2.1.1">\ac</span>NAS, which systematically explores model architectures to find a best-suited configuration for a given hardware platform. This study introduces a <span class="ltx_ERROR undefined" id="S1.p2.1.2">\ac</span>NAS workflow that pairs an edge device located in Belgium with a <span class="ltx_ERROR undefined" id="S1.p2.1.3">\ac</span>HPC system in Germany. This setup accelerates model training while simultaneously optimizing inference speed on the target hardware, ensuring a practical, improved, and efficient deployment. The corresponding code of the HPC2Edge workflow is available open-source on GitHub<span class="ltx_note ltx_role_footnote" id="footnote1"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span>HPC2Edge GitHub: <a class="ltx_ref ltx_url" href="https://github.com/Flanders-Make-vzw/HPC2edge" style="color:#0000FF;" title="">https://github.com/Flanders-Make-vzw/HPC2edge</a></span></span></span>. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">The approach is validated with a <span class="ltx_ERROR undefined" id="S1.p3.1.1">\ac</span>LPBF application, an industrial <span class="ltx_ERROR undefined" id="S1.p3.1.2">\ac</span>AM process that fabricates metal parts. Real-time anomaly detection is essential for preventing defects and reducing waste. The method uses a 20 kHz high-speed camera and a <span class="ltx_ERROR undefined" id="S1.p3.1.3">\ac</span>NN-based video regression model to predict laser parameters. Deviations of the predicted laser parameters from ground-truth laser parameters indicate process anomalies <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib3" title="">3</a>]</cite>. For training and evaluation of the method, the RAISE-LPBF-Laser dataset (v1.1)<span class="ltx_note ltx_role_footnote" id="footnote2"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_tag ltx_tag_note">2</span>RAISE-LPBF-Laser dataset: <a class="ltx_ref ltx_url" href="https://www.makebench.eu" style="color:#0000FF;" title="">https://www.makebench.eu</a></span></span></span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib2" title="">2</a>]</cite>, consisting of high-speed camera frames paired with various laser parameters, is used. Optimizing inference speed without sacrificing accuracy is key. Deploying the <span class="ltx_ERROR undefined" id="S1.p3.1.4">\ac</span>NAS-optimized model presented in this study on an edge device ensures seamless vision integration on any LPBF machine, while improving efficiency and reliability.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">The paper is structured as follows: Sec. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S2" title="2 Related Work on Hardware-Aware \acNAS ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">2</span></a> summarizes the related work on hardware-aware <span class="ltx_ERROR undefined" id="S1.p4.1.1">\ac</span>NAS, Sec. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3" title="3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">3</span></a> describes the developed workflow in detail, and Sec. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S4" title="4 Empirical Results ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">4</span></a> presents the empirical results. Finally, Sec. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S5" title="5 Summary and Conclusion ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">5</span></a> provides a summary and a conclusion.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related Work on Hardware-Aware <span class="ltx_ERROR undefined" id="S2.1.1">\ac</span>NAS</h2>
+<div class="ltx_para ltx_noindent" id="S2.p1">
+<p class="ltx_p" id="S2.p1.1">To leverage high-performing <span class="ltx_ERROR undefined" id="S2.p1.1.1">\ac</span>ML and <span class="ltx_ERROR undefined" id="S2.p1.1.2">\ac</span>AI models in a practical setting on resource-limited edge devices, two approaches exist. On the one hand, an already optimized model is compressed to fit on the hardware, e.g., by quantization or structural pruning. On the other hand, hardware-aware <span class="ltx_ERROR undefined" id="S2.p1.1.3">\ac</span>NAS seeks to find the optimal building blocks for a model and then constructs its architecture from scratch. While in regular <span class="ltx_ERROR undefined" id="S2.p1.1.4">\ac</span>NAS the objective is to find the best performing <span class="ltx_ERROR undefined" id="S2.p1.1.5">\ac</span>NN architectures in terms of accuracy, hardware-aware <span class="ltx_ERROR undefined" id="S2.p1.1.6">\ac</span>NAS is inherently multi-objective as not only the accuracy of a model but also factors such as the model size and inference speed are of high relevance. Several methods for performing hardware-aware <span class="ltx_ERROR undefined" id="S2.p1.1.7">\ac</span>NAS for different types of edge devices have already been introduced in the literature and are summarized in the following, based on a general overview of the field in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib1" title="">1</a>]</cite>. <span class="ltx_ERROR undefined" id="S2.p1.1.8">\acp</span>FBNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib14" title="">14</a>]</cite>, a family of convolutional architectures for use on mobile devices were discovered using a differential <span class="ltx_ERROR undefined" id="S2.p1.1.9">\ac</span>NAS approach and outperformed human crafted architectures (such as MobileNets <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib5" title="">5</a>]</cite>) at the time in terms of speed and accuracy. FNAS <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib6" title="">6</a>]</cite> leverages hardware-aware <span class="ltx_ERROR undefined" id="S2.p1.1.10">\ac</span>NAS for creating <span class="ltx_ERROR undefined" id="S2.p1.1.11">\ac</span>NN architectures that meet the specifications of <span class="ltx_ERROR undefined" id="S2.p1.1.12">\acp</span>FPGA. It uses a multi-objective reinforcement learning <span class="ltx_ERROR undefined" id="S2.p1.1.13">\ac</span>NAS approach <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib15" title="">15</a>]</cite>, where the latency of an architecture candidate is estimated and only verified after the <span class="ltx_ERROR undefined" id="S2.p1.1.14">\ac</span>NAS run on the target <span class="ltx_ERROR undefined" id="S2.p1.1.15">\ac</span>FPGA. The <span class="ltx_ERROR undefined" id="S2.p1.1.16">\ac</span>MCUNet in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib9" title="">9</a>]</cite> focuses on microcontroller units, which feature even smaller memory than mobile phones. It also leverages a two stage process, where the <span class="ltx_ERROR undefined" id="S2.p1.1.17">\ac</span>NAS search space is first refined, such that all possible candidates fit the resource constraints of the edge device. Then, the <span class="ltx_ERROR undefined" id="S2.p1.1.18">\ac</span>NAS for the architecture with the best accuracy is launched. The memory footprint and the <span class="ltx_ERROR undefined" id="S2.p1.1.19">\ac</span>FLOP performance are calculated not on the edge device. From an optimization technique point of view, also <span class="ltx_ERROR undefined" id="S2.p1.1.20">\ac</span>EA are a strong choice <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib4" title="">4</a>]</cite>. In <span class="ltx_ERROR undefined" id="S2.p1.1.21">\ac</span>EA, an initial population is sampled randomly. Subsequent generations are iteratively obtained from the previous one through selection (biased for fitness), mutations, and usually also crossover, i.e., sex. Measurement of fitness, which requires fully training the <span class="ltx_ERROR undefined" id="S2.p1.1.22">\acp</span>NN candidates is here the expensive step. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.p2">
+<p class="ltx_p" id="S2.p2.1">A critical aspect of hardware-aware <span class="ltx_ERROR undefined" id="S2.p2.1.1">\ac</span>NAS is accurately measuring hardware costs. While the number of parameters and <span class="ltx_ERROR undefined" id="S2.p2.1.2">\acp</span>FLOP required for the inference of an architecture candidate can be easily estimated, it has been shown that other quantities of interest, such as the inference time, cannot be reliably derived from these. This is, for instance, the case on different types of edge devices and especially relevant when <span class="ltx_ERROR undefined" id="S2.p2.1.3">\acp</span>GPU are used <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib8" title="">8</a>]</cite>. For execution latency, real-world measurement has shown to be the most accurate technique. This may, however, increase the runtime of the <span class="ltx_ERROR undefined" id="S2.p2.1.4">\ac</span>NAS, as each network candidate needs to be transferred to the edge device, perform the measurement, and return the results. Therefore, many works rely on learning a surrogate model, use a look-up table or heuristics, to predict the latency on the target hardware. Even <span class="ltx_ERROR undefined" id="S2.p2.1.5">\ac</span>ML-based prediction models result in an error that is off by a factor of up to 3.8, compared to the actual latency <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib1" title="">1</a>]</cite>.
+Other important hardware cost measurements include energy consumption and memory footprint. While benchmarks exist that collect a large number of edge measurements on modern devices, they are often limited in scope. For <span class="ltx_ERROR undefined" id="S2.p2.1.6">\ac</span>CV workloads these are mainly focused on <span class="ltx_ERROR undefined" id="S2.p2.1.7">\acp</span>CNN <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib8" title="">8</a>]</cite>, while the ones that focus on Transformer-based models tend to emphasize large language models. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib12" title="">12</a>]</cite>.</p>
+</div>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Design and Implementation</h2>
+<div class="ltx_para ltx_noindent" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">This section introduces the database schema in Sec. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.SS1" title="3.1 Database Schema ‣ 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">3.1</span></a>, the <span class="ltx_ERROR undefined" id="S3.p1.1.1">\ac</span>AI model along with its architectural and optimizer-related hyperparameters in Sec. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.SS2" title="3.2 AI Model ‣ 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">3.2</span></a>, and the setup of main HPC2Edge workflow in Sec. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.SS3" title="3.3 Workflow Setup ‣ 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">3.3</span></a>. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.p2">
+<p class="ltx_p" id="S3.p2.1">To enable a wide roll-out of monitoring of 3D printers, it is highly preferable to run the inference on embedded hardware near the printer rather than remotely and expensively on a power-hungry machine. Therefore, the community ultimately faces a multi-objective optimization problem: finding a model that is as accurate as possible and at the same time sufficiently fast and small for inferencing on embedded hardware.</p>
+</div>
+<figure class="ltx_figure" id="S3.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="187" id="S3.F1.g1" src="extracted/6457717/figures/edge-device-jetson-orin-IMG_20231121_141321.jpg" width="180"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F1.2.1.1" style="font-size:90%;">Figure 1</span>: </span><span class="ltx_text" id="S3.F1.3.2" style="font-size:90%;">The edge device, an Nvidia AGX Orin (front), with a frame grabber PCIe card (green) for interfacing with high-speed cameras over fiber.</span></figcaption>
+</figure>
+<div class="ltx_para ltx_noindent" id="S3.p3">
+<p class="ltx_p" id="S3.p3.1">The embedded system of choice is an NVIDIA Jetson AGX Orin™ system, see <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.F1" title="In 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">Fig.</span> <span class="ltx_text ltx_ref_tag">1</span></a>. This system is fairly powerful and expensive (<math alttext="\sim" class="ltx_Math" display="inline" id="S3.p3.1.m1.1"><semantics id="S3.p3.1.m1.1a"><mo id="S3.p3.1.m1.1.1" xref="S3.p3.1.m1.1.1.cmml">∼</mo><annotation-xml encoding="MathML-Content" id="S3.p3.1.m1.1b"><csymbol cd="latexml" id="S3.p3.1.m1.1.1.cmml" xref="S3.p3.1.m1.1.1">similar-to</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S3.p3.1.m1.1c">\sim</annotation><annotation encoding="application/x-llamapun" id="S3.p3.1.m1.1d">∼</annotation></semantics></math>2,000 EUR as of 03/2025) for an embedded device. The cost is, however, reasonable compared to the much more expensive metal printer and camera. The Jetson has an integrated 10 Gbps Ethernet <span class="ltx_ERROR undefined" id="S3.p3.1.1">\ac</span>NIC, a <span class="ltx_ERROR undefined" id="S3.p3.1.2">\ac</span>PCIe slot for hosting a frame grabber, and it can emulate smaller and cheaper devices of the same series. System and <span class="ltx_ERROR undefined" id="S3.p3.1.3">\ac</span>GPU memory are unified on the board. On the full AGX Orin, memory is not a constraining factor for storing the default <span class="ltx_ERROR undefined" id="S3.p3.1.4">\ac</span>NN architecture of the baseline model presented in this study. However, the speed of inference remains a constraint, as the system must be able to process the entire surface to catch all faults. The latency of this prediction should be low, i.e., feedback to the controller arrives within a few scanlines to avoid more damage and allow recovery of the fault. Ideally, this processing time should be not much longer than the time it takes to print a scanline.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.p4">
+<p class="ltx_p" id="S3.p4.1">The two objectives are therefore (i) inference speed and (ii) the <span class="ltx_ERROR undefined" id="S3.p4.1.1">\ac</span>RSME of the predictions. The inference speed for a model architecture is influenced by many factors, such as the number of parameters. It can be roughly estimated/interpolated (see Sec. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S2" title="2 Related Work on Hardware-Aware \acNAS ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">2</span></a>), but only an execution on the device itself can reveal the true inference performance. Therefore, the inference speed of all model variants considered in this study are directly measured on the embedded device. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.p5">
+<p class="ltx_p" id="S3.p5.1">A central relational database (in PostgreSQL) has been set up to allow bi-directional communication between the embedded device located in Belgium at Flanders Make and the <span class="ltx_ERROR undefined" id="S3.p5.1.1">\ac</span>HPC cluster located at the Jülich Supercomputing Centre, Forschungszentrum Jülich, in Germany. The schema is shown in <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.F2" title="In 3.1 Database Schema ‣ 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">Fig.</span> <span class="ltx_text ltx_ref_tag">2</span></a>.
+The optimizer consults the embedded device as soon as it conceives a new candidate <span class="ltx_ERROR undefined" id="S3.p5.1.2">\ac</span>NN architecture (hyperparameter setting), posting the architecture details to the database. The embedded device continuously polls the database for unmeasured architectures, compiles and optimizes the architecture with the NVIDIA TensorRT library<span class="ltx_note ltx_role_footnote" id="footnote3"><sup class="ltx_note_mark">3</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">3</sup><span class="ltx_tag ltx_tag_note">3</span>NVIDIA TensorRT: <a class="ltx_ref ltx_url" href="https://developer.nvidia.com/tensorrt-getting-started" style="color:#0000FF;" title="">https://developer.nvidia.com/tensorrt-getting-started</a></span></span></span>, and (after warmup) runs a few inference steps to measure steady-state latency and throughput at several batch sizes. It subsequently reports its results back to the database. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.p6">
+<p class="ltx_p" id="S3.p6.1">The current setup lacks load balancing for multiple embedded devices of the same type, which is desirable for extremely large-scale optimizations, for efficient parallel operation also on the embedded side, as well as to achieve a degree of fault tolerance. At this point, further optimizations, such as the introduction of surrogate models, also become relevant.</p>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Database Schema</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">The HPC2Edge database schema, shown in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.F2" title="Figure 2 ‣ 3.1 Database Schema ‣ 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">2</span></a>, consists of an essential part that supports basic communication between the <span class="ltx_ERROR undefined" id="S3.SS1.p1.1.1">\ac</span>HPC and edge systems (labeled ‘HPC2Edge core’ in the figure), and accessory tables to optionally store the full exploration of the optimizer.</p>
+</div>
+<figure class="ltx_figure" id="S3.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="793" id="S3.F2.g1" src="x1.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F2.2.1.1" style="font-size:90%;">Figure 2</span>: </span><span class="ltx_text" id="S3.F2.3.2" style="font-size:90%;">Relational database schema for connecting the HPC-based HPO with an embedded device for inference measurements.</span></figcaption>
+</figure>
+<div class="ltx_para ltx_noindent" id="S3.SS1.p2">
+<p class="ltx_p" id="S3.SS1.p2.1">In terms of core schema, the edge device is <span class="ltx_text ltx_font_typewriter" id="S3.SS1.p2.1.1">GRANT</span>ed <span class="ltx_text ltx_font_typewriter" id="S3.SS1.p2.1.2">INSERT</span> permission only into the <span class="ltx_text ltx_font_typewriter" id="S3.SS1.p2.1.3">edge_measurement</span> table. The <span class="ltx_ERROR undefined" id="S3.SS1.p2.1.4">\ac</span>HPO algorithm gets an account that can <span class="ltx_text ltx_font_typewriter" id="S3.SS1.p2.1.5">INSERT</span> into the (neural) <span class="ltx_text ltx_font_typewriter" id="S3.SS1.p2.1.6">network_architecture</span> and <span class="ltx_text ltx_font_typewriter" id="S3.SS1.p2.1.7">benchmark_result</span> tables. All accounts can <span class="ltx_text ltx_font_typewriter" id="S3.SS1.p2.1.8">SELECT</span> from all tables. The <span class="ltx_text ltx_font_typewriter" id="S3.SS1.p2.1.9">JSONB</span> columns allow noSQL-equivalent freedom to evolve the system without changing the main schema, but can still be indexed and efficiently queried when needed. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS1.p3">
+<p class="ltx_p" id="S3.SS1.p3.1">The extended schema is designed to be compatible with OpenML<span class="ltx_note ltx_role_footnote" id="footnote4"><sup class="ltx_note_mark">4</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">4</sup><span class="ltx_tag ltx_tag_note">4</span>OpenML: <a class="ltx_ref ltx_url" href="https://openml.org" style="color:#0000FF;" title="">https://openml.org</a></span></span></span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib13" title="">13</a>]</cite>, which is an open platform for sharing datasets, algorithms, and experiments. OpenML has similarities to the more recent Hugging Face<span class="ltx_note ltx_role_footnote" id="footnote5"><sup class="ltx_note_mark">5</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">5</sup><span class="ltx_tag ltx_tag_note">5</span>Hugging Face: <a class="ltx_ref ltx_url" href="https://huggingface.co" style="color:#0000FF;" title="">https://huggingface.co</a></span></span></span> platform, it is, however, more geared towards classical <span class="ltx_ERROR undefined" id="S3.SS1.p3.1.1">\ac</span>ML using tabular datasets. It offers <span class="ltx_ERROR undefined" id="S3.SS1.p3.1.2">\acp</span>API and supports experiment logging from several popular <span class="ltx_ERROR undefined" id="S3.SS1.p3.1.3">\ac</span>ML toolkits.
+The present work uses the publicly available code as of 08/2024<span class="ltx_note ltx_role_footnote" id="footnote6"><sup class="ltx_note_mark">6</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">6</sup><span class="ltx_tag ltx_tag_note">6</span>OpenML 08/2024: <a class="ltx_ref ltx_url" href="https://github.com/openml/OpenML/tree/develop/data/sql" style="color:#0000FF;" title="">https://github.com/openml/OpenML/tree/develop/data/sql</a></span></span></span>.
+Note that no full direct compatibility is achieved and OpenML has announced a full backend code rewrite, i.e., their future schema might be structured substantially different. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS1.p4">
+<p class="ltx_p" id="S3.SS1.p4.1">OpenML uses an extremely flexible, untyped schema. Here, some untyped, string-serialized fields were specialized to double precision, and the table <span class="ltx_text ltx_font_typewriter" id="S3.SS1.p4.1.1">math_function</span> to <span class="ltx_text ltx_font_typewriter" id="S3.SS1.p4.1.2">estimation_procedure</span>. Only reference records relevant for regression are stored, without loss of generality. The tables <span class="ltx_text ltx_font_typewriter" id="S3.SS1.p4.1.3">benchmark</span> and <span class="ltx_text ltx_font_typewriter" id="S3.SS1.p4.1.4">benchmark_result</span> correspond conceptually to tasks and runs in OpenML. It should be noted that the corresponding <span class="ltx_ERROR undefined" id="S3.SS1.p4.1.5">\ac</span>DDL was not available publicly to ensure some level of compatibility. Future work may consider running a full OpenML server for experiment logging — or some other logging method like MLflow <span class="ltx_note ltx_role_footnote" id="footnote7"><sup class="ltx_note_mark">7</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">7</sup><span class="ltx_tag ltx_tag_note">7</span>MLflow: <a class="ltx_ref ltx_url" href="https://mlflow.org/" style="color:#0000FF;" title="">https://mlflow.org/</a></span></span></span> or ClearML <span class="ltx_note ltx_role_footnote" id="footnote8"><sup class="ltx_note_mark">8</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">8</sup><span class="ltx_tag ltx_tag_note">8</span>ClearML: <a class="ltx_ref ltx_url" href="https://clear.ml/" style="color:#0000FF;" title="">https://clear.ml/</a></span></span></span> — extended with only the HPC2Edge core schema.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>AI Model</h3>
+<div class="ltx_para ltx_noindent" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">The model used to predict the laser parameters and to produce the following results (see Sec. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S4" title="4 Empirical Results ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">4</span></a>) is a Video Swin Transformer <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib10" title="">10</a>]</cite> with a modified fully connected end layer for power and speed regression. The data pre-processing is the same as described in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib2" title="">2</a>]</cite>. The RAISE-LPBF-Laser dataset (v1.1) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib2" title="">2</a>]</cite>, consisting of high-speed camera frames paired with various laser parameters, is used. Training and validation focus on a single object (C027) with an 80-20 split, while object C028 is used for testing. The proposed <span class="ltx_ERROR undefined" id="S3.SS2.p1.1.1">\ac</span>NAS framework directly optimizes performance for edge deployment, balancing both speed and accuracy, while leveraging <span class="ltx_ERROR undefined" id="S3.SS2.p1.1.2">\ac</span>HPC for acceleration. This work provides an efficient solution for real-time <span class="ltx_ERROR undefined" id="S3.SS2.p1.1.3">\ac</span>AI-driven industrial applications. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.4">The input to the model consists of a window of <math alttext="16" class="ltx_Math" display="inline" id="S3.SS2.p2.1.m1.1"><semantics id="S3.SS2.p2.1.m1.1a"><mn id="S3.SS2.p2.1.m1.1.1" xref="S3.SS2.p2.1.m1.1.1.cmml">16</mn><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.1.m1.1b"><cn id="S3.SS2.p2.1.m1.1.1.cmml" type="integer" xref="S3.SS2.p2.1.m1.1.1">16</cn></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.1.m1.1c">16</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.1.m1.1d">16</annotation></semantics></math> consecutive frames that are randomly sampled from each scanline and then normalized and resized to a model input shape of <math alttext="(256,256)" class="ltx_Math" display="inline" id="S3.SS2.p2.2.m2.2"><semantics id="S3.SS2.p2.2.m2.2a"><mrow id="S3.SS2.p2.2.m2.2.3.2" xref="S3.SS2.p2.2.m2.2.3.1.cmml"><mo id="S3.SS2.p2.2.m2.2.3.2.1" stretchy="false" xref="S3.SS2.p2.2.m2.2.3.1.cmml">(</mo><mn id="S3.SS2.p2.2.m2.1.1" xref="S3.SS2.p2.2.m2.1.1.cmml">256</mn><mo id="S3.SS2.p2.2.m2.2.3.2.2" xref="S3.SS2.p2.2.m2.2.3.1.cmml">,</mo><mn id="S3.SS2.p2.2.m2.2.2" xref="S3.SS2.p2.2.m2.2.2.cmml">256</mn><mo id="S3.SS2.p2.2.m2.2.3.2.3" stretchy="false" xref="S3.SS2.p2.2.m2.2.3.1.cmml">)</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.2.m2.2b"><interval closure="open" id="S3.SS2.p2.2.m2.2.3.1.cmml" xref="S3.SS2.p2.2.m2.2.3.2"><cn id="S3.SS2.p2.2.m2.1.1.cmml" type="integer" xref="S3.SS2.p2.2.m2.1.1">256</cn><cn id="S3.SS2.p2.2.m2.2.2.cmml" type="integer" xref="S3.SS2.p2.2.m2.2.2">256</cn></interval></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.2.m2.2c">(256,256)</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.2.m2.2d">( 256 , 256 )</annotation></semantics></math> pixels.
+The output of the model corresponds to the ground-truth values, consisting of a pair of setpoints for laser dot speed and power for each scanline, which are normalized by dividing by their nominal values of 900<math alttext="mm/s" class="ltx_Math" display="inline" id="S3.SS2.p2.3.m3.1"><semantics id="S3.SS2.p2.3.m3.1a"><mrow id="S3.SS2.p2.3.m3.1.1" xref="S3.SS2.p2.3.m3.1.1.cmml"><mrow id="S3.SS2.p2.3.m3.1.1.2" xref="S3.SS2.p2.3.m3.1.1.2.cmml"><mi id="S3.SS2.p2.3.m3.1.1.2.2" xref="S3.SS2.p2.3.m3.1.1.2.2.cmml">m</mi><mo id="S3.SS2.p2.3.m3.1.1.2.1" xref="S3.SS2.p2.3.m3.1.1.2.1.cmml">⁢</mo><mi id="S3.SS2.p2.3.m3.1.1.2.3" xref="S3.SS2.p2.3.m3.1.1.2.3.cmml">m</mi></mrow><mo id="S3.SS2.p2.3.m3.1.1.1" xref="S3.SS2.p2.3.m3.1.1.1.cmml">/</mo><mi id="S3.SS2.p2.3.m3.1.1.3" xref="S3.SS2.p2.3.m3.1.1.3.cmml">s</mi></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.3.m3.1b"><apply id="S3.SS2.p2.3.m3.1.1.cmml" xref="S3.SS2.p2.3.m3.1.1"><divide id="S3.SS2.p2.3.m3.1.1.1.cmml" xref="S3.SS2.p2.3.m3.1.1.1"></divide><apply id="S3.SS2.p2.3.m3.1.1.2.cmml" xref="S3.SS2.p2.3.m3.1.1.2"><times id="S3.SS2.p2.3.m3.1.1.2.1.cmml" xref="S3.SS2.p2.3.m3.1.1.2.1"></times><ci id="S3.SS2.p2.3.m3.1.1.2.2.cmml" xref="S3.SS2.p2.3.m3.1.1.2.2">𝑚</ci><ci id="S3.SS2.p2.3.m3.1.1.2.3.cmml" xref="S3.SS2.p2.3.m3.1.1.2.3">𝑚</ci></apply><ci id="S3.SS2.p2.3.m3.1.1.3.cmml" xref="S3.SS2.p2.3.m3.1.1.3">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.3.m3.1c">mm/s</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.3.m3.1d">italic_m italic_m / italic_s</annotation></semantics></math> and 215<math alttext="W" class="ltx_Math" display="inline" id="S3.SS2.p2.4.m4.1"><semantics id="S3.SS2.p2.4.m4.1a"><mi id="S3.SS2.p2.4.m4.1.1" xref="S3.SS2.p2.4.m4.1.1.cmml">W</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.4.m4.1b"><ci id="S3.SS2.p2.4.m4.1.1.cmml" xref="S3.SS2.p2.4.m4.1.1">𝑊</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.4.m4.1c">W</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.4.m4.1d">italic_W</annotation></semantics></math>, respectively. The choice of using a Video Swin model for prediction is motivated by the fact that it is the best performing attention-based model from <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib10" title="">10</a>]</cite> and that its architecture can be easily modified. Specifically, the model’s hyperparameters are well-designed to minimize conflicts and interdependencies, reducing the likelihood of parameterization issues during the optimization run. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS2.p3">
+<p class="ltx_p" id="S3.SS2.p3.1">The hyperparameters of the model that are optimized during the <span class="ltx_ERROR undefined" id="S3.SS2.p3.1.1">\ac</span>NAS run are listed in Tab. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.T1" title="Table 1 ‣ 3.2 AI Model ‣ 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">1</span></a>. The search space includes various Transformer-specific architectural parameters, i.e., the video patch size, which controls the temporal and spatial granularity of the input, the embedded dimensions influencing the dimensions of the tokens, the depths of each model stage, the number of attention heads, the window size of the self attention, and the ratio of feed-forward <span class="ltx_ERROR undefined" id="S3.SS2.p3.1.2">\ac</span>MLP layers between attention blocks. The classical optimizer-related parameters are the base learning rate of the Adam optimizer <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib7" title="">7</a>]</cite> and the scheduler-specific step-size and learning rate decay factor. The search space is chosen to be high-dimensional to allow for an extensive exploration of model size and model quality.</p>
+</div>
+<figure class="ltx_table" id="S3.T1">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S3.T1.4.1.1" style="font-size:90%;">Table 1</span>: </span><span class="ltx_text" id="S3.T1.5.2" style="font-size:90%;">Hyperparameter search space, consisting of architectural and optimizer-related hyperparameters of the Video Swin Transformer model. </span></figcaption>
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S3.T1.2">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.T1.2.3.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.3.1.1"><span class="ltx_text ltx_font_bold" id="S3.T1.2.3.1.1.1">Name</span></th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.3.1.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.2.3.1.2.1">
+<span class="ltx_p" id="S3.T1.2.3.1.2.1.1" style="width:160.4pt;"><span class="ltx_text ltx_font_bold" id="S3.T1.2.3.1.2.1.1.1">Description</span></span>
+</span>
+</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="S3.T1.2.3.1.3"><span class="ltx_text ltx_font_bold" id="S3.T1.2.3.1.3.1">Default</span></td>
+<td class="ltx_td ltx_align_left" id="S3.T1.2.3.1.4"><span class="ltx_text ltx_font_bold" id="S3.T1.2.3.1.4.1">Sampling Range</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.4.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S3.T1.2.4.2.1">Patch size</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S3.T1.2.4.2.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.2.4.2.2.1">
+<span class="ltx_p" id="S3.T1.2.4.2.2.1.1" style="width:160.4pt;">Video patch size for transformer tokenization</span>
+</span>
+</th>
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_t" id="S3.T1.2.4.2.3">[2,4,4]</td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S3.T1.2.4.2.4">[2, 4] each</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.5.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.5.3.1">Embedded dimensions</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.5.3.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.2.5.3.2.1">
+<span class="ltx_p" id="S3.T1.2.5.3.2.1.1" style="width:160.4pt;">Number of linear projection output channels</span>
+</span>
+</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="S3.T1.2.5.3.3">96</td>
+<td class="ltx_td ltx_align_left" id="S3.T1.2.5.3.4">[24, 48]</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.6.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.6.4.1">Depths</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.6.4.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.2.6.4.2.1">
+<span class="ltx_p" id="S3.T1.2.6.4.2.1.1" style="width:160.4pt;">Depths of each Video Swin Transformer stage</span>
+</span>
+</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="S3.T1.2.6.4.3">[2,2,6,2]</td>
+<td class="ltx_td ltx_align_left" id="S3.T1.2.6.4.4">[1, 2, 4] each</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.7.5">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.7.5.1">Heads number</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.7.5.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.2.7.5.2.1">
+<span class="ltx_p" id="S3.T1.2.7.5.2.1.1" style="width:160.4pt;">Number of attention heads of each stage</span>
+</span>
+</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="S3.T1.2.7.5.3">[3,6,12,24]</td>
+<td class="ltx_td ltx_align_left" id="S3.T1.2.7.5.4">[3,6,12,24] each</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.8.6">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.8.6.1">
+<span class="ltx_ERROR undefined" id="S3.T1.2.8.6.1.1">\ac</span>MLP ratio</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.8.6.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.2.8.6.2.1">
+<span class="ltx_p" id="S3.T1.2.8.6.2.1.1" style="width:160.4pt;">Ratio of <span class="ltx_ERROR undefined" id="S3.T1.2.8.6.2.1.1.1">\ac</span>MLP hidden dim. to embedding dim.</span>
+</span>
+</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="S3.T1.2.8.6.3">4</td>
+<td class="ltx_td ltx_align_left" id="S3.T1.2.8.6.4">[1, 2, 3, 4]</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.T1.1.1.2">Learning rate</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_row ltx_border_r" id="S3.T1.1.1.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.1.3.1">
+<span class="ltx_p" id="S3.T1.1.1.3.1.1" style="width:160.4pt;">Controls how much to adjust model weights during training</span>
+</span>
+</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="S3.T1.1.1.1"><math alttext="1e^{-4}" class="ltx_Math" display="inline" id="S3.T1.1.1.1.m1.1"><semantics id="S3.T1.1.1.1.m1.1a"><mrow id="S3.T1.1.1.1.m1.1.1" xref="S3.T1.1.1.1.m1.1.1.cmml"><mn id="S3.T1.1.1.1.m1.1.1.2" xref="S3.T1.1.1.1.m1.1.1.2.cmml">1</mn><mo id="S3.T1.1.1.1.m1.1.1.1" xref="S3.T1.1.1.1.m1.1.1.1.cmml">⁢</mo><msup id="S3.T1.1.1.1.m1.1.1.3" xref="S3.T1.1.1.1.m1.1.1.3.cmml"><mi id="S3.T1.1.1.1.m1.1.1.3.2" xref="S3.T1.1.1.1.m1.1.1.3.2.cmml">e</mi><mrow id="S3.T1.1.1.1.m1.1.1.3.3" xref="S3.T1.1.1.1.m1.1.1.3.3.cmml"><mo id="S3.T1.1.1.1.m1.1.1.3.3a" xref="S3.T1.1.1.1.m1.1.1.3.3.cmml">−</mo><mn id="S3.T1.1.1.1.m1.1.1.3.3.2" xref="S3.T1.1.1.1.m1.1.1.3.3.2.cmml">4</mn></mrow></msup></mrow><annotation-xml encoding="MathML-Content" id="S3.T1.1.1.1.m1.1b"><apply id="S3.T1.1.1.1.m1.1.1.cmml" xref="S3.T1.1.1.1.m1.1.1"><times id="S3.T1.1.1.1.m1.1.1.1.cmml" xref="S3.T1.1.1.1.m1.1.1.1"></times><cn id="S3.T1.1.1.1.m1.1.1.2.cmml" type="integer" xref="S3.T1.1.1.1.m1.1.1.2">1</cn><apply id="S3.T1.1.1.1.m1.1.1.3.cmml" xref="S3.T1.1.1.1.m1.1.1.3"><csymbol cd="ambiguous" id="S3.T1.1.1.1.m1.1.1.3.1.cmml" xref="S3.T1.1.1.1.m1.1.1.3">superscript</csymbol><ci id="S3.T1.1.1.1.m1.1.1.3.2.cmml" xref="S3.T1.1.1.1.m1.1.1.3.2">𝑒</ci><apply id="S3.T1.1.1.1.m1.1.1.3.3.cmml" xref="S3.T1.1.1.1.m1.1.1.3.3"><minus id="S3.T1.1.1.1.m1.1.1.3.3.1.cmml" xref="S3.T1.1.1.1.m1.1.1.3.3"></minus><cn id="S3.T1.1.1.1.m1.1.1.3.3.2.cmml" type="integer" xref="S3.T1.1.1.1.m1.1.1.3.3.2">4</cn></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.T1.1.1.1.m1.1c">1e^{-4}</annotation><annotation encoding="application/x-llamapun" id="S3.T1.1.1.1.m1.1d">1 italic_e start_POSTSUPERSCRIPT - 4 end_POSTSUPERSCRIPT</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left" id="S3.T1.1.1.4">log[1e-5, 1]</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.9.7">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.9.7.1">Learning rate step size</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.9.7.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.2.9.7.2.1">
+<span class="ltx_p" id="S3.T1.2.9.7.2.1.1" style="width:160.4pt;">Interval of learning rate adjustment</span>
+</span>
+</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="S3.T1.2.9.7.3">10</td>
+<td class="ltx_td ltx_align_left" id="S3.T1.2.9.7.4">[10, 20, 40]</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.2.1">Learning rate <math alttext="\gamma" class="ltx_Math" display="inline" id="S3.T1.2.2.1.m1.1"><semantics id="S3.T1.2.2.1.m1.1a"><mi id="S3.T1.2.2.1.m1.1.1" xref="S3.T1.2.2.1.m1.1.1.cmml">γ</mi><annotation-xml encoding="MathML-Content" id="S3.T1.2.2.1.m1.1b"><ci id="S3.T1.2.2.1.m1.1.1.cmml" xref="S3.T1.2.2.1.m1.1.1">𝛾</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.T1.2.2.1.m1.1c">\gamma</annotation><annotation encoding="application/x-llamapun" id="S3.T1.2.2.1.m1.1d">italic_γ</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.2.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.2.2.2.1">
+<span class="ltx_p" id="S3.T1.2.2.2.1.1" style="width:160.4pt;">Learning rate decay factor</span>
+</span>
+</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="S3.T1.2.2.3">0.5</td>
+<td class="ltx_td ltx_align_left" id="S3.T1.2.2.4">(0.1, 0.9)</td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Workflow Setup</h3>
+<div class="ltx_para ltx_noindent" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.4">The setup of the HPC2Edge workflow is shown in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.F3" title="Figure 3 ‣ 3.3 Workflow Setup ‣ 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">3</span></a>. The training of the different models is performed on the Extreme-Scale Booster partition of the DEEP-EST <span class="ltx_ERROR undefined" id="S3.SS3.p1.4.1">\ac</span>HPC machine <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#bib.bib11" title="">11</a>]</cite> at the Jülich Supercomputing Centre, Forschungszentrum Jülich, in Germany. It features a total of 75 nodes, each one equipped with one NVIDIA V100 GPU and an Intel Xeon 4215 <span class="ltx_ERROR undefined" id="S3.SS3.p1.4.2">\ac</span>CPU with 8 cores and a base frequency of 2.5 GHz. To achieve results in a reasonable amount of time, the training of the different <span class="ltx_ERROR undefined" id="S3.SS3.p1.4.3">\acp</span>NN is performed in data-parallel fashion with the PyTorch-DDP library<span class="ltx_note ltx_role_footnote" id="footnote9"><sup class="ltx_note_mark">9</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">9</sup><span class="ltx_tag ltx_tag_note">9</span>PyTorch-DDP: <a class="ltx_ref ltx_url" href="https://pytorch.org/docs/stable/notes/ddp.html" style="color:#0000FF;" title="">https://pytorch.org/docs/stable/notes/ddp.html</a></span></span></span>. Orchestration of the <span class="ltx_ERROR undefined" id="S3.SS3.p1.4.4">\ac</span>HPO runs is handled by the Ray Tune framework<span class="ltx_note ltx_role_footnote" id="footnote10"><sup class="ltx_note_mark">10</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">10</sup><span class="ltx_tag ltx_tag_note">10</span>Ray Tune: <a class="ltx_ref ltx_url" href="https://www.ray.io/" style="color:#0000FF;" title="">https://www.ray.io/</a></span></span></span>. The optimization process leverages the Nevergrad library<span class="ltx_note ltx_role_footnote" id="footnote11"><sup class="ltx_note_mark">11</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">11</sup><span class="ltx_tag ltx_tag_note">11</span>Nevergrad: <a class="ltx_ref ltx_url" href="https://facebookresearch.github.io/nevergrad/" style="color:#0000FF;" title="">https://facebookresearch.github.io/nevergrad/</a></span></span></span>, a gradient-free optimization tool. Nevergrad performs evolutionary optimization in settings where the computation of gradients is hard or impossible. It is, therefore, a suitable solution for black box optimization problems such as <span class="ltx_ERROR undefined" id="S3.SS3.p1.4.5">\ac</span>HPO and <span class="ltx_ERROR undefined" id="S3.SS3.p1.4.6">\ac</span>NAS. It features a variety of optimization methods, that can be selected based on the search space and available computing budget. For the present work, the <math alttext="(1+1)" class="ltx_Math" display="inline" id="S3.SS3.p1.1.m1.1"><semantics id="S3.SS3.p1.1.m1.1a"><mrow id="S3.SS3.p1.1.m1.1.1.1" xref="S3.SS3.p1.1.m1.1.1.1.1.cmml"><mo id="S3.SS3.p1.1.m1.1.1.1.2" stretchy="false" xref="S3.SS3.p1.1.m1.1.1.1.1.cmml">(</mo><mrow id="S3.SS3.p1.1.m1.1.1.1.1" xref="S3.SS3.p1.1.m1.1.1.1.1.cmml"><mn id="S3.SS3.p1.1.m1.1.1.1.1.2" xref="S3.SS3.p1.1.m1.1.1.1.1.2.cmml">1</mn><mo id="S3.SS3.p1.1.m1.1.1.1.1.1" xref="S3.SS3.p1.1.m1.1.1.1.1.1.cmml">+</mo><mn id="S3.SS3.p1.1.m1.1.1.1.1.3" xref="S3.SS3.p1.1.m1.1.1.1.1.3.cmml">1</mn></mrow><mo id="S3.SS3.p1.1.m1.1.1.1.3" stretchy="false" xref="S3.SS3.p1.1.m1.1.1.1.1.cmml">)</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.1.m1.1b"><apply id="S3.SS3.p1.1.m1.1.1.1.1.cmml" xref="S3.SS3.p1.1.m1.1.1.1"><plus id="S3.SS3.p1.1.m1.1.1.1.1.1.cmml" xref="S3.SS3.p1.1.m1.1.1.1.1.1"></plus><cn id="S3.SS3.p1.1.m1.1.1.1.1.2.cmml" type="integer" xref="S3.SS3.p1.1.m1.1.1.1.1.2">1</cn><cn id="S3.SS3.p1.1.m1.1.1.1.1.3.cmml" type="integer" xref="S3.SS3.p1.1.m1.1.1.1.1.3">1</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.1.m1.1c">(1+1)</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.1.m1.1d">( 1 + 1 )</annotation></semantics></math> <span class="ltx_ERROR undefined" id="S3.SS3.p1.4.7">\ac</span>EA was chosen. The algorithm starts with an initial parent population and then creates one offspring for each parent via mutation. It subsequently evaluates the fitness of both the parent and the offspring. In case the offspring achieves a better fitness value than the parent, it replaces the parent in the subsequent generation. For the present experiments, the population size is fixed at <math alttext="8" class="ltx_Math" display="inline" id="S3.SS3.p1.2.m2.1"><semantics id="S3.SS3.p1.2.m2.1a"><mn id="S3.SS3.p1.2.m2.1.1" xref="S3.SS3.p1.2.m2.1.1.cmml">8</mn><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.2.m2.1b"><cn id="S3.SS3.p1.2.m2.1.1.cmml" type="integer" xref="S3.SS3.p1.2.m2.1.1">8</cn></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.2.m2.1c">8</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.2.m2.1d">8</annotation></semantics></math>, while the total number of evaluations is varied from <math alttext="16" class="ltx_Math" display="inline" id="S3.SS3.p1.3.m3.1"><semantics id="S3.SS3.p1.3.m3.1a"><mn id="S3.SS3.p1.3.m3.1.1" xref="S3.SS3.p1.3.m3.1.1.cmml">16</mn><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.3.m3.1b"><cn id="S3.SS3.p1.3.m3.1.1.cmml" type="integer" xref="S3.SS3.p1.3.m3.1.1">16</cn></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.3.m3.1c">16</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.3.m3.1d">16</annotation></semantics></math> to <math alttext="64" class="ltx_Math" display="inline" id="S3.SS3.p1.4.m4.1"><semantics id="S3.SS3.p1.4.m4.1a"><mn id="S3.SS3.p1.4.m4.1.1" xref="S3.SS3.p1.4.m4.1.1.cmml">64</mn><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.4.m4.1b"><cn id="S3.SS3.p1.4.m4.1.1.cmml" type="integer" xref="S3.SS3.p1.4.m4.1.1">64</cn></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.4.m4.1c">64</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.4.m4.1d">64</annotation></semantics></math>. 
+<br class="ltx_break"/></p>
+</div>
+<figure class="ltx_figure" id="S3.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="318" id="S3.F3.g1" src="extracted/6457717/figures/HPC2EDGE_workflow_draft_new.png" width="479"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F3.3.1.1" style="font-size:90%;">Figure 3</span>: </span><span class="ltx_text" id="S3.F3.4.2" style="font-size:90%;">Orchestration of the Hardware-aware NAS search, with communication between the <span class="ltx_ERROR undefined" id="S3.F3.4.2.1">\ac</span>HPC system, located at the Jülich Supercomputing Centre, Forschungszentrum Jülich, in Germany, and the edge device, located at Flanders Make in Belgium.</span></figcaption>
+</figure>
+<div class="ltx_para ltx_noindent" id="S3.SS3.p2">
+<p class="ltx_p" id="S3.SS3.p2.2">The edge device periodically queries the database for new, unevaluated entries that match its configuration, i.e., for supported edge device types. Upon finding a relevant entry, it loads the model parameters and performs ten inference runs to compute an average timing. This process is repeated for each configured batch size (1, 2, 4, and 8 in this case). The measured inference times, along with other measurements not exploited in this method, e.g., memory usage, <span class="ltx_ERROR undefined" id="S3.SS3.p2.2.1">\ac</span>CPU usage, or <span class="ltx_ERROR undefined" id="S3.SS3.p2.2.2">\ac</span>GPU usage, are entered in the database to be leveraged by the optimizer.
+Once a hyperparameter candidate is chosen, four <span class="ltx_ERROR undefined" id="S3.SS3.p2.2.3">\acp</span>GPU are allocated to its training. With a population size of <math alttext="8" class="ltx_Math" display="inline" id="S3.SS3.p2.1.m1.1"><semantics id="S3.SS3.p2.1.m1.1a"><mn id="S3.SS3.p2.1.m1.1.1" xref="S3.SS3.p2.1.m1.1.1.cmml">8</mn><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.1.m1.1b"><cn id="S3.SS3.p2.1.m1.1.1.cmml" type="integer" xref="S3.SS3.p2.1.m1.1.1">8</cn></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.1.m1.1c">8</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.1.m1.1d">8</annotation></semantics></math>, this results in <math alttext="32" class="ltx_Math" display="inline" id="S3.SS3.p2.2.m2.1"><semantics id="S3.SS3.p2.2.m2.1a"><mn id="S3.SS3.p2.2.m2.1.1" xref="S3.SS3.p2.2.m2.1.1.cmml">32</mn><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.2.m2.1b"><cn id="S3.SS3.p2.2.m2.1.1.cmml" type="integer" xref="S3.SS3.p2.2.m2.1.1">32</cn></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.2.m2.1c">32</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.2.m2.1d">32</annotation></semantics></math> <span class="ltx_ERROR undefined" id="S3.SS3.p2.2.4">\acp</span>GPU being used at the same time. Before launching the training, the head <span class="ltx_ERROR undefined" id="S3.SS3.p2.2.5">\ac</span>GPU submits the architectural details to the database for latency measurement on the edge device. After training for two epochs, the head node reads back this runtime measurement and combines it with the achieved validation loss. Submitting the architecture to the edge device before training the model and inquiring about the runtime measurement only after the model is trained hides the latency of communication between the <span class="ltx_ERROR undefined" id="S3.SS3.p2.2.6">\ac</span>HPC system and edge device.</p>
+<table class="ltx_equationgroup ltx_eqn_align ltx_eqn_table" id="S5.EGx1">
+<tbody id="S3.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math alttext="\displaystyle score_{val}=loss_{val}\cdot 1000+time_{inference}" class="ltx_Math" display="inline" id="S3.E1.m1.1"><semantics id="S3.E1.m1.1a"><mrow id="S3.E1.m1.1.1" xref="S3.E1.m1.1.1.cmml"><mrow id="S3.E1.m1.1.1.2" xref="S3.E1.m1.1.1.2.cmml"><mi id="S3.E1.m1.1.1.2.2" xref="S3.E1.m1.1.1.2.2.cmml">s</mi><mo id="S3.E1.m1.1.1.2.1" xref="S3.E1.m1.1.1.2.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.2.3" xref="S3.E1.m1.1.1.2.3.cmml">c</mi><mo id="S3.E1.m1.1.1.2.1a" xref="S3.E1.m1.1.1.2.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.2.4" xref="S3.E1.m1.1.1.2.4.cmml">o</mi><mo id="S3.E1.m1.1.1.2.1b" xref="S3.E1.m1.1.1.2.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.2.5" xref="S3.E1.m1.1.1.2.5.cmml">r</mi><mo id="S3.E1.m1.1.1.2.1c" xref="S3.E1.m1.1.1.2.1.cmml">⁢</mo><msub id="S3.E1.m1.1.1.2.6" xref="S3.E1.m1.1.1.2.6.cmml"><mi id="S3.E1.m1.1.1.2.6.2" xref="S3.E1.m1.1.1.2.6.2.cmml">e</mi><mrow id="S3.E1.m1.1.1.2.6.3" xref="S3.E1.m1.1.1.2.6.3.cmml"><mi id="S3.E1.m1.1.1.2.6.3.2" xref="S3.E1.m1.1.1.2.6.3.2.cmml">v</mi><mo id="S3.E1.m1.1.1.2.6.3.1" xref="S3.E1.m1.1.1.2.6.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.2.6.3.3" xref="S3.E1.m1.1.1.2.6.3.3.cmml">a</mi><mo id="S3.E1.m1.1.1.2.6.3.1a" xref="S3.E1.m1.1.1.2.6.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.2.6.3.4" xref="S3.E1.m1.1.1.2.6.3.4.cmml">l</mi></mrow></msub></mrow><mo id="S3.E1.m1.1.1.1" xref="S3.E1.m1.1.1.1.cmml">=</mo><mrow id="S3.E1.m1.1.1.3" xref="S3.E1.m1.1.1.3.cmml"><mrow id="S3.E1.m1.1.1.3.2" xref="S3.E1.m1.1.1.3.2.cmml"><mrow id="S3.E1.m1.1.1.3.2.2" xref="S3.E1.m1.1.1.3.2.2.cmml"><mi id="S3.E1.m1.1.1.3.2.2.2" xref="S3.E1.m1.1.1.3.2.2.2.cmml">l</mi><mo id="S3.E1.m1.1.1.3.2.2.1" xref="S3.E1.m1.1.1.3.2.2.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.2.2.3" xref="S3.E1.m1.1.1.3.2.2.3.cmml">o</mi><mo id="S3.E1.m1.1.1.3.2.2.1a" xref="S3.E1.m1.1.1.3.2.2.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.2.2.4" xref="S3.E1.m1.1.1.3.2.2.4.cmml">s</mi><mo id="S3.E1.m1.1.1.3.2.2.1b" xref="S3.E1.m1.1.1.3.2.2.1.cmml">⁢</mo><msub id="S3.E1.m1.1.1.3.2.2.5" xref="S3.E1.m1.1.1.3.2.2.5.cmml"><mi id="S3.E1.m1.1.1.3.2.2.5.2" xref="S3.E1.m1.1.1.3.2.2.5.2.cmml">s</mi><mrow id="S3.E1.m1.1.1.3.2.2.5.3" xref="S3.E1.m1.1.1.3.2.2.5.3.cmml"><mi id="S3.E1.m1.1.1.3.2.2.5.3.2" xref="S3.E1.m1.1.1.3.2.2.5.3.2.cmml">v</mi><mo id="S3.E1.m1.1.1.3.2.2.5.3.1" xref="S3.E1.m1.1.1.3.2.2.5.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.2.2.5.3.3" xref="S3.E1.m1.1.1.3.2.2.5.3.3.cmml">a</mi><mo id="S3.E1.m1.1.1.3.2.2.5.3.1a" xref="S3.E1.m1.1.1.3.2.2.5.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.2.2.5.3.4" xref="S3.E1.m1.1.1.3.2.2.5.3.4.cmml">l</mi></mrow></msub></mrow><mo id="S3.E1.m1.1.1.3.2.1" lspace="0.222em" rspace="0.222em" xref="S3.E1.m1.1.1.3.2.1.cmml">⋅</mo><mn id="S3.E1.m1.1.1.3.2.3" xref="S3.E1.m1.1.1.3.2.3.cmml">1000</mn></mrow><mo id="S3.E1.m1.1.1.3.1" xref="S3.E1.m1.1.1.3.1.cmml">+</mo><mrow id="S3.E1.m1.1.1.3.3" xref="S3.E1.m1.1.1.3.3.cmml"><mi id="S3.E1.m1.1.1.3.3.2" xref="S3.E1.m1.1.1.3.3.2.cmml">t</mi><mo id="S3.E1.m1.1.1.3.3.1" xref="S3.E1.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.3.3" xref="S3.E1.m1.1.1.3.3.3.cmml">i</mi><mo id="S3.E1.m1.1.1.3.3.1a" xref="S3.E1.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.3.4" xref="S3.E1.m1.1.1.3.3.4.cmml">m</mi><mo id="S3.E1.m1.1.1.3.3.1b" xref="S3.E1.m1.1.1.3.3.1.cmml">⁢</mo><msub id="S3.E1.m1.1.1.3.3.5" xref="S3.E1.m1.1.1.3.3.5.cmml"><mi id="S3.E1.m1.1.1.3.3.5.2" xref="S3.E1.m1.1.1.3.3.5.2.cmml">e</mi><mrow id="S3.E1.m1.1.1.3.3.5.3" xref="S3.E1.m1.1.1.3.3.5.3.cmml"><mi id="S3.E1.m1.1.1.3.3.5.3.2" xref="S3.E1.m1.1.1.3.3.5.3.2.cmml">i</mi><mo id="S3.E1.m1.1.1.3.3.5.3.1" xref="S3.E1.m1.1.1.3.3.5.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.3.5.3.3" xref="S3.E1.m1.1.1.3.3.5.3.3.cmml">n</mi><mo id="S3.E1.m1.1.1.3.3.5.3.1a" xref="S3.E1.m1.1.1.3.3.5.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.3.5.3.4" xref="S3.E1.m1.1.1.3.3.5.3.4.cmml">f</mi><mo id="S3.E1.m1.1.1.3.3.5.3.1b" xref="S3.E1.m1.1.1.3.3.5.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.3.5.3.5" xref="S3.E1.m1.1.1.3.3.5.3.5.cmml">e</mi><mo id="S3.E1.m1.1.1.3.3.5.3.1c" xref="S3.E1.m1.1.1.3.3.5.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.3.5.3.6" xref="S3.E1.m1.1.1.3.3.5.3.6.cmml">r</mi><mo id="S3.E1.m1.1.1.3.3.5.3.1d" xref="S3.E1.m1.1.1.3.3.5.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.3.5.3.7" xref="S3.E1.m1.1.1.3.3.5.3.7.cmml">e</mi><mo id="S3.E1.m1.1.1.3.3.5.3.1e" xref="S3.E1.m1.1.1.3.3.5.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.3.5.3.8" xref="S3.E1.m1.1.1.3.3.5.3.8.cmml">n</mi><mo id="S3.E1.m1.1.1.3.3.5.3.1f" xref="S3.E1.m1.1.1.3.3.5.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.3.5.3.9" xref="S3.E1.m1.1.1.3.3.5.3.9.cmml">c</mi><mo id="S3.E1.m1.1.1.3.3.5.3.1g" xref="S3.E1.m1.1.1.3.3.5.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.3.5.3.10" xref="S3.E1.m1.1.1.3.3.5.3.10.cmml">e</mi></mrow></msub></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.E1.m1.1b"><apply id="S3.E1.m1.1.1.cmml" xref="S3.E1.m1.1.1"><eq id="S3.E1.m1.1.1.1.cmml" xref="S3.E1.m1.1.1.1"></eq><apply id="S3.E1.m1.1.1.2.cmml" xref="S3.E1.m1.1.1.2"><times id="S3.E1.m1.1.1.2.1.cmml" xref="S3.E1.m1.1.1.2.1"></times><ci id="S3.E1.m1.1.1.2.2.cmml" xref="S3.E1.m1.1.1.2.2">𝑠</ci><ci id="S3.E1.m1.1.1.2.3.cmml" xref="S3.E1.m1.1.1.2.3">𝑐</ci><ci id="S3.E1.m1.1.1.2.4.cmml" xref="S3.E1.m1.1.1.2.4">𝑜</ci><ci id="S3.E1.m1.1.1.2.5.cmml" xref="S3.E1.m1.1.1.2.5">𝑟</ci><apply id="S3.E1.m1.1.1.2.6.cmml" xref="S3.E1.m1.1.1.2.6"><csymbol cd="ambiguous" id="S3.E1.m1.1.1.2.6.1.cmml" xref="S3.E1.m1.1.1.2.6">subscript</csymbol><ci id="S3.E1.m1.1.1.2.6.2.cmml" xref="S3.E1.m1.1.1.2.6.2">𝑒</ci><apply id="S3.E1.m1.1.1.2.6.3.cmml" xref="S3.E1.m1.1.1.2.6.3"><times id="S3.E1.m1.1.1.2.6.3.1.cmml" xref="S3.E1.m1.1.1.2.6.3.1"></times><ci id="S3.E1.m1.1.1.2.6.3.2.cmml" xref="S3.E1.m1.1.1.2.6.3.2">𝑣</ci><ci id="S3.E1.m1.1.1.2.6.3.3.cmml" xref="S3.E1.m1.1.1.2.6.3.3">𝑎</ci><ci id="S3.E1.m1.1.1.2.6.3.4.cmml" xref="S3.E1.m1.1.1.2.6.3.4">𝑙</ci></apply></apply></apply><apply id="S3.E1.m1.1.1.3.cmml" xref="S3.E1.m1.1.1.3"><plus id="S3.E1.m1.1.1.3.1.cmml" xref="S3.E1.m1.1.1.3.1"></plus><apply id="S3.E1.m1.1.1.3.2.cmml" xref="S3.E1.m1.1.1.3.2"><ci id="S3.E1.m1.1.1.3.2.1.cmml" xref="S3.E1.m1.1.1.3.2.1">⋅</ci><apply id="S3.E1.m1.1.1.3.2.2.cmml" xref="S3.E1.m1.1.1.3.2.2"><times id="S3.E1.m1.1.1.3.2.2.1.cmml" xref="S3.E1.m1.1.1.3.2.2.1"></times><ci id="S3.E1.m1.1.1.3.2.2.2.cmml" xref="S3.E1.m1.1.1.3.2.2.2">𝑙</ci><ci id="S3.E1.m1.1.1.3.2.2.3.cmml" xref="S3.E1.m1.1.1.3.2.2.3">𝑜</ci><ci id="S3.E1.m1.1.1.3.2.2.4.cmml" xref="S3.E1.m1.1.1.3.2.2.4">𝑠</ci><apply id="S3.E1.m1.1.1.3.2.2.5.cmml" xref="S3.E1.m1.1.1.3.2.2.5"><csymbol cd="ambiguous" id="S3.E1.m1.1.1.3.2.2.5.1.cmml" xref="S3.E1.m1.1.1.3.2.2.5">subscript</csymbol><ci id="S3.E1.m1.1.1.3.2.2.5.2.cmml" xref="S3.E1.m1.1.1.3.2.2.5.2">𝑠</ci><apply id="S3.E1.m1.1.1.3.2.2.5.3.cmml" xref="S3.E1.m1.1.1.3.2.2.5.3"><times id="S3.E1.m1.1.1.3.2.2.5.3.1.cmml" xref="S3.E1.m1.1.1.3.2.2.5.3.1"></times><ci id="S3.E1.m1.1.1.3.2.2.5.3.2.cmml" xref="S3.E1.m1.1.1.3.2.2.5.3.2">𝑣</ci><ci id="S3.E1.m1.1.1.3.2.2.5.3.3.cmml" xref="S3.E1.m1.1.1.3.2.2.5.3.3">𝑎</ci><ci id="S3.E1.m1.1.1.3.2.2.5.3.4.cmml" xref="S3.E1.m1.1.1.3.2.2.5.3.4">𝑙</ci></apply></apply></apply><cn id="S3.E1.m1.1.1.3.2.3.cmml" type="integer" xref="S3.E1.m1.1.1.3.2.3">1000</cn></apply><apply id="S3.E1.m1.1.1.3.3.cmml" xref="S3.E1.m1.1.1.3.3"><times id="S3.E1.m1.1.1.3.3.1.cmml" xref="S3.E1.m1.1.1.3.3.1"></times><ci id="S3.E1.m1.1.1.3.3.2.cmml" xref="S3.E1.m1.1.1.3.3.2">𝑡</ci><ci id="S3.E1.m1.1.1.3.3.3.cmml" xref="S3.E1.m1.1.1.3.3.3">𝑖</ci><ci id="S3.E1.m1.1.1.3.3.4.cmml" xref="S3.E1.m1.1.1.3.3.4">𝑚</ci><apply id="S3.E1.m1.1.1.3.3.5.cmml" xref="S3.E1.m1.1.1.3.3.5"><csymbol cd="ambiguous" id="S3.E1.m1.1.1.3.3.5.1.cmml" xref="S3.E1.m1.1.1.3.3.5">subscript</csymbol><ci id="S3.E1.m1.1.1.3.3.5.2.cmml" xref="S3.E1.m1.1.1.3.3.5.2">𝑒</ci><apply id="S3.E1.m1.1.1.3.3.5.3.cmml" xref="S3.E1.m1.1.1.3.3.5.3"><times id="S3.E1.m1.1.1.3.3.5.3.1.cmml" xref="S3.E1.m1.1.1.3.3.5.3.1"></times><ci id="S3.E1.m1.1.1.3.3.5.3.2.cmml" xref="S3.E1.m1.1.1.3.3.5.3.2">𝑖</ci><ci id="S3.E1.m1.1.1.3.3.5.3.3.cmml" xref="S3.E1.m1.1.1.3.3.5.3.3">𝑛</ci><ci id="S3.E1.m1.1.1.3.3.5.3.4.cmml" xref="S3.E1.m1.1.1.3.3.5.3.4">𝑓</ci><ci id="S3.E1.m1.1.1.3.3.5.3.5.cmml" xref="S3.E1.m1.1.1.3.3.5.3.5">𝑒</ci><ci id="S3.E1.m1.1.1.3.3.5.3.6.cmml" xref="S3.E1.m1.1.1.3.3.5.3.6">𝑟</ci><ci id="S3.E1.m1.1.1.3.3.5.3.7.cmml" xref="S3.E1.m1.1.1.3.3.5.3.7">𝑒</ci><ci id="S3.E1.m1.1.1.3.3.5.3.8.cmml" xref="S3.E1.m1.1.1.3.3.5.3.8">𝑛</ci><ci id="S3.E1.m1.1.1.3.3.5.3.9.cmml" xref="S3.E1.m1.1.1.3.3.5.3.9">𝑐</ci><ci id="S3.E1.m1.1.1.3.3.5.3.10.cmml" xref="S3.E1.m1.1.1.3.3.5.3.10">𝑒</ci></apply></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E1.m1.1c">\displaystyle score_{val}=loss_{val}\cdot 1000+time_{inference}</annotation><annotation encoding="application/x-llamapun" id="S3.E1.m1.1d">italic_s italic_c italic_o italic_r italic_e start_POSTSUBSCRIPT italic_v italic_a italic_l end_POSTSUBSCRIPT = italic_l italic_o italic_s italic_s start_POSTSUBSCRIPT italic_v italic_a italic_l end_POSTSUBSCRIPT ⋅ 1000 + italic_t italic_i italic_m italic_e start_POSTSUBSCRIPT italic_i italic_n italic_f italic_e italic_r italic_e italic_n italic_c italic_e end_POSTSUBSCRIPT</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS3.p3">
+<p class="ltx_p" id="S3.SS3.p3.1">A weighted validation score value, based on validation loss and inference time in milliseconds (see Eq. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.E1" title="Equation 1 ‣ 3.3 Workflow Setup ‣ 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">1</span></a>) is then reported back to the optimizer and minimized. The best performing model is chosen according to the lowest score achieved. This model is then evaluated on the unseen test dataset, where also a test score is computed in a similar way.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Empirical Results</h2>
+<div class="ltx_para ltx_noindent" id="S4.p1">
+<p class="ltx_p" id="S4.p1.11">The empirical results of running the hybrid workflow are shown in Tab. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S4.T2" title="Table 2 ‣ 4 Empirical Results ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">2</span></a>. It compares the default hyperparameter configuration, which was chosen by an expert (baseline) based on experience and several experiments, against running hardware-aware <span class="ltx_ERROR undefined" id="S4.p1.11.1">\ac</span>NAS with an increasing number of samples <math alttext="n=\{16,32,64\}" class="ltx_Math" display="inline" id="S4.p1.1.m1.3"><semantics id="S4.p1.1.m1.3a"><mrow id="S4.p1.1.m1.3.4" xref="S4.p1.1.m1.3.4.cmml"><mi id="S4.p1.1.m1.3.4.2" xref="S4.p1.1.m1.3.4.2.cmml">n</mi><mo id="S4.p1.1.m1.3.4.1" xref="S4.p1.1.m1.3.4.1.cmml">=</mo><mrow id="S4.p1.1.m1.3.4.3.2" xref="S4.p1.1.m1.3.4.3.1.cmml"><mo id="S4.p1.1.m1.3.4.3.2.1" stretchy="false" xref="S4.p1.1.m1.3.4.3.1.cmml">{</mo><mn id="S4.p1.1.m1.1.1" xref="S4.p1.1.m1.1.1.cmml">16</mn><mo id="S4.p1.1.m1.3.4.3.2.2" xref="S4.p1.1.m1.3.4.3.1.cmml">,</mo><mn id="S4.p1.1.m1.2.2" xref="S4.p1.1.m1.2.2.cmml">32</mn><mo id="S4.p1.1.m1.3.4.3.2.3" xref="S4.p1.1.m1.3.4.3.1.cmml">,</mo><mn id="S4.p1.1.m1.3.3" xref="S4.p1.1.m1.3.3.cmml">64</mn><mo id="S4.p1.1.m1.3.4.3.2.4" stretchy="false" xref="S4.p1.1.m1.3.4.3.1.cmml">}</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S4.p1.1.m1.3b"><apply id="S4.p1.1.m1.3.4.cmml" xref="S4.p1.1.m1.3.4"><eq id="S4.p1.1.m1.3.4.1.cmml" xref="S4.p1.1.m1.3.4.1"></eq><ci id="S4.p1.1.m1.3.4.2.cmml" xref="S4.p1.1.m1.3.4.2">𝑛</ci><set id="S4.p1.1.m1.3.4.3.1.cmml" xref="S4.p1.1.m1.3.4.3.2"><cn id="S4.p1.1.m1.1.1.cmml" type="integer" xref="S4.p1.1.m1.1.1">16</cn><cn id="S4.p1.1.m1.2.2.cmml" type="integer" xref="S4.p1.1.m1.2.2">32</cn><cn id="S4.p1.1.m1.3.3.cmml" type="integer" xref="S4.p1.1.m1.3.3">64</cn></set></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p1.1.m1.3c">n=\{16,32,64\}</annotation><annotation encoding="application/x-llamapun" id="S4.p1.1.m1.3d">italic_n = { 16 , 32 , 64 }</annotation></semantics></math>. The training times of a single configuration range between 1 – 3 hours, while the whole <span class="ltx_ERROR undefined" id="S4.p1.11.2">\ac</span>HPO run on the <span class="ltx_ERROR undefined" id="S4.p1.11.3">\ac</span>HPC system took between 8 – 19 hours, stretching the maximum allowed job time of 20 hours on the <span class="ltx_ERROR undefined" id="S4.p1.11.4">\ac</span>HPC system. The evaluation metrics include the validation loss <math alttext="l_{v}" class="ltx_Math" display="inline" id="S4.p1.2.m2.1"><semantics id="S4.p1.2.m2.1a"><msub id="S4.p1.2.m2.1.1" xref="S4.p1.2.m2.1.1.cmml"><mi id="S4.p1.2.m2.1.1.2" xref="S4.p1.2.m2.1.1.2.cmml">l</mi><mi id="S4.p1.2.m2.1.1.3" xref="S4.p1.2.m2.1.1.3.cmml">v</mi></msub><annotation-xml encoding="MathML-Content" id="S4.p1.2.m2.1b"><apply id="S4.p1.2.m2.1.1.cmml" xref="S4.p1.2.m2.1.1"><csymbol cd="ambiguous" id="S4.p1.2.m2.1.1.1.cmml" xref="S4.p1.2.m2.1.1">subscript</csymbol><ci id="S4.p1.2.m2.1.1.2.cmml" xref="S4.p1.2.m2.1.1.2">𝑙</ci><ci id="S4.p1.2.m2.1.1.3.cmml" xref="S4.p1.2.m2.1.1.3">𝑣</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p1.2.m2.1c">l_{v}</annotation><annotation encoding="application/x-llamapun" id="S4.p1.2.m2.1d">italic_l start_POSTSUBSCRIPT italic_v end_POSTSUBSCRIPT</annotation></semantics></math>, the inferences time <math alttext="t" class="ltx_Math" display="inline" id="S4.p1.3.m3.1"><semantics id="S4.p1.3.m3.1a"><mi id="S4.p1.3.m3.1.1" xref="S4.p1.3.m3.1.1.cmml">t</mi><annotation-xml encoding="MathML-Content" id="S4.p1.3.m3.1b"><ci id="S4.p1.3.m3.1.1.cmml" xref="S4.p1.3.m3.1.1">𝑡</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.p1.3.m3.1c">t</annotation><annotation encoding="application/x-llamapun" id="S4.p1.3.m3.1d">italic_t</annotation></semantics></math> and the test loss <math alttext="l_{t}" class="ltx_Math" display="inline" id="S4.p1.4.m4.1"><semantics id="S4.p1.4.m4.1a"><msub id="S4.p1.4.m4.1.1" xref="S4.p1.4.m4.1.1.cmml"><mi id="S4.p1.4.m4.1.1.2" xref="S4.p1.4.m4.1.1.2.cmml">l</mi><mi id="S4.p1.4.m4.1.1.3" xref="S4.p1.4.m4.1.1.3.cmml">t</mi></msub><annotation-xml encoding="MathML-Content" id="S4.p1.4.m4.1b"><apply id="S4.p1.4.m4.1.1.cmml" xref="S4.p1.4.m4.1.1"><csymbol cd="ambiguous" id="S4.p1.4.m4.1.1.1.cmml" xref="S4.p1.4.m4.1.1">subscript</csymbol><ci id="S4.p1.4.m4.1.1.2.cmml" xref="S4.p1.4.m4.1.1.2">𝑙</ci><ci id="S4.p1.4.m4.1.1.3.cmml" xref="S4.p1.4.m4.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p1.4.m4.1c">l_{t}</annotation><annotation encoding="application/x-llamapun" id="S4.p1.4.m4.1d">italic_l start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT</annotation></semantics></math> of the best configuration, which is chosen according to the lowest validation score metric <math alttext="s_{v}" class="ltx_Math" display="inline" id="S4.p1.5.m5.1"><semantics id="S4.p1.5.m5.1a"><msub id="S4.p1.5.m5.1.1" xref="S4.p1.5.m5.1.1.cmml"><mi id="S4.p1.5.m5.1.1.2" xref="S4.p1.5.m5.1.1.2.cmml">s</mi><mi id="S4.p1.5.m5.1.1.3" xref="S4.p1.5.m5.1.1.3.cmml">v</mi></msub><annotation-xml encoding="MathML-Content" id="S4.p1.5.m5.1b"><apply id="S4.p1.5.m5.1.1.cmml" xref="S4.p1.5.m5.1.1"><csymbol cd="ambiguous" id="S4.p1.5.m5.1.1.1.cmml" xref="S4.p1.5.m5.1.1">subscript</csymbol><ci id="S4.p1.5.m5.1.1.2.cmml" xref="S4.p1.5.m5.1.1.2">𝑠</ci><ci id="S4.p1.5.m5.1.1.3.cmml" xref="S4.p1.5.m5.1.1.3">𝑣</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p1.5.m5.1c">s_{v}</annotation><annotation encoding="application/x-llamapun" id="S4.p1.5.m5.1d">italic_s start_POSTSUBSCRIPT italic_v end_POSTSUBSCRIPT</annotation></semantics></math>, see Eq. (<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.E1" title="Equation 1 ‣ 3.3 Workflow Setup ‣ 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">1</span></a>). The most significant reduction in comparison to the baseline can be observed for the inference time metric. Using just <math alttext="16" class="ltx_Math" display="inline" id="S4.p1.6.m6.1"><semantics id="S4.p1.6.m6.1a"><mn id="S4.p1.6.m6.1.1" xref="S4.p1.6.m6.1.1.cmml">16</mn><annotation-xml encoding="MathML-Content" id="S4.p1.6.m6.1b"><cn id="S4.p1.6.m6.1.1.cmml" type="integer" xref="S4.p1.6.m6.1.1">16</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.p1.6.m6.1c">16</annotation><annotation encoding="application/x-llamapun" id="S4.p1.6.m6.1d">16</annotation></semantics></math> samples decreases the inference time by a factor of <math alttext="\approx 6.35" class="ltx_Math" display="inline" id="S4.p1.7.m7.1"><semantics id="S4.p1.7.m7.1a"><mrow id="S4.p1.7.m7.1.1" xref="S4.p1.7.m7.1.1.cmml"><mi id="S4.p1.7.m7.1.1.2" xref="S4.p1.7.m7.1.1.2.cmml"></mi><mo id="S4.p1.7.m7.1.1.1" xref="S4.p1.7.m7.1.1.1.cmml">≈</mo><mn id="S4.p1.7.m7.1.1.3" xref="S4.p1.7.m7.1.1.3.cmml">6.35</mn></mrow><annotation-xml encoding="MathML-Content" id="S4.p1.7.m7.1b"><apply id="S4.p1.7.m7.1.1.cmml" xref="S4.p1.7.m7.1.1"><approx id="S4.p1.7.m7.1.1.1.cmml" xref="S4.p1.7.m7.1.1.1"></approx><csymbol cd="latexml" id="S4.p1.7.m7.1.1.2.cmml" xref="S4.p1.7.m7.1.1.2">absent</csymbol><cn id="S4.p1.7.m7.1.1.3.cmml" type="float" xref="S4.p1.7.m7.1.1.3">6.35</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p1.7.m7.1c">\approx 6.35</annotation><annotation encoding="application/x-llamapun" id="S4.p1.7.m7.1d">≈ 6.35</annotation></semantics></math> from <math alttext="332ms" class="ltx_Math" display="inline" id="S4.p1.8.m8.1"><semantics id="S4.p1.8.m8.1a"><mrow id="S4.p1.8.m8.1.1" xref="S4.p1.8.m8.1.1.cmml"><mn id="S4.p1.8.m8.1.1.2" xref="S4.p1.8.m8.1.1.2.cmml">332</mn><mo id="S4.p1.8.m8.1.1.1" xref="S4.p1.8.m8.1.1.1.cmml">⁢</mo><mi id="S4.p1.8.m8.1.1.3" xref="S4.p1.8.m8.1.1.3.cmml">m</mi><mo id="S4.p1.8.m8.1.1.1a" xref="S4.p1.8.m8.1.1.1.cmml">⁢</mo><mi id="S4.p1.8.m8.1.1.4" xref="S4.p1.8.m8.1.1.4.cmml">s</mi></mrow><annotation-xml encoding="MathML-Content" id="S4.p1.8.m8.1b"><apply id="S4.p1.8.m8.1.1.cmml" xref="S4.p1.8.m8.1.1"><times id="S4.p1.8.m8.1.1.1.cmml" xref="S4.p1.8.m8.1.1.1"></times><cn id="S4.p1.8.m8.1.1.2.cmml" type="integer" xref="S4.p1.8.m8.1.1.2">332</cn><ci id="S4.p1.8.m8.1.1.3.cmml" xref="S4.p1.8.m8.1.1.3">𝑚</ci><ci id="S4.p1.8.m8.1.1.4.cmml" xref="S4.p1.8.m8.1.1.4">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p1.8.m8.1c">332ms</annotation><annotation encoding="application/x-llamapun" id="S4.p1.8.m8.1d">332 italic_m italic_s</annotation></semantics></math> to <math alttext="52ms" class="ltx_Math" display="inline" id="S4.p1.9.m9.1"><semantics id="S4.p1.9.m9.1a"><mrow id="S4.p1.9.m9.1.1" xref="S4.p1.9.m9.1.1.cmml"><mn id="S4.p1.9.m9.1.1.2" xref="S4.p1.9.m9.1.1.2.cmml">52</mn><mo id="S4.p1.9.m9.1.1.1" xref="S4.p1.9.m9.1.1.1.cmml">⁢</mo><mi id="S4.p1.9.m9.1.1.3" xref="S4.p1.9.m9.1.1.3.cmml">m</mi><mo id="S4.p1.9.m9.1.1.1a" xref="S4.p1.9.m9.1.1.1.cmml">⁢</mo><mi id="S4.p1.9.m9.1.1.4" xref="S4.p1.9.m9.1.1.4.cmml">s</mi></mrow><annotation-xml encoding="MathML-Content" id="S4.p1.9.m9.1b"><apply id="S4.p1.9.m9.1.1.cmml" xref="S4.p1.9.m9.1.1"><times id="S4.p1.9.m9.1.1.1.cmml" xref="S4.p1.9.m9.1.1.1"></times><cn id="S4.p1.9.m9.1.1.2.cmml" type="integer" xref="S4.p1.9.m9.1.1.2">52</cn><ci id="S4.p1.9.m9.1.1.3.cmml" xref="S4.p1.9.m9.1.1.3">𝑚</ci><ci id="S4.p1.9.m9.1.1.4.cmml" xref="S4.p1.9.m9.1.1.4">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p1.9.m9.1c">52ms</annotation><annotation encoding="application/x-llamapun" id="S4.p1.9.m9.1d">52 italic_m italic_s</annotation></semantics></math>. Increasing the number of samples to <math alttext="64" class="ltx_Math" display="inline" id="S4.p1.10.m10.1"><semantics id="S4.p1.10.m10.1a"><mn id="S4.p1.10.m10.1.1" xref="S4.p1.10.m10.1.1.cmml">64</mn><annotation-xml encoding="MathML-Content" id="S4.p1.10.m10.1b"><cn id="S4.p1.10.m10.1.1.cmml" type="integer" xref="S4.p1.10.m10.1.1">64</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.p1.10.m10.1c">64</annotation><annotation encoding="application/x-llamapun" id="S4.p1.10.m10.1d">64</annotation></semantics></math> even leads to a reduction factor of <math alttext="\approx 8.8" class="ltx_Math" display="inline" id="S4.p1.11.m11.1"><semantics id="S4.p1.11.m11.1a"><mrow id="S4.p1.11.m11.1.1" xref="S4.p1.11.m11.1.1.cmml"><mi id="S4.p1.11.m11.1.1.2" xref="S4.p1.11.m11.1.1.2.cmml"></mi><mo id="S4.p1.11.m11.1.1.1" xref="S4.p1.11.m11.1.1.1.cmml">≈</mo><mn id="S4.p1.11.m11.1.1.3" xref="S4.p1.11.m11.1.1.3.cmml">8.8</mn></mrow><annotation-xml encoding="MathML-Content" id="S4.p1.11.m11.1b"><apply id="S4.p1.11.m11.1.1.cmml" xref="S4.p1.11.m11.1.1"><approx id="S4.p1.11.m11.1.1.1.cmml" xref="S4.p1.11.m11.1.1.1"></approx><csymbol cd="latexml" id="S4.p1.11.m11.1.1.2.cmml" xref="S4.p1.11.m11.1.1.2">absent</csymbol><cn id="S4.p1.11.m11.1.1.3.cmml" type="float" xref="S4.p1.11.m11.1.1.3">8.8</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p1.11.m11.1c">\approx 8.8</annotation><annotation encoding="application/x-llamapun" id="S4.p1.11.m11.1d">≈ 8.8</annotation></semantics></math> in comparison to the baseline, which highlights the potential of the hybrid HPC2Edge workflow. 
+<br class="ltx_break"/></p>
+</div>
+<figure class="ltx_table" id="S4.T2">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S4.T2.6.1.1" style="font-size:90%;">Table 2</span>: </span><span class="ltx_text" id="S4.T2.7.2" style="font-size:90%;">Results at different scales (averaged over five seeds).</span></figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S4.T2.4">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T2.4.5.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r" id="S4.T2.4.5.1.1"><span class="ltx_text ltx_font_bold" id="S4.T2.4.5.1.1.1">Num. Samples</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r" id="S4.T2.4.5.1.2"><span class="ltx_text ltx_font_bold" id="S4.T2.4.5.1.2.1">Val. Score</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r" id="S4.T2.4.5.1.3"><span class="ltx_text ltx_font_bold" id="S4.T2.4.5.1.3.1">Val. Loss</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r" id="S4.T2.4.5.1.4"><span class="ltx_text ltx_font_bold" id="S4.T2.4.5.1.4.1">Inference Time</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r" id="S4.T2.4.5.1.5"><span class="ltx_text ltx_font_bold" id="S4.T2.4.5.1.5.1">Test Score</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column" id="S4.T2.4.5.1.6"><span class="ltx_text ltx_font_bold" id="S4.T2.4.5.1.6.1">Test Loss</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T2.1.1">
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.1.1.2">0 (baseline)</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.1.1.3">412.81</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.1.1.4">0.0807</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.1.1.1"><math alttext="332.11ms" class="ltx_Math" display="inline" id="S4.T2.1.1.1.m1.1"><semantics id="S4.T2.1.1.1.m1.1a"><mrow id="S4.T2.1.1.1.m1.1.1" xref="S4.T2.1.1.1.m1.1.1.cmml"><mn id="S4.T2.1.1.1.m1.1.1.2" xref="S4.T2.1.1.1.m1.1.1.2.cmml">332.11</mn><mo id="S4.T2.1.1.1.m1.1.1.1" xref="S4.T2.1.1.1.m1.1.1.1.cmml">⁢</mo><mi id="S4.T2.1.1.1.m1.1.1.3" xref="S4.T2.1.1.1.m1.1.1.3.cmml">m</mi><mo id="S4.T2.1.1.1.m1.1.1.1a" xref="S4.T2.1.1.1.m1.1.1.1.cmml">⁢</mo><mi id="S4.T2.1.1.1.m1.1.1.4" xref="S4.T2.1.1.1.m1.1.1.4.cmml">s</mi></mrow><annotation-xml encoding="MathML-Content" id="S4.T2.1.1.1.m1.1b"><apply id="S4.T2.1.1.1.m1.1.1.cmml" xref="S4.T2.1.1.1.m1.1.1"><times id="S4.T2.1.1.1.m1.1.1.1.cmml" xref="S4.T2.1.1.1.m1.1.1.1"></times><cn id="S4.T2.1.1.1.m1.1.1.2.cmml" type="float" xref="S4.T2.1.1.1.m1.1.1.2">332.11</cn><ci id="S4.T2.1.1.1.m1.1.1.3.cmml" xref="S4.T2.1.1.1.m1.1.1.3">𝑚</ci><ci id="S4.T2.1.1.1.m1.1.1.4.cmml" xref="S4.T2.1.1.1.m1.1.1.4">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.T2.1.1.1.m1.1c">332.11ms</annotation><annotation encoding="application/x-llamapun" id="S4.T2.1.1.1.m1.1d">332.11 italic_m italic_s</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.1.1.5">457.51</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T2.1.1.6">0.1254</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.2.2">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.2.2.2">16</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.2.2.3">146.02</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.2.2.4">0.0937</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.2.2.1"><math alttext="52.30ms" class="ltx_Math" display="inline" id="S4.T2.2.2.1.m1.1"><semantics id="S4.T2.2.2.1.m1.1a"><mrow id="S4.T2.2.2.1.m1.1.1" xref="S4.T2.2.2.1.m1.1.1.cmml"><mn id="S4.T2.2.2.1.m1.1.1.2" xref="S4.T2.2.2.1.m1.1.1.2.cmml">52.30</mn><mo id="S4.T2.2.2.1.m1.1.1.1" xref="S4.T2.2.2.1.m1.1.1.1.cmml">⁢</mo><mi id="S4.T2.2.2.1.m1.1.1.3" xref="S4.T2.2.2.1.m1.1.1.3.cmml">m</mi><mo id="S4.T2.2.2.1.m1.1.1.1a" xref="S4.T2.2.2.1.m1.1.1.1.cmml">⁢</mo><mi id="S4.T2.2.2.1.m1.1.1.4" xref="S4.T2.2.2.1.m1.1.1.4.cmml">s</mi></mrow><annotation-xml encoding="MathML-Content" id="S4.T2.2.2.1.m1.1b"><apply id="S4.T2.2.2.1.m1.1.1.cmml" xref="S4.T2.2.2.1.m1.1.1"><times id="S4.T2.2.2.1.m1.1.1.1.cmml" xref="S4.T2.2.2.1.m1.1.1.1"></times><cn id="S4.T2.2.2.1.m1.1.1.2.cmml" type="float" xref="S4.T2.2.2.1.m1.1.1.2">52.30</cn><ci id="S4.T2.2.2.1.m1.1.1.3.cmml" xref="S4.T2.2.2.1.m1.1.1.3">𝑚</ci><ci id="S4.T2.2.2.1.m1.1.1.4.cmml" xref="S4.T2.2.2.1.m1.1.1.4">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.T2.2.2.1.m1.1c">52.30ms</annotation><annotation encoding="application/x-llamapun" id="S4.T2.2.2.1.m1.1d">52.30 italic_m italic_s</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.2.2.5">156.66</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.2.2.6">0.1044</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.3.3">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.3.3.2">32</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.3.3.3">140.26</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.3.3.4">0.0959</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.3.3.1"><math alttext="44.34ms" class="ltx_Math" display="inline" id="S4.T2.3.3.1.m1.1"><semantics id="S4.T2.3.3.1.m1.1a"><mrow id="S4.T2.3.3.1.m1.1.1" xref="S4.T2.3.3.1.m1.1.1.cmml"><mn id="S4.T2.3.3.1.m1.1.1.2" xref="S4.T2.3.3.1.m1.1.1.2.cmml">44.34</mn><mo id="S4.T2.3.3.1.m1.1.1.1" xref="S4.T2.3.3.1.m1.1.1.1.cmml">⁢</mo><mi id="S4.T2.3.3.1.m1.1.1.3" xref="S4.T2.3.3.1.m1.1.1.3.cmml">m</mi><mo id="S4.T2.3.3.1.m1.1.1.1a" xref="S4.T2.3.3.1.m1.1.1.1.cmml">⁢</mo><mi id="S4.T2.3.3.1.m1.1.1.4" xref="S4.T2.3.3.1.m1.1.1.4.cmml">s</mi></mrow><annotation-xml encoding="MathML-Content" id="S4.T2.3.3.1.m1.1b"><apply id="S4.T2.3.3.1.m1.1.1.cmml" xref="S4.T2.3.3.1.m1.1.1"><times id="S4.T2.3.3.1.m1.1.1.1.cmml" xref="S4.T2.3.3.1.m1.1.1.1"></times><cn id="S4.T2.3.3.1.m1.1.1.2.cmml" type="float" xref="S4.T2.3.3.1.m1.1.1.2">44.34</cn><ci id="S4.T2.3.3.1.m1.1.1.3.cmml" xref="S4.T2.3.3.1.m1.1.1.3">𝑚</ci><ci id="S4.T2.3.3.1.m1.1.1.4.cmml" xref="S4.T2.3.3.1.m1.1.1.4">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.T2.3.3.1.m1.1c">44.34ms</annotation><annotation encoding="application/x-llamapun" id="S4.T2.3.3.1.m1.1d">44.34 italic_m italic_s</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.3.3.5">140.53</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.3.3.6">0.0962</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.4.4">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.4.4.2">64</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.4.4.3">129.99</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.4.4.4">0.0923</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.4.4.1"><math alttext="37.72ms" class="ltx_Math" display="inline" id="S4.T2.4.4.1.m1.1"><semantics id="S4.T2.4.4.1.m1.1a"><mrow id="S4.T2.4.4.1.m1.1.1" xref="S4.T2.4.4.1.m1.1.1.cmml"><mn id="S4.T2.4.4.1.m1.1.1.2" xref="S4.T2.4.4.1.m1.1.1.2.cmml">37.72</mn><mo id="S4.T2.4.4.1.m1.1.1.1" xref="S4.T2.4.4.1.m1.1.1.1.cmml">⁢</mo><mi id="S4.T2.4.4.1.m1.1.1.3" xref="S4.T2.4.4.1.m1.1.1.3.cmml">m</mi><mo id="S4.T2.4.4.1.m1.1.1.1a" xref="S4.T2.4.4.1.m1.1.1.1.cmml">⁢</mo><mi id="S4.T2.4.4.1.m1.1.1.4" xref="S4.T2.4.4.1.m1.1.1.4.cmml">s</mi></mrow><annotation-xml encoding="MathML-Content" id="S4.T2.4.4.1.m1.1b"><apply id="S4.T2.4.4.1.m1.1.1.cmml" xref="S4.T2.4.4.1.m1.1.1"><times id="S4.T2.4.4.1.m1.1.1.1.cmml" xref="S4.T2.4.4.1.m1.1.1.1"></times><cn id="S4.T2.4.4.1.m1.1.1.2.cmml" type="float" xref="S4.T2.4.4.1.m1.1.1.2">37.72</cn><ci id="S4.T2.4.4.1.m1.1.1.3.cmml" xref="S4.T2.4.4.1.m1.1.1.3">𝑚</ci><ci id="S4.T2.4.4.1.m1.1.1.4.cmml" xref="S4.T2.4.4.1.m1.1.1.4">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.T2.4.4.1.m1.1c">37.72ms</annotation><annotation encoding="application/x-llamapun" id="S4.T2.4.4.1.m1.1d">37.72 italic_m italic_s</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.4.4.5">130.58</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.4.4.6">0.0929</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para ltx_noindent" id="S4.p2">
+<p class="ltx_p" id="S4.p2.5">In terms of model quality, the validation loss metric shows varying performance across different sample sizes. At <math alttext="16" class="ltx_Math" display="inline" id="S4.p2.1.m1.1"><semantics id="S4.p2.1.m1.1a"><mn id="S4.p2.1.m1.1.1" xref="S4.p2.1.m1.1.1.cmml">16</mn><annotation-xml encoding="MathML-Content" id="S4.p2.1.m1.1b"><cn id="S4.p2.1.m1.1.1.cmml" type="integer" xref="S4.p2.1.m1.1.1">16</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.p2.1.m1.1c">16</annotation><annotation encoding="application/x-llamapun" id="S4.p2.1.m1.1d">16</annotation></semantics></math> samples, the validation loss increases to <math alttext="0.0937" class="ltx_Math" display="inline" id="S4.p2.2.m2.1"><semantics id="S4.p2.2.m2.1a"><mn id="S4.p2.2.m2.1.1" xref="S4.p2.2.m2.1.1.cmml">0.0937</mn><annotation-xml encoding="MathML-Content" id="S4.p2.2.m2.1b"><cn id="S4.p2.2.m2.1.1.cmml" type="float" xref="S4.p2.2.m2.1.1">0.0937</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.p2.2.m2.1c">0.0937</annotation><annotation encoding="application/x-llamapun" id="S4.p2.2.m2.1d">0.0937</annotation></semantics></math>, while at 64 samples it still remains higher at <math alttext="0.0923" class="ltx_Math" display="inline" id="S4.p2.3.m3.1"><semantics id="S4.p2.3.m3.1a"><mn id="S4.p2.3.m3.1.1" xref="S4.p2.3.m3.1.1.cmml">0.0923</mn><annotation-xml encoding="MathML-Content" id="S4.p2.3.m3.1b"><cn id="S4.p2.3.m3.1.1.cmml" type="float" xref="S4.p2.3.m3.1.1">0.0923</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.p2.3.m3.1c">0.0923</annotation><annotation encoding="application/x-llamapun" id="S4.p2.3.m3.1d">0.0923</annotation></semantics></math>, compared to the baseline. In contrast, the <math alttext="64" class="ltx_Math" display="inline" id="S4.p2.4.m4.1"><semantics id="S4.p2.4.m4.1a"><mn id="S4.p2.4.m4.1.1" xref="S4.p2.4.m4.1.1.cmml">64</mn><annotation-xml encoding="MathML-Content" id="S4.p2.4.m4.1b"><cn id="S4.p2.4.m4.1.1.cmml" type="integer" xref="S4.p2.4.m4.1.1">64</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.p2.4.m4.1c">64</annotation><annotation encoding="application/x-llamapun" id="S4.p2.4.m4.1d">64</annotation></semantics></math> samples <span class="ltx_ERROR undefined" id="S4.p2.5.1">\ac</span>NAS run results in the best model, decreasing the test loss by a factor of <math alttext="\approx 1.35" class="ltx_Math" display="inline" id="S4.p2.5.m5.1"><semantics id="S4.p2.5.m5.1a"><mrow id="S4.p2.5.m5.1.1" xref="S4.p2.5.m5.1.1.cmml"><mi id="S4.p2.5.m5.1.1.2" xref="S4.p2.5.m5.1.1.2.cmml"></mi><mo id="S4.p2.5.m5.1.1.1" xref="S4.p2.5.m5.1.1.1.cmml">≈</mo><mn id="S4.p2.5.m5.1.1.3" xref="S4.p2.5.m5.1.1.3.cmml">1.35</mn></mrow><annotation-xml encoding="MathML-Content" id="S4.p2.5.m5.1b"><apply id="S4.p2.5.m5.1.1.cmml" xref="S4.p2.5.m5.1.1"><approx id="S4.p2.5.m5.1.1.1.cmml" xref="S4.p2.5.m5.1.1.1"></approx><csymbol cd="latexml" id="S4.p2.5.m5.1.1.2.cmml" xref="S4.p2.5.m5.1.1.2">absent</csymbol><cn id="S4.p2.5.m5.1.1.3.cmml" type="float" xref="S4.p2.5.m5.1.1.3">1.35</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p2.5.m5.1c">\approx 1.35</annotation><annotation encoding="application/x-llamapun" id="S4.p2.5.m5.1d">≈ 1.35</annotation></semantics></math> compared to the baseline model. It is hypothesized that the fluctuations in the validation loss metric are due to the weighting of both metrics into a single one, see Eq. (<a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S3.E1" title="Equation 1 ‣ 3.3 Workflow Setup ‣ 3 Design and Implementation ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">1</span></a>), and thus a larger focus is on the inference time. However, as shown by the decreasing test loss, the model still seems to be able to achieve a higher solution quality than the baseline. Both metrics, the model quality on the test set and the inference time in general decrease for the model on the edge as the number of samples (and thus the compute resources spent on the <span class="ltx_ERROR undefined" id="S4.p2.5.2">\ac</span>NAS loop) is increased. In Fig. <a class="ltx_ref" href="https://arxiv.org/html/2505.19995v1#S4.F4" title="Figure 4 ‣ 4 Empirical Results ‣ Optimizing edge AI models on HPC systems with the edge in the loop"><span class="ltx_text ltx_ref_tag">4</span></a>, the pareto curves of the different configurations are depicted, showing the optimal trade-off points between validation loss and inference time. As can be seen, in all cases the pareto curves do move to the left bottom of the plots, indicating better models. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S4.p3">
+<p class="ltx_p" id="S4.p3.9">To assess the importance of the architectural and optimizer-related parameters on the model performance, the top <math alttext="10\%" class="ltx_Math" display="inline" id="S4.p3.1.m1.1"><semantics id="S4.p3.1.m1.1a"><mrow id="S4.p3.1.m1.1.1" xref="S4.p3.1.m1.1.1.cmml"><mn id="S4.p3.1.m1.1.1.2" xref="S4.p3.1.m1.1.1.2.cmml">10</mn><mo id="S4.p3.1.m1.1.1.1" xref="S4.p3.1.m1.1.1.1.cmml">%</mo></mrow><annotation-xml encoding="MathML-Content" id="S4.p3.1.m1.1b"><apply id="S4.p3.1.m1.1.1.cmml" xref="S4.p3.1.m1.1.1"><csymbol cd="latexml" id="S4.p3.1.m1.1.1.1.cmml" xref="S4.p3.1.m1.1.1.1">percent</csymbol><cn id="S4.p3.1.m1.1.1.2.cmml" type="integer" xref="S4.p3.1.m1.1.1.2">10</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p3.1.m1.1c">10\%</annotation><annotation encoding="application/x-llamapun" id="S4.p3.1.m1.1d">10 %</annotation></semantics></math> models found during the 5 <span class="ltx_ERROR undefined" id="S4.p3.9.1">\ac</span>NAS runs with <math alttext="64" class="ltx_Math" display="inline" id="S4.p3.2.m2.1"><semantics id="S4.p3.2.m2.1a"><mn id="S4.p3.2.m2.1.1" xref="S4.p3.2.m2.1.1.cmml">64</mn><annotation-xml encoding="MathML-Content" id="S4.p3.2.m2.1b"><cn id="S4.p3.2.m2.1.1.cmml" type="integer" xref="S4.p3.2.m2.1.1">64</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.p3.2.m2.1c">64</annotation><annotation encoding="application/x-llamapun" id="S4.p3.2.m2.1d">64</annotation></semantics></math> samples are examined through their median hyperparameter values. The results show that a small learning rate of <math alttext="\approx 4.7\cdot 10^{-4}" class="ltx_Math" display="inline" id="S4.p3.3.m3.1"><semantics id="S4.p3.3.m3.1a"><mrow id="S4.p3.3.m3.1.1" xref="S4.p3.3.m3.1.1.cmml"><mi id="S4.p3.3.m3.1.1.2" xref="S4.p3.3.m3.1.1.2.cmml"></mi><mo id="S4.p3.3.m3.1.1.1" xref="S4.p3.3.m3.1.1.1.cmml">≈</mo><mrow id="S4.p3.3.m3.1.1.3" xref="S4.p3.3.m3.1.1.3.cmml"><mn id="S4.p3.3.m3.1.1.3.2" xref="S4.p3.3.m3.1.1.3.2.cmml">4.7</mn><mo id="S4.p3.3.m3.1.1.3.1" lspace="0.222em" rspace="0.222em" xref="S4.p3.3.m3.1.1.3.1.cmml">⋅</mo><msup id="S4.p3.3.m3.1.1.3.3" xref="S4.p3.3.m3.1.1.3.3.cmml"><mn id="S4.p3.3.m3.1.1.3.3.2" xref="S4.p3.3.m3.1.1.3.3.2.cmml">10</mn><mrow id="S4.p3.3.m3.1.1.3.3.3" xref="S4.p3.3.m3.1.1.3.3.3.cmml"><mo id="S4.p3.3.m3.1.1.3.3.3a" xref="S4.p3.3.m3.1.1.3.3.3.cmml">−</mo><mn id="S4.p3.3.m3.1.1.3.3.3.2" xref="S4.p3.3.m3.1.1.3.3.3.2.cmml">4</mn></mrow></msup></mrow></mrow><annotation-xml encoding="MathML-Content" id="S4.p3.3.m3.1b"><apply id="S4.p3.3.m3.1.1.cmml" xref="S4.p3.3.m3.1.1"><approx id="S4.p3.3.m3.1.1.1.cmml" xref="S4.p3.3.m3.1.1.1"></approx><csymbol cd="latexml" id="S4.p3.3.m3.1.1.2.cmml" xref="S4.p3.3.m3.1.1.2">absent</csymbol><apply id="S4.p3.3.m3.1.1.3.cmml" xref="S4.p3.3.m3.1.1.3"><ci id="S4.p3.3.m3.1.1.3.1.cmml" xref="S4.p3.3.m3.1.1.3.1">⋅</ci><cn id="S4.p3.3.m3.1.1.3.2.cmml" type="float" xref="S4.p3.3.m3.1.1.3.2">4.7</cn><apply id="S4.p3.3.m3.1.1.3.3.cmml" xref="S4.p3.3.m3.1.1.3.3"><csymbol cd="ambiguous" id="S4.p3.3.m3.1.1.3.3.1.cmml" xref="S4.p3.3.m3.1.1.3.3">superscript</csymbol><cn id="S4.p3.3.m3.1.1.3.3.2.cmml" type="integer" xref="S4.p3.3.m3.1.1.3.3.2">10</cn><apply id="S4.p3.3.m3.1.1.3.3.3.cmml" xref="S4.p3.3.m3.1.1.3.3.3"><minus id="S4.p3.3.m3.1.1.3.3.3.1.cmml" xref="S4.p3.3.m3.1.1.3.3.3"></minus><cn id="S4.p3.3.m3.1.1.3.3.3.2.cmml" type="integer" xref="S4.p3.3.m3.1.1.3.3.3.2">4</cn></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p3.3.m3.1c">\approx 4.7\cdot 10^{-4}</annotation><annotation encoding="application/x-llamapun" id="S4.p3.3.m3.1d">≈ 4.7 ⋅ 10 start_POSTSUPERSCRIPT - 4 end_POSTSUPERSCRIPT</annotation></semantics></math>, combined with a large decay factor of <math alttext="\approx 0.75" class="ltx_Math" display="inline" id="S4.p3.4.m4.1"><semantics id="S4.p3.4.m4.1a"><mrow id="S4.p3.4.m4.1.1" xref="S4.p3.4.m4.1.1.cmml"><mi id="S4.p3.4.m4.1.1.2" xref="S4.p3.4.m4.1.1.2.cmml"></mi><mo id="S4.p3.4.m4.1.1.1" xref="S4.p3.4.m4.1.1.1.cmml">≈</mo><mn id="S4.p3.4.m4.1.1.3" xref="S4.p3.4.m4.1.1.3.cmml">0.75</mn></mrow><annotation-xml encoding="MathML-Content" id="S4.p3.4.m4.1b"><apply id="S4.p3.4.m4.1.1.cmml" xref="S4.p3.4.m4.1.1"><approx id="S4.p3.4.m4.1.1.1.cmml" xref="S4.p3.4.m4.1.1.1"></approx><csymbol cd="latexml" id="S4.p3.4.m4.1.1.2.cmml" xref="S4.p3.4.m4.1.1.2">absent</csymbol><cn id="S4.p3.4.m4.1.1.3.cmml" type="float" xref="S4.p3.4.m4.1.1.3">0.75</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p3.4.m4.1c">\approx 0.75</annotation><annotation encoding="application/x-llamapun" id="S4.p3.4.m4.1d">≈ 0.75</annotation></semantics></math> and a moderate adjustment interval of <math alttext="20" class="ltx_Math" display="inline" id="S4.p3.5.m5.1"><semantics id="S4.p3.5.m5.1a"><mn id="S4.p3.5.m5.1.1" xref="S4.p3.5.m5.1.1.cmml">20</mn><annotation-xml encoding="MathML-Content" id="S4.p3.5.m5.1b"><cn id="S4.p3.5.m5.1.1.cmml" type="integer" xref="S4.p3.5.m5.1.1">20</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.p3.5.m5.1c">20</annotation><annotation encoding="application/x-llamapun" id="S4.p3.5.m5.1d">20</annotation></semantics></math> steps results in the lowest validation score values. From an input data perspective, a median patch size of <math alttext="[4,4,4]" class="ltx_Math" display="inline" id="S4.p3.6.m6.3"><semantics id="S4.p3.6.m6.3a"><mrow id="S4.p3.6.m6.3.4.2" xref="S4.p3.6.m6.3.4.1.cmml"><mo id="S4.p3.6.m6.3.4.2.1" stretchy="false" xref="S4.p3.6.m6.3.4.1.cmml">[</mo><mn id="S4.p3.6.m6.1.1" xref="S4.p3.6.m6.1.1.cmml">4</mn><mo id="S4.p3.6.m6.3.4.2.2" xref="S4.p3.6.m6.3.4.1.cmml">,</mo><mn id="S4.p3.6.m6.2.2" xref="S4.p3.6.m6.2.2.cmml">4</mn><mo id="S4.p3.6.m6.3.4.2.3" xref="S4.p3.6.m6.3.4.1.cmml">,</mo><mn id="S4.p3.6.m6.3.3" xref="S4.p3.6.m6.3.3.cmml">4</mn><mo id="S4.p3.6.m6.3.4.2.4" stretchy="false" xref="S4.p3.6.m6.3.4.1.cmml">]</mo></mrow><annotation-xml encoding="MathML-Content" id="S4.p3.6.m6.3b"><list id="S4.p3.6.m6.3.4.1.cmml" xref="S4.p3.6.m6.3.4.2"><cn id="S4.p3.6.m6.1.1.cmml" type="integer" xref="S4.p3.6.m6.1.1">4</cn><cn id="S4.p3.6.m6.2.2.cmml" type="integer" xref="S4.p3.6.m6.2.2">4</cn><cn id="S4.p3.6.m6.3.3.cmml" type="integer" xref="S4.p3.6.m6.3.3">4</cn></list></annotation-xml><annotation encoding="application/x-tex" id="S4.p3.6.m6.3c">[4,4,4]</annotation><annotation encoding="application/x-llamapun" id="S4.p3.6.m6.3d">[ 4 , 4 , 4 ]</annotation></semantics></math> suggests larger patches to be more favorable. From an architectural point of view, a median depth of <math alttext="[1,1,2,1]" class="ltx_Math" display="inline" id="S4.p3.7.m7.4"><semantics id="S4.p3.7.m7.4a"><mrow id="S4.p3.7.m7.4.5.2" xref="S4.p3.7.m7.4.5.1.cmml"><mo id="S4.p3.7.m7.4.5.2.1" stretchy="false" xref="S4.p3.7.m7.4.5.1.cmml">[</mo><mn id="S4.p3.7.m7.1.1" xref="S4.p3.7.m7.1.1.cmml">1</mn><mo id="S4.p3.7.m7.4.5.2.2" xref="S4.p3.7.m7.4.5.1.cmml">,</mo><mn id="S4.p3.7.m7.2.2" xref="S4.p3.7.m7.2.2.cmml">1</mn><mo id="S4.p3.7.m7.4.5.2.3" xref="S4.p3.7.m7.4.5.1.cmml">,</mo><mn id="S4.p3.7.m7.3.3" xref="S4.p3.7.m7.3.3.cmml">2</mn><mo id="S4.p3.7.m7.4.5.2.4" xref="S4.p3.7.m7.4.5.1.cmml">,</mo><mn id="S4.p3.7.m7.4.4" xref="S4.p3.7.m7.4.4.cmml">1</mn><mo id="S4.p3.7.m7.4.5.2.5" stretchy="false" xref="S4.p3.7.m7.4.5.1.cmml">]</mo></mrow><annotation-xml encoding="MathML-Content" id="S4.p3.7.m7.4b"><list id="S4.p3.7.m7.4.5.1.cmml" xref="S4.p3.7.m7.4.5.2"><cn id="S4.p3.7.m7.1.1.cmml" type="integer" xref="S4.p3.7.m7.1.1">1</cn><cn id="S4.p3.7.m7.2.2.cmml" type="integer" xref="S4.p3.7.m7.2.2">1</cn><cn id="S4.p3.7.m7.3.3.cmml" type="integer" xref="S4.p3.7.m7.3.3">2</cn><cn id="S4.p3.7.m7.4.4.cmml" type="integer" xref="S4.p3.7.m7.4.4">1</cn></list></annotation-xml><annotation encoding="application/x-tex" id="S4.p3.7.m7.4c">[1,1,2,1]</annotation><annotation encoding="application/x-llamapun" id="S4.p3.7.m7.4d">[ 1 , 1 , 2 , 1 ]</annotation></semantics></math>, a median attention head number of <math alttext="[3,6,3,12]" class="ltx_Math" display="inline" id="S4.p3.8.m8.4"><semantics id="S4.p3.8.m8.4a"><mrow id="S4.p3.8.m8.4.5.2" xref="S4.p3.8.m8.4.5.1.cmml"><mo id="S4.p3.8.m8.4.5.2.1" stretchy="false" xref="S4.p3.8.m8.4.5.1.cmml">[</mo><mn id="S4.p3.8.m8.1.1" xref="S4.p3.8.m8.1.1.cmml">3</mn><mo id="S4.p3.8.m8.4.5.2.2" xref="S4.p3.8.m8.4.5.1.cmml">,</mo><mn id="S4.p3.8.m8.2.2" xref="S4.p3.8.m8.2.2.cmml">6</mn><mo id="S4.p3.8.m8.4.5.2.3" xref="S4.p3.8.m8.4.5.1.cmml">,</mo><mn id="S4.p3.8.m8.3.3" xref="S4.p3.8.m8.3.3.cmml">3</mn><mo id="S4.p3.8.m8.4.5.2.4" xref="S4.p3.8.m8.4.5.1.cmml">,</mo><mn id="S4.p3.8.m8.4.4" xref="S4.p3.8.m8.4.4.cmml">12</mn><mo id="S4.p3.8.m8.4.5.2.5" stretchy="false" xref="S4.p3.8.m8.4.5.1.cmml">]</mo></mrow><annotation-xml encoding="MathML-Content" id="S4.p3.8.m8.4b"><list id="S4.p3.8.m8.4.5.1.cmml" xref="S4.p3.8.m8.4.5.2"><cn id="S4.p3.8.m8.1.1.cmml" type="integer" xref="S4.p3.8.m8.1.1">3</cn><cn id="S4.p3.8.m8.2.2.cmml" type="integer" xref="S4.p3.8.m8.2.2">6</cn><cn id="S4.p3.8.m8.3.3.cmml" type="integer" xref="S4.p3.8.m8.3.3">3</cn><cn id="S4.p3.8.m8.4.4.cmml" type="integer" xref="S4.p3.8.m8.4.4">12</cn></list></annotation-xml><annotation encoding="application/x-tex" id="S4.p3.8.m8.4c">[3,6,3,12]</annotation><annotation encoding="application/x-llamapun" id="S4.p3.8.m8.4d">[ 3 , 6 , 3 , 12 ]</annotation></semantics></math>, and a median embedding dimension of <math alttext="24" class="ltx_Math" display="inline" id="S4.p3.9.m9.1"><semantics id="S4.p3.9.m9.1a"><mn id="S4.p3.9.m9.1.1" xref="S4.p3.9.m9.1.1.cmml">24</mn><annotation-xml encoding="MathML-Content" id="S4.p3.9.m9.1b"><cn id="S4.p3.9.m9.1.1.cmml" type="integer" xref="S4.p3.9.m9.1.1">24</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.p3.9.m9.1c">24</annotation><annotation encoding="application/x-llamapun" id="S4.p3.9.m9.1d">24</annotation></semantics></math> suggests smaller models to be favorable. This is expected as these parameters usually also result in shorter inference times, which is one of the two objectives of the multi-objective optimizer.</p>
+</div>
+<figure class="ltx_figure" id="S4.F4">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape" height="247" id="S4.F4.g1" src="x2.png" width="332"/></div>
+<div class="ltx_flex_cell ltx_flex_size_2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape" height="247" id="S4.F4.g2" src="x3.png" width="332"/></div>
+<div class="ltx_flex_break"></div>
+<div class="ltx_flex_cell ltx_flex_size_1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape" height="247" id="S4.F4.g3" src="x4.png" width="332"/></div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F4.2.1.1" style="font-size:90%;">Figure 4</span>: </span><span class="ltx_text" id="S4.F4.3.2" style="font-size:90%;">Results at different scales, showing the median best run.</span></figcaption>
+</figure>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Summary and Conclusion</h2>
+<div class="ltx_para ltx_noindent" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">In this work, a hybrid, cross-border, hardware-aware <span class="ltx_ERROR undefined" id="S5.p1.1.1">\ac</span>NAS workflow that runs in parallel on an <span class="ltx_ERROR undefined" id="S5.p1.1.2">\ac</span>HPC system and an edge device was presented. The workflow leverages the powerful <span class="ltx_ERROR undefined" id="S5.p1.1.3">\acp</span>GPU of the <span class="ltx_ERROR undefined" id="S5.p1.1.4">\ac</span>HPC system to train different model configurations with data-parallel training while performing the inference time measurement of the models on the actual target device, resulting in an accurate measurement. To hide communication latency, each candidate model architecture is sent to the inference device before training on the <span class="ltx_ERROR undefined" id="S5.p1.1.5">\ac</span>HPC system. The empirical results clearly highlight how large savings in terms of inference time and model quality (in terms of final test loss) can be achieved. As a key finding, this research demonstrates empirically that increasing the computational resources of the <span class="ltx_ERROR undefined" id="S5.p1.1.6">\ac</span>HPO loop can lead to a smaller computational resource usage during the inference on the edge device. In the future, such workflows could therefore be used to find architectures with even higher speed (compared to expert baselines) or fitting on even smaller edge devices, which is an important feature not only in <span class="ltx_ERROR undefined" id="S5.p1.1.7">\ac</span>AM but in any field where fast <span class="ltx_ERROR undefined" id="S5.p1.1.8">\ac</span>ML models are deployed on small devices.</p>
+</div>
+<section class="ltx_subsubsection" id="S5.SS0.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">5.0.1 </span>Acknowledgements.</h4>
+<div class="ltx_para ltx_noindent" id="S5.SS0.SSS1.p1">
+<p class="ltx_p" id="S5.SS0.SSS1.p1.1">The CoE RAISE project has received funding from the European Union’s Horizon 2020 Research and Innovation Framework Programme H2020-INFRAEDI-2019-1 under grant agreement no. 951733. This research was also partially supported by the RELAI project of Flanders Make, the strategic research centre for the manufacturing industry, and by the Flemish Government AI Research Program. Resources for the database were provided by the VSC (Flemish Supercomputer Center), funded by the Research Foundation - Flanders (FWO) and the Flemish Government.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S5.SS0.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">5.0.2 </span>Disclosure of Interests.</h4>
+<div class="ltx_para ltx_noindent" id="S5.SS0.SSS2.p1">
+<p class="ltx_p" id="S5.SS0.SSS2.p1.1">The authors have no competing interests to declare that are
+relevant to the content of this article.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S5.SS0.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">5.0.3 </span>Venue and Manuscript Version.</h4>
+<div class="ltx_para ltx_noindent" id="S5.SS0.SSS3.p1">
+<p class="ltx_p" id="S5.SS0.SSS3.p1.1">This work was accepted for publication in the proceedings of ISC 2025 workshop Computational Aspects of Deep Learning (CADL 2025), and was selected for oral presentation. This preprint version of the manuscript, however, has not undergone peer review or any post-submission improvements or corrections. The Version of Record of this contribution will be published in HIGH PERFORMANCE COMPUTING: ISC High Performance 2025 International Workshops (Lecture Notes in Computer Science — LNCS).</p>
+</div>
+</section>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+Benmeziane, H., Maghraoui, K.E., Ouarnoughi, H., Niar, S., Wistuba, M., Wang,
+N.: A comprehensive survey on hardware-aware neural architecture search
+(2021), <a class="ltx_ref ltx_url" href="https://arxiv.org/abs/2101.09336" style="color:#0000FF;" title="">https://arxiv.org/abs/2101.09336</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+Blanc, C., Ahar, A., De Grave, K.: Reference dataset and benchmark for
+reconstructing laser parameters from on-axis video in powder bed fusion of
+bulk stainless steel. Additive Manufacturing Letters <span class="ltx_text ltx_font_bold" id="bib.bib2.1.1">7</span>, 100161
+(2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+Booth, B.G., Heylen, R., Nourazar, M., Verhees, D., Philips, W., Bey-Temsamani,
+A.: Encoding stability into laser powder bed fusion monitoring using temporal
+features and pore density modelling. Sensors <span class="ltx_text ltx_font_bold" id="bib.bib3.1.1">22</span>(10) (2022).
+https://doi.org/10.3390/s22103740
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+Eiben, A.E., Smith, J.E.: Introduction to Evolutionary Computing. Springer
+(2003)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+Howard, A.G., Zhu, M., Chen, B., Kalenichenko, D., Wang, W., Weyand, T.,
+Andreetto, M., Adam, H.: Mobilenets: Efficient convolutional neural networks
+for mobile vision applications (2017), <a class="ltx_ref ltx_url" href="https://arxiv.org/abs/1704.04861" style="color:#0000FF;" title="">https://arxiv.org/abs/1704.04861</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">
+Jiang, W., Zhang, X., Sha, E.H.M., Yang, L., Zhuge, Q., Shi, Y., Hu, J.:
+Accuracy vs. efficiency: Achieving both through FPGA-implementation aware
+neural architecture search. In: Proceedings of the 56th Annual Design
+Automation Conference 2019. DAC ’19, Association for Computing Machinery, New
+York, NY, USA (2019). https://doi.org/10.1145/3316781.3317757
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+Kingma, D.P., Ba, J.: Adam: A method for stochastic optimization. In:
+International Conference on Learning Representations (2015),
+<a class="ltx_ref ltx_url" href="http://arxiv.org/abs/1412.6980" style="color:#0000FF;" title="">http://arxiv.org/abs/1412.6980</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+Li, C., Yu, Z., Fu, Y., Zhang, Y., Zhao, Y., You, H., Yu, Q., Wang, Y., Lin,
+Y.C.: HW-NAS-bench: Hardware-aware neural architecture search benchmark.
+In: International Conference on Learning Representations (2021),
+<a class="ltx_ref ltx_url" href="https://openreview.net/forum?id=_0kaDkv3dVf" style="color:#0000FF;" title="">https://openreview.net/forum?id=_0kaDkv3dVf</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">
+Lin, J., Chen, W.M., Lin, Y., Cohn, J., Gan, C., Han, S.: MCUNet: tiny deep
+learning on IoT devices. In: Proceedings of the 34th International
+Conference on Neural Information Processing Systems. NeurIPS ’20, Curran
+Associates Inc., Red Hook, NY, USA (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+Liu, Z., Ning, J., Cao, Y., Wei, Y., Zhang, Z., Lin, S., Hu, H.: Video swin
+transformer. In: Proceedings of the IEEE/CVF Conference on Computer Vision
+and Pattern Recognition (CVPR). pp. 3202–3211 (June 2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock">
+Suarez, E., Kreuzer, A., Eicker, N., Lippert, T.: The DEEP-EST project,
+Schriften des Forschungszentrums Jülich IAS Series, vol. 48, pp. 9–25.
+Forschungszentrum Jülich GmbH Zentralbibliothek, Verlag, Jülich (2021),
+<a class="ltx_ref ltx_url" href="https://juser.fz-juelich.de/record/905812" style="color:#0000FF;" title="">https://juser.fz-juelich.de/record/905812</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock">
+Sukthanker, R.S., Zela, A., Staffler, B., Klein, A., Purucker, L., Franke,
+J.K., Hutter, F.: HW-GPT-bench: Hardware-aware architecture benchmark for
+language models. In: The Thirty-eight Conference on Neural Information
+Processing Systems Datasets and Benchmarks Track (2024),
+<a class="ltx_ref ltx_url" href="https://openreview.net/forum?id=urJyyMKs7E" style="color:#0000FF;" title="">https://openreview.net/forum?id=urJyyMKs7E</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock">
+Vanschoren, J., van Rijn, J.N., Bischl, B., Torgo, L.: OpenML: networked
+science in machine learning. SIGKDD Explorations <span class="ltx_text ltx_font_bold" id="bib.bib13.1.1">15</span>(2), 49–60
+(2013). https://doi.org/10.1145/2641190.2641198
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock">
+Wu, B., Keutzer, K., Dai, X., Zhang, P., Wang, Y., Sun, F., Wu, Y., Tian, Y.,
+Vajda, P., Jia, Y.: Fbnet: Hardware-aware efficient convnet design via
+differentiable neural architecture search. In: 2019 IEEE/CVF Conference on
+Computer Vision and Pattern Recognition (CVPR). pp. 10726–10734. IEEE
+Computer Society, Los Alamitos, CA, USA (Jun 2019).
+https://doi.org/10.1109/CVPR.2019.01099
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock">
+Zoph, B., Le, Q.: Neural architecture search with reinforcement learning. In:
+International Conference on Learning Representations (2017),
+<a class="ltx_ref ltx_url" href="https://openreview.net/forum?id=r1Ue8Hcxg" style="color:#0000FF;" title="">https://openreview.net/forum?id=r1Ue8Hcxg</a>
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Mon May 26 13:44:41 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,2250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare</title>
+<!--Generated on Mon May 26 14:01:00 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<meta content="
+Federated learning,  healthcare,  LLM application,  biomedical ontologies
+" lang="en" name="keywords"/>
+<base href="/html/2505.20020v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S1" title="In Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">I </span><span class="ltx_text ltx_font_smallcaps">Introduction</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S2" title="In Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II </span><span class="ltx_text ltx_font_smallcaps">Federated learning frameworks</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S2.SS1" title="In II Federated learning frameworks ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">II-A</span> </span><span class="ltx_text ltx_font_italic">Vantage6</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S2.SS2" title="In II Federated learning frameworks ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">II-B</span> </span><span class="ltx_text ltx_font_italic">Brane</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S2.SS3" title="In II Federated learning frameworks ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">II-C</span> </span><span class="ltx_text ltx_font_italic">EPI platform</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S2.SS4" title="In II Federated learning frameworks ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">II-D</span> </span><span class="ltx_text ltx_font_italic">Discussion</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S2.SS5" title="In II Federated learning frameworks ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">II-E</span> </span><span class="ltx_text ltx_font_italic">Towards an Open-FL platform</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S3" title="In Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III </span><span class="ltx_text ltx_font_smallcaps">Aligning biomedical data via ontologies</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4" title="In Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV </span><span class="ltx_text ltx_font_smallcaps">Data alignment for drug reporting use case</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4.SS1" title="In IV Data alignment for drug reporting use case ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-A</span> </span><span class="ltx_text ltx_font_italic">Unannotated dataset</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4.SS2" title="In IV Data alignment for drug reporting use case ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-B</span> </span><span class="ltx_text ltx_font_italic">Annotated dataset</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S5" title="In Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">V </span><span class="ltx_text ltx_font_smallcaps">Related work</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S6" title="In Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VI </span><span class="ltx_text ltx_font_smallcaps">Conclusions</span></span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare
+<br class="ltx_break"/><span class="ltx_note ltx_role_thanks" id="id1.id1"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">thanks: </span></span></span></span>
+</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Natallia Kokash
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id2.1.id1">Institute of Informatics</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id3.2.id2">University of Amsterdam
+<br class="ltx_break"/></span>The Netherlands 
+<br class="ltx_break"/>0000-0003-3639-1245
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Lei Wang
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id4.1.id1">College of Medicine</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id5.2.id2">The Ohio State University
+<br class="ltx_break"/></span>OH, USA 
+<br class="ltx_break"/>Lei.Wang2@osumc.edu
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Thomas H. Gillespie
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id6.1.id1">Department of Neuroscience</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id7.2.id2">University of California
+<br class="ltx_break"/></span>CA, USA 
+<br class="ltx_break"/>0000-0002-7509-4801
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Adam Belloum
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id8.1.id1">Institute of Informatics</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id9.2.id2">University of Amsterdam
+<br class="ltx_break"/></span>The Netherlands 
+<br class="ltx_break"/>0000-0001-6306-6937
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Paola Grosso
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id10.1.id1">Institute of Informatics</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id11.2.id2">University of Amsterdam
+<br class="ltx_break"/></span>The Netherlands 
+<br class="ltx_break"/>0000-0003-4600-9812
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Sara Quinney
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id12.1.id1">School of Medicine</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id13.2.id2">Indiana University
+<br class="ltx_break"/></span>IN, USA 
+<br class="ltx_break"/>squinney@iu.edu 
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Lang Li
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id14.1.id1">College of Medicine</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id15.2.id2">The Ohio State University
+<br class="ltx_break"/></span>OH, USA 
+<br class="ltx_break"/>0000-0002-0746-1809
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Bernard de Bono
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id16.1.id1">School of Medicine</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id17.2.id2">Indiana University
+<br class="ltx_break"/></span>IN, USA 
+<br class="ltx_break"/>0000-0003-0638-5274
+</span></span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id18.id1">The rise of electronic health records (EHRs) has unlocked new opportunities for medical research, but privacy regulations and data heterogeneity remain key barriers to large-scale machine learning. Federated learning (FL) enables collaborative modeling without sharing raw data, yet faces challenges in harmonizing diverse clinical datasets. This paper presents a two-step data alignment strategy integrating ontologies and large language models (LLMs) to support secure, privacy-preserving FL in healthcare, demonstrating its effectiveness in a real-world project involving semantic mapping of EHR data.</p>
+</div>
+<div class="ltx_keywords">
+<h6 class="ltx_title ltx_title_keywords">Index Terms: </h6>
+Federated learning, healthcare, LLM application, biomedical ontologies
+
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">I </span><span class="ltx_text ltx_font_smallcaps" id="S1.1.1">Introduction</span>
+</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">The rapid digitalization of healthcare has led to the proliferation of electronic health records (EHRs), offering unprecedented opportunities for data-driven medical research and clinical decision-making <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib41" title="">41</a>, <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib19" title="">19</a>]</cite>. However, leveraging this data at scale remains challenging due to stringent privacy regulations, security risks, and ethical concerns associated with centralized data storage. Traditional machine learning (ML) approaches rely on the aggregation of patient data into centralized repositories, making them vulnerable to massive data breaches and non-compliance with regulations such as the Health Insurance Portability and Accountability Act (HIPAA) in the United States and the General Data Protection Regulation (GDPR) in Europe <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib15" title="">15</a>, <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib60" title="">60</a>]</cite>. To address these concerns, federated learning (FL) has emerged as a promising paradigm for collaborative model training without the need for direct data sharing <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib50" title="">50</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">Federated learning enables multiple healthcare institutions to run ML models locally on their private datasets while only sharing model updates instead of raw patient data <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib33" title="">33</a>]</cite>. This decentralized approach significantly reduces the risk of data leaks and helps maintain compliance with privacy regulations. Despite these advantages, FL in healthcare presents several challenges, particularly in terms of data heterogeneity, security vulnerabilities, and computational overhead <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib53" title="">53</a>, <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib7" title="">7</a>]</cite>. One major obstacle is the alignment and harmonization of heterogeneous EHR formats, which can vary significantly across institutions due to differences in clinical terminologies, data collection standards, and infrastructure <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib21" title="">21</a>]</cite>.
+Data harmonization is the practice of “reconciling” various types, levels and sources of data in formats that are compatible and comparable, and thus useful for better decision-making <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib3" title="">3</a>, <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib1" title="">1</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">Data harmonization often relies on probabilistic and/or ML-based entity resolution techniques <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib13" title="">13</a>]</cite>. Schema matching <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib22" title="">22</a>]</cite> automates the identification of correspondences between fields in different datasets, such as aligning ”DOB” in one database with ”DateOfBirth” in another. Modern tools leverage natural language processing (NLP) and ontology-based reasoning to improve accuracy <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib70" title="">70</a>]</cite>. Type conversion ensures consistent representation of data types, such as converting blood pressure values stored as strings into standardized numeric formats or translating medication codes between vocabularies like RxNorm <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib48" title="">48</a>]</cite> and SNOMED CT <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib14" title="">14</a>]</cite>. In healthcare, these automated techniques support critical applications like patient cohort identification <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib3" title="">3</a>]</cite>, population health monitoring, and real-time clinical decision support, reducing manual curation and improving data quality for ML pipelines and interoperable health information systems.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">Large language models (LLMs), trained on vast corpora of biomedical literature and structured clinical data, have demonstrated strong capabilities in natural language understanding and information extraction <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib24" title="">24</a>]</cite>. They can be leveraged to standardize disparate EHRs, align ontologies, and mitigate discrepancies in medical coding practices across different hospitals and research centers <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib64" title="">64</a>]</cite>. However, ensuring the trustworthiness, bias mitigation, and interpretability of LLMs in clinical applications remains a critical research frontier <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib5" title="">5</a>, <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib11" title="">11</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">This paper explores the intersection of FL and healthcare, focusing on data harmonization strategies within privacy-preserving data access environments. With attention to security and regulatory compliance challenges, we are working on the integration of LLM-based functionality to a programmable FL framework to enable healthcare data alignment. We show how our two-step ontology- and LLM-based data alignment strategy was instrumental in the mapping of healthcare data for a real-world project. In the first step, the converter generated matching candidates using (a) vector-space embeddings <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib42" title="">42</a>]</cite> and/or (b) ontology-based converter matching. In the second step, an LLM was used to accept or reject the matching pairs.</p>
+</div>
+<div class="ltx_para" id="S1.p6">
+<p class="ltx_p" id="S1.p6.1">The paper is structured as follows. In Section <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S2" title="II Federated learning frameworks ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">II</span></a> we introduce the FL framework that we intend to empower with LLM support to improve the experience of research scientists designing workflows. In this work, we focus on the integration of LLMs to functions that perform data harmonization at domain nodes. Section <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S3" title="III Aligning biomedical data via ontologies ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">III</span></a> discusses the problem of healthcare data harmonization focusing on disambiguation via alignment with biomedical ontologies. We propose an LLM-empowered pipeline to automatically convert natural language annotations to the corresponding ontology codes. Section <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4" title="IV Data alignment for drug reporting use case ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">IV</span></a> introduces a collaborative real-world project in healthcare as a use case where the pipeline was applied to handle semantic heterogeneity of EHRs data. In section <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S5" title="V Related work ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">V</span></a>, we overview related work. Section <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S6" title="VI Conclusions ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">VI</span></a> concludes our work and outlines future steps.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">II </span><span class="ltx_text ltx_font_smallcaps" id="S2.1.1">Federated learning frameworks</span>
+</h2>
+<div class="ltx_para" id="S2.p1">
+<p class="ltx_p" id="S2.p1.1">FL applications face issues such as diversity in data types, model complexity, privacy concerns, and the need for efficient resource distribution. The research communities have been working on minimizing the effort by designing dedicated frameworks, reusable architectural patterns, and domain specific languages to orchestrate workflows and express security and privacy policies. Among such frameworks are Vantage6 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib44" title="">44</a>]</cite> and Brane <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib61" title="">61</a>]</cite> which jointly provide an infrastructure to design, deploy, and run federated workflows.</p>
+</div>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S2.SS1.4.1.1">II-A</span> </span><span class="ltx_text ltx_font_italic" id="S2.SS1.5.2">Vantage6</span>
+</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">Vantage6 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib44" title="">44</a>]</cite> allows researchers to perform ML operations on client’s data located at worker (computing) nodes. The process is orchestrated by a server (central node). A researcher can submit a task to the server with an algorithm and input parameters. The algorithm is first implemented using Vantage6 tools and built into a Docker image <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib23" title="">23</a>]</cite>. After a task is submitted to the server, the server sends the task information to a computing node. A computing node automatically detects the server, gets the task information, and executes the algorithm on local data. The intermediate results are sent back to the server for aggregation, and the iterative process of FL repeats to update the global model. The final result is sent back to the researcher when the computation is complete.</p>
+</div>
+<figure class="ltx_figure" id="S2.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="116" id="S2.F1.g1" src="extracted/6480224/images/vantage6.jpg" width="269"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>VANTAGE6 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib44" title="">44</a>]</cite> The server loads its configuration parameters and exposes its RESTful API Nodes.</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S2.SS2.4.1.1">II-B</span> </span><span class="ltx_text ltx_font_italic" id="S2.SS2.5.2">Brane</span>
+</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">Brane is a programmable framework for secure data exchange and scientific workflow orchestration. The primary purpose of Brane is to support efficient and secure data exchange among research organizations <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib61" title="">61</a>]</cite>. Brane utilizes containerization to encapsulate functionalities as portable building blocks. Through programmability, application orchestration can be expressed using an intuitive domain-specific language or user-friendly interactive notebooks. End users with limited programming experience are empowered to compose workflows without the need to deal with the underlying technical details.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p2">
+<p class="ltx_p" id="S2.SS2.p2.1">A key principle of Brane’s design is the clear separation of concerns based on specialized user roles, as shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S2.F2" title="Figure 2 ‣ II-B Brane ‣ II Federated learning frameworks ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">2</span></a>:
+(i) <em class="ltx_emph ltx_font_italic" id="S2.SS2.p2.1.1">domain scientists</em> focus on data analysis without managing execution details, (ii) <em class="ltx_emph ltx_font_italic" id="S2.SS2.p2.1.2">software engineers</em> develop and optimize data processing workflows, (iii) <em class="ltx_emph ltx_font_italic" id="S2.SS2.p2.1.3">systems engineers</em> maintain the infrastructure and ensure system efficiency.</p>
+</div>
+<figure class="ltx_figure" id="S2.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="88" id="S2.F2.g1" src="extracted/6480224/images/brain.png" width="293"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Brane’s approach to the distributed workflow implementation via separation of user roles <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib61" title="">61</a>]</cite>.</figcaption>
+</figure>
+<div class="ltx_para" id="S2.SS2.p3">
+<p class="ltx_p" id="S2.SS2.p3.1">The only requirement for remote resources is to be able to install and run containers.
+Brane supports Docker <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib23" title="">23</a>]</cite>, Singularity <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib29" title="">29</a>]</cite>, and Kubernetes clusters <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib10" title="">10</a>]</cite>. The runtime system can automatically convert packages (Open Container Initiative (OCI) images <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib49" title="">49</a>]</cite>) to the appropriate container image format. By default, direct access to resources is assumed; when this is not possible (e.g., not permitted by participating organizations or regulatory policies), an optional indirection layer is enabled.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S2.SS3.4.1.1">II-C</span> </span><span class="ltx_text ltx_font_italic" id="S2.SS3.5.2">EPI platform</span>
+</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p" id="S2.SS3.p1.1">Brane is a key component of the Enabling Personalized Interventions (EPI) framework <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib6" title="">6</a>]</cite>. The EPI framework provides a secure, distributed data platform that supports personalized health insights through analytics and decision support tools. Its main features are:</p>
+<ul class="ltx_itemize" id="S2.I1">
+<li class="ltx_item" id="S2.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i1.p1">
+<p class="ltx_p" id="S2.I1.i1.p1.1">Allowing analysts to process data across multiple organizations without dealing with technical complexities.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i2.p1">
+<p class="ltx_p" id="S2.I1.i2.p1.1">Enforcing user-defined data policies during all stages of data processing.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ltx_para" id="S2.SS3.p2">
+<p class="ltx_p" id="S2.SS3.p2.1">Various extensions were added to Brane to provide a seamless experience for data scientists while enforcing strict data protection measures. The framework automates the setup of the underlying infrastructure while considering the different requirements communicated by its components.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p3">
+<p class="ltx_p" id="S2.SS3.p3.1">Figure <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S2.F3" title="Figure 3 ‣ II-C EPI platform ‣ II Federated learning frameworks ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">3</span></a> shows the main components of the framework, which are:</p>
+<ul class="ltx_itemize" id="S2.I2">
+<li class="ltx_item" id="S2.I2.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I2.i1.p1">
+<p class="ltx_p" id="S2.I2.i1.p1.1">the <em class="ltx_emph ltx_font_italic" id="S2.I2.i1.p1.1.1">orchestrators</em> (both at the application level and infrastructural level);</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I2.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I2.i2.p1">
+<p class="ltx_p" id="S2.I2.i2.p1.1">the <em class="ltx_emph ltx_font_italic" id="S2.I2.i2.p1.1.1">policy management system</em>;</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I2.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I2.i3.p1">
+<p class="ltx_p" id="S2.I2.i3.p1.1">the components required to be present at the participating institutions: the <em class="ltx_emph ltx_font_italic" id="S2.I2.i3.p1.1.1">resource provisional</em> and the <em class="ltx_emph ltx_font_italic" id="S2.I2.i3.p1.1.2">authorizers</em>.</p>
+</div>
+</li>
+</ul>
+</div>
+<figure class="ltx_figure" id="S2.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="134" id="S2.F3.g1" src="extracted/6480224/images/epi.png" width="293"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>EPI Framework <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib26" title="">26</a>]</cite>.</figcaption>
+</figure>
+<div class="ltx_para" id="S2.SS3.p4">
+<p class="ltx_p" id="S2.SS3.p4.1">At the network level, the EPI platform enforces security and low-level policies to protect data sharing.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S2.SS4.4.1.1">II-D</span> </span><span class="ltx_text ltx_font_italic" id="S2.SS4.5.2">Discussion</span>
+</h3>
+<div class="ltx_para" id="S2.SS4.p1">
+<p class="ltx_p" id="S2.SS4.p1.1">In collaboration with health organizations (St.Antonius Ziekenhuis, UMC Utrecht, and Princes Maxima Centrum), a proof-of-concept collaborative network has been deployed to process patient data across the two hospitals and the Dutch supercomputer center SURF <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib6" title="">6</a>]</cite>. This network is a successful application of the EPI framework for collaborative research on privacy-sensitive data in the healthcare domain.</p>
+</div>
+<div class="ltx_para" id="S2.SS4.p2">
+<p class="ltx_p" id="S2.SS4.p2.1">The EPI project focused on fast and secure computations across healthcare institutions; it prioritized usability, data privacy, and security. However, it has been applied within a closed consortium of organizations that agreed to participate in a joint FL project. The partners:</p>
+<ul class="ltx_itemize" id="S2.I3">
+<li class="ltx_item" id="S2.I3.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I3.i1.p1">
+<p class="ltx_p" id="S2.I3.i1.p1.1">agreed on a common research project a priori;</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I3.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I3.i2.p1">
+<p class="ltx_p" id="S2.I3.i2.p1.1">exchanged information, discussed data content, access strategies, and agreed on learning workflows;</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I3.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I3.i3.p1">
+<p class="ltx_p" id="S2.I3.i3.p1.1">worked together to prepare and align data for FL;</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I3.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I3.i4.p1">
+<p class="ltx_p" id="S2.I3.i4.p1.1">discussed and agreed on compliance beforehand;</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I3.i5" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I3.i5.p1">
+<p class="ltx_p" id="S2.I3.i5.p1.1">trusted each other to act ethically in protecting data.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ltx_para" id="S2.SS4.p3">
+<p class="ltx_p" id="S2.SS4.p3.1">Architectural FL solutions and workflow management frameworks often leave the problem of data alignment to their users, as these problems are application specific. Domain experts are not always able to meet the technical requirements imposed by the FL platforms. This hinders their practical applications.</p>
+</div>
+<div class="ltx_para" id="S2.SS4.p4">
+<p class="ltx_p" id="S2.SS4.p4.1">Regulatory requirements such as GDPR and HIPAA are not the major concern within closed consortia. For example, the GDPR’s “right to be forgotten” is often not the part of the automated workflow, i.e., participating organizations cannot request for their data, metadata, user profile, etc. to be removed or rectified via the platform’s API requests.</p>
+</div>
+<div class="ltx_para" id="S2.SS4.p5">
+<p class="ltx_p" id="S2.SS4.p5.1">The FL scope and architectural pattern <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib37" title="">37</a>, <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib36" title="">36</a>]</cite>, data content, schemata, and organizational conventions are known beforehand. These aspects make the FL workflow design and orchestration somewhat easier than in an “open-ended” scenario where there is no prior knowledge about the partners and their data. However, the FL solutions designed under these conditions are hardly ever reusable. The workflows are hard to reproduce even for identical projects because the FL methods are designed to work with apriori known data (types, formats, distributions, dimensions, and so on).</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S2.SS5.4.1.1">II-E</span> </span><span class="ltx_text ltx_font_italic" id="S2.SS5.5.2">Towards an Open-FL platform</span>
+</h3>
+<div class="ltx_para" id="S2.SS5.p1">
+<p class="ltx_p" id="S2.SS5.p1.1">A unique selling point of the Brane’s framework lies in its flexibility. Unlike many specialized collaborative and FL platforms in healthcare <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib47" title="">47</a>, <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib59" title="">59</a>, <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib65" title="">65</a>]</cite>, it provides a technology for anyone interested in secure private data access to develop their own solution. In this respect, and provided that a good support infrastructure becomes available, this tool has potential similar to enterprise low-code application platforms <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib18" title="">18</a>]</cite> (for which the global market is experiencing significant growth - valued USD 24.83 billion in 2023 and is projected to reach USD 101.68 billion by 2030 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib20" title="">20</a>]</cite>).</p>
+</div>
+<div class="ltx_para" id="S2.SS5.p2">
+<p class="ltx_p" id="S2.SS5.p2.1">We are working on the adaptation of the Brane/EPI frameworks to serve open consortia of (healthcare) organizations interested in on-demand FL networks. In our vision, any scientist interested in the deployment of an FL network to answer a research question, (i) design a high-level workflow and, (ii) in collaboration with software and system engineers, deploys a project server that allows any interested organization with potentially relevant data to (iii) join the call by downloading a pre-configured container, through which the scientist (iv) pushes ML algorithm images, executes them on local data, and (v) receives the results back to the server for aggregation.</p>
+</div>
+<div class="ltx_para" id="S2.SS5.p3">
+<p class="ltx_p" id="S2.SS5.p3.1">The combination of Vantage6, Brane and EPI tools are able to provide technical solutions for multiple issues relevant to this vision. Although Brane is not a dedicated FL platform, its programmable nature and universality make it suitable for FL workflow implementation. L.Liu <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib35" title="">35</a>]</cite> in her thesis showed how the Vantage6 FL algorithm images can be deployed and executed on a Brane network. Notably, this work mentioned the lack of data converters (even simple data type conversions) as the main obstacle to the deployment of FL workflows.</p>
+</div>
+<div class="ltx_para" id="S2.SS5.p4">
+<p class="ltx_p" id="S2.SS5.p4.1">The main difficulty in realizing this vision is the lack of ready-to-use resources and a community support network to keep the FL workflow process design “low-code”. Dhooper <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib12" title="">12</a>]</cite> discusses the advantages of the agnostic approach to ML. In particular, a data-agnostic approach signifies the ability of a learning system to process the data collected from heterogeneous data sources. The ML model should be designed in such a way that it can process unstructured data seamlessly as it processes structured data. A collection of data-agnostic ML methods available for the use within Brane containers would significantly increase the prospects of the framework’s application for FL research. While, as many student projects showed, the integration of Python-based ML libraries (e.g., PyTorch <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib51" title="">51</a>]</cite>) within Brane is rather straightforward, regulatory compliance and data harmonization are two challenging aspects of a FL process that research scientists are left to implement on the application level.</p>
+</div>
+<div class="ltx_para" id="S2.SS5.p5">
+<p class="ltx_p" id="S2.SS5.p5.1">The proven success of large language models (LLMs) in processing unstructured data, requests in natural language, code generation, summarization, transformation, and data mapping makes them a promising tool for bridging the gaps within FL workflows. Hence, we aim at integrating LLM-based assistants to the Brane/EPI framework to:</p>
+<ul class="ltx_itemize" id="S2.I4">
+<li class="ltx_item" id="S2.I4.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I4.i1.p1">
+<p class="ltx_p" id="S2.I4.i1.p1.1">simplify compliance policy translation to the specification formats supported by the framework (eFlint <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib8" title="">8</a>]</cite>, Datalog <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib16" title="">16</a>]</cite>);</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I4.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I4.i2.p1">
+<p class="ltx_p" id="S2.I4.i2.p1.1">enable data harmonization pipelines to overcome structural and semantic heterogeneity of federated data.</p>
+</div>
+</li>
+</ul>
+<p class="ltx_p" id="S2.SS5.p5.2">In this paper, we focus on the second aspect of this roadmap. In particular, we integrate an LLM to provide a data-agnostic conversion function that aligns patient EHRs with standardized biomedical vocabularies.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">III </span><span class="ltx_text ltx_font_smallcaps" id="S3.1.1">Aligning biomedical data via ontologies</span>
+</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">Biomedical ontologies such as SNOMED CT <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib14" title="">14</a>]</cite>, ICD-10 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib66" title="">66</a>]</cite>, MONDO <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib45" title="">45</a>]</cite>, and HPO <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib30" title="">30</a>]</cite> were created to standardize the representation of medical concepts, enabling accurate communication, data integration, and interoperability across healthcare and research domains. SNOMED CT, used in over 50 countries, supports EHRs and clinical decision-making <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib31" title="">31</a>]</cite>. ICD-10, maintained by the World Health Organization (WHO), is the global standard for disease classification, used in over 150 countries for epidemiology, billing, and public health monitoring.
+HPO standardizes descriptions of human phenotypes, widely adopted in genomic diagnostics and rare disease research. These ontologies are crucial for improving patient care, medical research, and health data analytics worldwide.
+MONDO integrates multiple disease ontologies to unify rare disease research across organizations like Orphanet, OMIM, and ClinGen. The Orphanet Rare Disease ontology (ORDO) is jointly developed by Orphanet and the EBI to provide a structured vocabulary for rare diseases.</p>
+</div>
+<div class="ltx_para" id="S3.p2">
+<p class="ltx_p" id="S3.p2.1">The biomedical domain encompasses an immense variety of terminologies to represent diseases, diagnoses, treatments, laboratory findings, and clinical outcomes.
+Table <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S3.T1" title="TABLE I ‣ III Aligning biomedical data via ontologies ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">I</span></a> summarizes the purpose, key features and use cases of biomedical ontologies relevant to our work. The aforementioned ontologies and resources provide structured vocabularies that help researchers and clinicians communicate and exchange medical data. However, these ontologies differ in their focus, level of granularity, and intended applications. Some are used for clinical documentation (SNOMED, ICD), some for genetic research (HPO, ClinGen, OMIM), others for pharmacology and treatment classification (RxNorm <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib48" title="">48</a>]</cite>, ATC <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib67" title="">67</a>]</cite>, MedDRA <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib9" title="">9</a>]</cite>). Furthermore, medical knowledge is constantly evolving, requiring frequent updates to these ontologies. This results in multiple versions and implementations across institutions and countries, making interoperability a significant challenge. Even widely used ontologies such as SNOMED CT and ICD-10 have multiple regional implementations and undergo frequent updates <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib31" title="">31</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.p3">
+<p class="ltx_p" id="S3.p3.1">Efforts such as the OHDSI (Observational Health Data Sciences and Informatics) Common Data Model, the LOINC-SNOMED harmonization initiative, and the UMLS Metathesaurus are crucial in ensuring that FL models trained on distributed datasets can produce reliable, interpretable, and generalizable results. However, full automation of this process remains an open research challenge, requiring advances in ontology alignment, machine learning-driven entity resolution, and human-expert validation.</p>
+</div>
+<figure class="ltx_table" id="S3.T1">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">TABLE I: </span>Biomedical ontologies</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S3.T1.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S3.T1.1.1.1">
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.1.1.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.1.1.1.1">
+<span class="ltx_p" id="S3.T1.1.1.1.1.1.1" style="width:42.7pt;"><span class="ltx_text ltx_font_bold" id="S3.T1.1.1.1.1.1.1.1">Name</span></span>
+</span>
+</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T1.1.1.1.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.1.1.2.1">
+<span class="ltx_p" id="S3.T1.1.1.1.2.1.1" style="width:142.3pt;"><span class="ltx_text ltx_font_bold" id="S3.T1.1.1.1.2.1.1.1">Purpose</span></span>
+</span>
+</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T1.1.1.1.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.1.1.3.1">
+<span class="ltx_p" id="S3.T1.1.1.1.3.1.1" style="width:142.3pt;"><span class="ltx_text ltx_font_bold" id="S3.T1.1.1.1.3.1.1.1">Key Features</span></span>
+</span>
+</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T1.1.1.1.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.1.1.4.1">
+<span class="ltx_p" id="S3.T1.1.1.1.4.1.1" style="width:142.3pt;"><span class="ltx_text ltx_font_bold" id="S3.T1.1.1.1.4.1.1.1">Use Cases</span></span>
+</span>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.T1.1.2.1">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.2.1.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.2.1.1.1">
+<span class="ltx_p" id="S3.T1.1.2.1.1.1.1" style="width:42.7pt;">SNOMED CT</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.2.1.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.2.1.2.1">
+<span class="ltx_p" id="S3.T1.1.2.1.2.1.1" style="width:142.3pt;">Standardized clinical terminology for electronic health records</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.2.1.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.2.1.3.1">
+<span class="ltx_p" id="S3.T1.1.2.1.3.1.1" style="width:142.3pt;">Provides hierarchical relationships and standardized codes for diseases, symptoms, and procedures</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.2.1.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.2.1.4.1">
+<span class="ltx_p" id="S3.T1.1.2.1.4.1.1" style="width:142.3pt;">Clinical documentation, decision support, interoperability in healthcare IT systems</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.3.2">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.3.2.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.3.2.1.1">
+<span class="ltx_p" id="S3.T1.1.3.2.1.1.1" style="width:42.7pt;">ICD-10</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.3.2.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.3.2.2.1">
+<span class="ltx_p" id="S3.T1.1.3.2.2.1.1" style="width:142.3pt;">Global classification of diseases, maintained by WHO</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.3.2.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.3.2.3.1">
+<span class="ltx_p" id="S3.T1.1.3.2.3.1.1" style="width:142.3pt;">Provides alphanumeric codes for diseases and health conditions</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.3.2.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.3.2.4.1">
+<span class="ltx_p" id="S3.T1.1.3.2.4.1.1" style="width:142.3pt;">Public health monitoring, insurance claims, medical record standardization</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.4.3">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.4.3.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.4.3.1.1">
+<span class="ltx_p" id="S3.T1.1.4.3.1.1.1" style="width:42.7pt;">MONDO</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.4.3.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.4.3.2.1">
+<span class="ltx_p" id="S3.T1.1.4.3.2.1.1" style="width:142.3pt;">Unified disease ontology integrating multiple sources</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.4.3.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.4.3.3.1">
+<span class="ltx_p" id="S3.T1.1.4.3.3.1.1" style="width:142.3pt;">Harmonizes data from Orphanet, OMIM, and DOID</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.4.3.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.4.3.4.1">
+<span class="ltx_p" id="S3.T1.1.4.3.4.1.1" style="width:142.3pt;">Research in rare diseases, precision medicine, biomedical data integration</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.5.4">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.5.4.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.5.4.1.1">
+<span class="ltx_p" id="S3.T1.1.5.4.1.1.1" style="width:42.7pt;">HPO</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.5.4.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.5.4.2.1">
+<span class="ltx_p" id="S3.T1.1.5.4.2.1.1" style="width:142.3pt;">Standardized vocabulary for human disease phenotypes</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.5.4.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.5.4.3.1">
+<span class="ltx_p" id="S3.T1.1.5.4.3.1.1" style="width:142.3pt;">Describes phenotypic abnormalities in a hierarchical structure</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.5.4.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.5.4.4.1">
+<span class="ltx_p" id="S3.T1.1.5.4.4.1.1" style="width:142.3pt;">Clinical genomics, rare disease research, computational phenotyping</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.6.5">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.6.5.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.6.5.1.1">
+<span class="ltx_p" id="S3.T1.1.6.5.1.1.1" style="width:42.7pt;">ORDO</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.6.5.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.6.5.2.1">
+<span class="ltx_p" id="S3.T1.1.6.5.2.1.1" style="width:142.3pt;">Orphanet Rare Disease Ontology, European database for rare diseases and orphan drugs</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.6.5.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.6.5.3.1">
+<span class="ltx_p" id="S3.T1.1.6.5.3.1.1" style="width:142.3pt;">Disease and gene information</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.6.5.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.6.5.4.1">
+<span class="ltx_p" id="S3.T1.1.6.5.4.1.1" style="width:142.3pt;">Used in rare disease research, clinical guidelines, regulatory agencies</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.7.6">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.7.6.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.7.6.1.1">
+<span class="ltx_p" id="S3.T1.1.7.6.1.1.1" style="width:42.7pt;">OMIM</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.7.6.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.7.6.2.1">
+<span class="ltx_p" id="S3.T1.1.7.6.2.1.1" style="width:142.3pt;">Online Mendelian Inheritance in Man, a catalog of human genes and genetic disorders</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.7.6.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.7.6.3.1">
+<span class="ltx_p" id="S3.T1.1.7.6.3.1.1" style="width:142.3pt;">Provides gene-disease relationships, clinical descriptions, inheritance patterns</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.7.6.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.7.6.4.1">
+<span class="ltx_p" id="S3.T1.1.7.6.4.1.1" style="width:142.3pt;">Used in clinical genetics, genomic research, and precision medicine</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.8.7">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.8.7.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.8.7.1.1">
+<span class="ltx_p" id="S3.T1.1.8.7.1.1.1" style="width:42.7pt;">ClinGen</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.8.7.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.8.7.2.1">
+<span class="ltx_p" id="S3.T1.1.8.7.2.1.1" style="width:142.3pt;">Clinical Genome Resource, NIH database of clinically relevant genetic variants</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.8.7.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.8.7.3.1">
+<span class="ltx_p" id="S3.T1.1.8.7.3.1.1" style="width:142.3pt;">Assists in variant classification for genetic diagnostics</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.8.7.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.8.7.4.1">
+<span class="ltx_p" id="S3.T1.1.8.7.4.1.1" style="width:142.3pt;">Supports clinical diagnostics, personalized medicine, and regulatory decisions</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.9.8">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.9.8.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.9.8.1.1">
+<span class="ltx_p" id="S3.T1.1.9.8.1.1.1" style="width:42.7pt;">EBI</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.9.8.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.9.8.2.1">
+<span class="ltx_p" id="S3.T1.1.9.8.2.1.1" style="width:142.3pt;">Bioinformatics resource for genomics, proteomics</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.9.8.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.9.8.3.1">
+<span class="ltx_p" id="S3.T1.1.9.8.3.1.1" style="width:142.3pt;">Provides large-scale biological data</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.9.8.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.9.8.4.1">
+<span class="ltx_p" id="S3.T1.1.9.8.4.1.1" style="width:142.3pt;">Used in genomics, pharmacology, and data integration</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.10.9">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.10.9.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.10.9.1.1">
+<span class="ltx_p" id="S3.T1.1.10.9.1.1.1" style="width:42.7pt;">MedGen</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.10.9.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.10.9.2.1">
+<span class="ltx_p" id="S3.T1.1.10.9.2.1.1" style="width:142.3pt;">Clinical genetics database</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.10.9.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.10.9.3.1">
+<span class="ltx_p" id="S3.T1.1.10.9.3.1.1" style="width:142.3pt;">Organizes human genetic conditions</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.10.9.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.10.9.4.1">
+<span class="ltx_p" id="S3.T1.1.10.9.4.1.1" style="width:142.3pt;">Used in genetic counseling, rare disease research</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.11.10">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.11.10.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.11.10.1.1">
+<span class="ltx_p" id="S3.T1.1.11.10.1.1.1" style="width:42.7pt;">MeSH</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.11.10.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.11.10.2.1">
+<span class="ltx_p" id="S3.T1.1.11.10.2.1.1" style="width:142.3pt;">Standardized biomedical terminology</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.11.10.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.11.10.3.1">
+<span class="ltx_p" id="S3.T1.1.11.10.3.1.1" style="width:142.3pt;">Indexes PubMed, MEDLINE, and biomedical databases</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.11.10.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.11.10.4.1">
+<span class="ltx_p" id="S3.T1.1.11.10.4.1.1" style="width:142.3pt;">Used in literature indexing and biomedical research</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.12.11">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.12.11.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.12.11.1.1">
+<span class="ltx_p" id="S3.T1.1.12.11.1.1.1" style="width:42.7pt;">UMLS</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.12.11.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.12.11.2.1">
+<span class="ltx_p" id="S3.T1.1.12.11.2.1.1" style="width:142.3pt;">Unified medical terminology system</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.12.11.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.12.11.3.1">
+<span class="ltx_p" id="S3.T1.1.12.11.3.1.1" style="width:142.3pt;">Maps multiple vocabularies for interoperability</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.12.11.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.12.11.4.1">
+<span class="ltx_p" id="S3.T1.1.12.11.4.1.1" style="width:142.3pt;">Used in clinical decision support, EHRs, NLP</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.13.12">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.13.12.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.13.12.1.1">
+<span class="ltx_p" id="S3.T1.1.13.12.1.1.1" style="width:42.7pt;">OBO</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.13.12.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.13.12.2.1">
+<span class="ltx_p" id="S3.T1.1.13.12.2.1.1" style="width:142.3pt;">Collection of interoperable ontologies</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.13.12.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.13.12.3.1">
+<span class="ltx_p" id="S3.T1.1.13.12.3.1.1" style="width:142.3pt;">Supports semantic consistency in biological data</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.13.12.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.13.12.4.1">
+<span class="ltx_p" id="S3.T1.1.13.12.4.1.1" style="width:142.3pt;">Used in bioinformatics and AI-driven research</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.14.13">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.14.13.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.14.13.1.1">
+<span class="ltx_p" id="S3.T1.1.14.13.1.1.1" style="width:42.7pt;">DOID</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.14.13.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.14.13.2.1">
+<span class="ltx_p" id="S3.T1.1.14.13.2.1.1" style="width:142.3pt;">Standardized disease classification</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.14.13.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.14.13.3.1">
+<span class="ltx_p" id="S3.T1.1.14.13.3.1.1" style="width:142.3pt;">Links genetic and environmental factors in diseases</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.14.13.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.14.13.4.1">
+<span class="ltx_p" id="S3.T1.1.14.13.4.1.1" style="width:142.3pt;">Used in genomics, precision medicine, and disease annotation</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.15.14">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.15.14.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.15.14.1.1">
+<span class="ltx_p" id="S3.T1.1.15.14.1.1.1" style="width:42.7pt;">NCIT</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.15.14.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.15.14.2.1">
+<span class="ltx_p" id="S3.T1.1.15.14.2.1.1" style="width:142.3pt;">Oncology-specific vocabulary</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.15.14.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.15.14.3.1">
+<span class="ltx_p" id="S3.T1.1.15.14.3.1.1" style="width:142.3pt;">Standardizes cancer terminology</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.15.14.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.15.14.4.1">
+<span class="ltx_p" id="S3.T1.1.15.14.4.1.1" style="width:142.3pt;">Used in clinical trials, cancer research, and informatics</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.16.15">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.16.15.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.16.15.1.1">
+<span class="ltx_p" id="S3.T1.1.16.15.1.1.1" style="width:42.7pt;">RxNorm</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.16.15.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.16.15.2.1">
+<span class="ltx_p" id="S3.T1.1.16.15.2.1.1" style="width:142.3pt;">Standardized drug terminology maintained by the U.S. National Library of Medicine</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.16.15.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.16.15.3.1">
+<span class="ltx_p" id="S3.T1.1.16.15.3.1.1" style="width:142.3pt;">Provides normalized names and unique identifiers for clinical drugs, linking various national drug terminologies</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.16.15.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.16.15.4.1">
+<span class="ltx_p" id="S3.T1.1.16.15.4.1.1" style="width:142.3pt;">Used in electronic health records (EHRs), clinical decision support, and pharmacy systems</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.17.16">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.17.16.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.17.16.1.1">
+<span class="ltx_p" id="S3.T1.1.17.16.1.1.1" style="width:42.7pt;">ATC</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.17.16.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.17.16.2.1">
+<span class="ltx_p" id="S3.T1.1.17.16.2.1.1" style="width:142.3pt;">Anatomical Therapeutic Chemical Classification System, classifies drugs based on mechanism of action and therapeutic use</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.17.16.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.17.16.3.1">
+<span class="ltx_p" id="S3.T1.1.17.16.3.1.1" style="width:142.3pt;">Hierarchical classification of drugs into five levels, covering active ingredients and therapeutic groups</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S3.T1.1.17.16.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.17.16.4.1">
+<span class="ltx_p" id="S3.T1.1.17.16.4.1.1" style="width:142.3pt;">Used in pharmacoepidemiology, drug regulation, and healthcare analytics</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.18.17">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.18.17.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.18.17.1.1">
+<span class="ltx_p" id="S3.T1.1.18.17.1.1.1" style="width:42.7pt;">MedDRA</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r ltx_border_t" id="S3.T1.1.18.17.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.18.17.2.1">
+<span class="ltx_p" id="S3.T1.1.18.17.2.1.1" style="width:142.3pt;">Medical Dictionary for Regulatory Activities, terminology for medical conditions, adverse events, and drug safety monitoring</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r ltx_border_t" id="S3.T1.1.18.17.3">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.18.17.3.1">
+<span class="ltx_p" id="S3.T1.1.18.17.3.1.1" style="width:142.3pt;">Maintains hierarchical coding for diseases, symptoms, and adverse drug reactions</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r ltx_border_t" id="S3.T1.1.18.17.4">
+<span class="ltx_inline-block ltx_align_top" id="S3.T1.1.18.17.4.1">
+<span class="ltx_p" id="S3.T1.1.18.17.4.1.1" style="width:142.3pt;">Used in pharmacovigilance, clinical trials, and regulatory reporting</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para" id="S3.p4">
+<p class="ltx_p" id="S3.p4.1">Annotating clinical observations from EHRs with ontology terms is useful for selection of patient cohorts and creation of federated datasets for ML training and evaluation on images or laboratory tests of patients with certain diseases or pathologies. Figure <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S3.F4" title="Figure 4 ‣ III Aligning biomedical data via ontologies ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">4</span></a> presents a generic LLM-based conversion process to map unannotated data to a target ontology terminology. The same process can be used to align the data with alternative annotations. The first step consists of (A) enabling Retrieval Augmented Generation (RAG) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib32" title="">32</a>]</cite> on the target vocabulary space to (B) find the best matching pairs of input data with the standardized terms. The second step consists of (C) formulating the acceptance criteria and asking an LLM to evaluate each generated matching pair, providing the criteria and the pairs in the request prompt.</p>
+</div>
+<figure class="ltx_figure" id="S3.F4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="162" id="S3.F4.g1" src="extracted/6480224/images/llm-matching.png" width="509"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>LLM-based pipeline to align data with target vocabulary. (A) Prepare target mapping space; (B) Find best matching targets for input data; (C) Define an acceptance criteria for LLM and evaluate best matching pairs.</figcaption>
+</figure>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">IV </span><span class="ltx_text ltx_font_smallcaps" id="S4.1.1">Data alignment for drug reporting use case</span>
+</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">The Maternal and Pediatric Precision in Therapeutics (MPRINT) hub aggregates, presents, and expands the available knowledge, tools, and expertise in maternal and pediatric therapeutics to the broader research, regulatory science, and drug development communities. It conducts therapeutics-focused research in obstetrics, lactation, and pediatrics while enhancing inclusion of people with disabilities <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib52" title="">52</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S4.p2">
+<p class="ltx_p" id="S4.p2.1">The MPRINT working group processes data from multiple healthcare organizations. Relevant data encompass a wide range of information including patient demographics, diagnoses, medications, procedures, treatment history, laboratory tests, and diagnostic images. In this section, we present our evaluation of a combination of ontology and LLM-based pipelines to align textual data for an FL study within the MPRINT initiative. This particular MPRINT study is focused on a drug reporting use case that aims to establish the relationship between exposure to certain medications or chemical substances during pregnancy and their effect on pregnancy, postpartum, and/or newborn health.</p>
+</div>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS1.4.1.1">IV-A</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS1.5.2">Unannotated dataset</span>
+</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">The first dataset, provided by Kids First DRC - Pediatric Cancer and Rare Disease Care <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib27" title="">27</a>]</cite> - included 512 clinical records with pregnancy characteristic/risk factors, exposure to drugs or chemicals, and outcomes of such exposure on the pregnancy, postpartum, and neonatal conditions. The information is provided in a table with 3 fields without ontological annotations. The goal of the data harmonization pipeline was to map the textual descriptions from these set to the matching ontology terms. For brevity, in this paper we focus on mapping pregnancy outcome descriptions to the MONDO and/or HPO ontologies.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p2">
+<p class="ltx_p" id="S4.SS1.p2.1">MONDO and HPO are complementary: MONDO standardizes disease definitions, while HPO defines phenotypic abnormalities in human diseases. They are linked through annotations — MONDO diseases are often associated with specific HPO terms to describe their characteristic clinical features. Therefore, using labels from both ontologies to map the EHR records helps to improve mapping recall.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p3">
+<p class="ltx_p" id="S4.SS1.p3.1">In an <span class="ltx_text ltx_font_italic" id="S4.SS1.p3.1.1">ontological annotation task</span>, where concepts from an ontology are assigned to data (e.g., EHR text or images), <span class="ltx_text ltx_font_italic" id="S4.SS1.p3.1.2">precision</span> is the proportion of predicted ontology terms that are correct, and <span class="ltx_text ltx_font_italic" id="S4.SS1.p3.1.3">recall</span> is the proportion of relevant ontology terms that were successfully predicted <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib39" title="">39</a>]</cite>.
+Precision reflects how many of the assigned annotations are relevant and recall measures how many of all relevant annotations were assigned.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p4">
+<p class="ltx_p" id="S4.SS1.p4.1">Figure <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4.F5" title="Figure 5 ‣ IV-A Unannotated dataset ‣ IV Data alignment for drug reporting use case ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">5</span></a> shows a variant of the generic matching pipeline to translate patient outcomes from this dataset to the corresponding MONDO and HPO ontology terms. In the first step, we extract labels and synonyms from MONDO and HPO ontologies, retaining the corresponding ontology identifiers as metadata. We then create vector embeddings for these documents and store them in a Qdrant vector database cluster <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib4" title="">4</a>]</cite>. For each row in the dataset, we embed the observed outcomes and use as a query to retrieve (up to) 3 most relevant MONDO/HPO disease terms and/or hereditary conditions.
+In the second step, we request the LLM (ChatGPT-4o) to decide whether the retrieved matching pairs, 1401 in total, satisfy the acceptance criteria using the following prompt:</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p5">
+<blockquote class="ltx_quote" id="S4.SS1.p5.1">
+<p class="ltx_p" id="S4.SS1.p5.1.1"><em class="ltx_emph ltx_font_italic" id="S4.SS1.p5.1.1.1" style="font-size:90%;">
+Given two short descriptions, decide whether they refer to the same disease or medical condition.
+If the second description is more narrow or specific, choose ”No” as an answer.
+If the second description is broader or more generic, choose ”Yes” as an answer.
+Start your answer from ”Y” for ”yes” or ”N” for ”no” and provide a concise justification, no more than 30 words, why you came to this conclusion.
+</em><span class="ltx_text" id="S4.SS1.p5.1.1.2" style="font-size:90%;"></span></p>
+</blockquote>
+</div>
+<figure class="ltx_figure" id="S4.F5"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="163" id="S4.F5.g1" src="extracted/6480224/images/llm-matching-instance.png" width="509"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 5: </span>LLM-based pipeline to annotate patient outcomes with MONDO and/or HPO ontology terms. (A) Extract labels and synonyms from target databases, retain ontology identifiers as metadata; (B) Find best matching labels for each outcome and form pairs; (C) Ask LLM to accept pairs with the same or more general target outcomes (diseases).</figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS1.p6">
+<p class="ltx_p" id="S4.SS1.p6.1">To evaluate the precision of the LLM’s decisions on the equivalence of the conditions in the queries, we asked a human expert (MD), to evaluate whether diseases in the matching pairs refer to equivalent or different conditions in the given context. We then compared the accepted and rejected pairs from the human expert and the LLM. The results are summarized in Figure <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4.F6.sf1" title="In Figure 6 ‣ IV-A Unannotated dataset ‣ IV Data alignment for drug reporting use case ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">6(a)</span></a>. The decisions of the human expert and the LLM coincided in 1285 cases (92%). In 18 cases, the human expert’s decision was positive while the LLM rejected these pairs, and in 98 cases, the human expert rejected the mappings while the LLM approved them. Among these cases, 57 wrongly approved by LLM mappings referred to related outcomes, but the target description was more restrictive than the input; only 27 approved pairs referred to different diseases.</p>
+</div>
+<figure class="ltx_figure" id="S4.F6">
+<div class="ltx_block" id="S4.F6.1">
+<figure class="ltx_figure ltx_align_center" id="S4.F6.sf1"><svg class="ltx_picture" height="1" id="S4.F6.sf1.pic1" overflow="visible" version="1.1" width="1"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,1) matrix(1 0 0 -1 0 0)"><foreignobject height="0" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="0"><span class="ltx_ERROR undefined" id="S4.F6.sf1.pic1.1.1.1.1">\pie</span><!-- %**** main.tex Line 300 **** --><span class="ltx_ERROR undefined" id="S4.F6.sf1.pic1.2.2.2.2">\pie</span><!-- %This is a trick to hide number on the thin fraction --></foreignobject></g></svg>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F6.sf1.2.1.1" style="font-size:80%;">(a)</span> </span><span class="ltx_text" id="S4.F6.sf1.3.2" style="font-size:80%;">Initial evaluation</span></figcaption>
+</figure>
+<figure class="ltx_figure ltx_align_center" id="S4.F6.sf2"><svg class="ltx_picture" height="1" id="S4.F6.sf2.pic1" overflow="visible" version="1.1" width="1"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,1) matrix(1 0 0 -1 0 0)"><foreignobject height="0" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="0"><span class="ltx_ERROR undefined" id="S4.F6.sf2.pic1.1.1.1.1">\pie</span><!-- %**** main.tex Line 325 **** --><span class="ltx_ERROR undefined" id="S4.F6.sf2.pic1.2.2.2.2">\pie</span></foreignobject></g></svg>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F6.sf2.2.1.1" style="font-size:80%;">(b)</span> </span><span class="ltx_text" id="S4.F6.sf2.3.2" style="font-size:80%;">Revised evaluation</span></figcaption>
+</figure>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 6: </span>Number of data record mappings approved and rejected by a human expert vs LLM. </figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS1.p7">
+<p class="ltx_p" id="S4.SS1.p7.1">The human expert was asked to review the decisions for pairs in which his assessment disagreed with the decision by the LLM. We clarified the requirements for the assessment of related outcomes similarly to the LLM prompt, asking to accept the mapping only if the target mapping is the same or more generic. The human expert retracted 11 out of 18 initially accepted mappings that he considered acceptable for the study context but that formally did not match the aforementioned relation. The revised results are shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4.F6.sf2" title="In Figure 6 ‣ IV-A Unannotated dataset ‣ IV Data alignment for drug reporting use case ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">6(b)</span></a>.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p8">
+<p class="ltx_p" id="S4.SS1.p8.1">Table <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4.T2" title="TABLE II ‣ IV-A Unannotated dataset ‣ IV Data alignment for drug reporting use case ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">II</span></a> and Table <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4.T3" title="TABLE III ‣ IV-A Unannotated dataset ‣ IV Data alignment for drug reporting use case ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">III</span></a> give examples of EHR observations and suggested MONDO/HPO labels misjudged by the human expert and the LLM, respectively. It is easy to see why this task was challenging: the records were very concise, involved numbers, signs, and abbreviations.</p>
+</div>
+<figure class="ltx_table" id="S4.T2">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">TABLE II: </span>Examples of mismatched conditions by LLM</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S4.T2.1.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T2.1.1.2.1">
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_t" id="S4.T2.1.1.2.1.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.2.1.1.1">
+<span class="ltx_p" id="S4.T2.1.1.2.1.1.1.1" style="width:96.7pt;"><span class="ltx_text ltx_font_bold" id="S4.T2.1.1.2.1.1.1.1.1">Patient record</span></span>
+</span>
+</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S4.T2.1.1.2.1.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.2.1.2.1">
+<span class="ltx_p" id="S4.T2.1.1.2.1.2.1.1" style="width:96.7pt;"><span class="ltx_text ltx_font_bold" id="S4.T2.1.1.2.1.2.1.1.1">Suggested mapping</span></span>
+</span>
+</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S4.T2.1.1.2.1.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.2.1.3.1">
+<span class="ltx_p" id="S4.T2.1.1.2.1.3.1.1" style="width:284.5pt;"><span class="ltx_text ltx_font_bold" id="S4.T2.1.1.2.1.3.1.1.1">Explanation</span></span>
+</span>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T2.1.1.3.1">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S4.T2.1.1.3.1.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.3.1.1.1">
+<span class="ltx_p" id="S4.T2.1.1.3.1.1.1.1" style="width:96.7pt;">Trimester MOUD initiated - 1st</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.3.1.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.3.1.2.1">
+<span class="ltx_p" id="S4.T2.1.1.3.1.2.1.1" style="width:96.7pt;">Late first trimester onset</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.3.1.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.3.1.3.1">
+<span class="ltx_p" id="S4.T2.1.1.3.1.3.1.1" style="width:284.5pt;">The first description mentions MOUD (Medications for Opioid Use Disorder), the second is about an unspecified condition observed toward the end of the first trimester.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.1.1">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S4.T2.1.1.1.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.1.1.1">
+<span class="ltx_p" id="S4.T2.1.1.1.1.1.1" style="width:96.7pt;">Intraventricular hemorrhage <math alttext="&gt;" class="ltx_Math" display="inline" id="S4.T2.1.1.1.1.1.1.m1.1"><semantics id="S4.T2.1.1.1.1.1.1.m1.1a"><mo id="S4.T2.1.1.1.1.1.1.m1.1.1" xref="S4.T2.1.1.1.1.1.1.m1.1.1.cmml">&gt;</mo><annotation-xml encoding="MathML-Content" id="S4.T2.1.1.1.1.1.1.m1.1b"><gt id="S4.T2.1.1.1.1.1.1.m1.1.1.cmml" xref="S4.T2.1.1.1.1.1.1.m1.1.1"></gt></annotation-xml><annotation encoding="application/x-tex" id="S4.T2.1.1.1.1.1.1.m1.1c">&gt;</annotation><annotation encoding="application/x-llamapun" id="S4.T2.1.1.1.1.1.1.m1.1d">&gt;</annotation></semantics></math> grade 2</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.1.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.1.2.1">
+<span class="ltx_p" id="S4.T2.1.1.1.2.1.1" style="width:96.7pt;">Grade II preterm intraventricular haemorrhage</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.1.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.1.3.1">
+<span class="ltx_p" id="S4.T2.1.1.1.3.1.1" style="width:284.5pt;">The first description refers to the grade above 2, the second to the grade 2.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.1.4.2">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S4.T2.1.1.4.2.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.4.2.1.1">
+<span class="ltx_p" id="S4.T2.1.1.4.2.1.1.1" style="width:96.7pt;">Congenital laryngomalacia</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.4.2.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.4.2.2.1">
+<span class="ltx_p" id="S4.T2.1.1.4.2.2.1.1" style="width:96.7pt;">Acquired laryngomalacia</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.4.2.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.4.2.3.1">
+<span class="ltx_p" id="S4.T2.1.1.4.2.3.1.1" style="width:284.5pt;">Congenital condition is present at birth, acquired develops after birth.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.1.5.3">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S4.T2.1.1.5.3.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.5.3.1.1">
+<span class="ltx_p" id="S4.T2.1.1.5.3.1.1.1" style="width:96.7pt;">APGAR score minute 1</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.5.3.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.5.3.2.1">
+<span class="ltx_p" id="S4.T2.1.1.5.3.2.1.1" style="width:96.7pt;">10-minute APGAR score of 1</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.5.3.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.5.3.3.1">
+<span class="ltx_p" id="S4.T2.1.1.5.3.3.1.1" style="width:284.5pt;">The first description refers to the test performed at 1st minute after birth, the second at 10th minute.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.1.6.4">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S4.T2.1.1.6.4.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.6.4.1.1">
+<span class="ltx_p" id="S4.T2.1.1.6.4.1.1.1" style="width:96.7pt;">Continued vomiting hours 1-4</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.6.4.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.6.4.2.1">
+<span class="ltx_p" id="S4.T2.1.1.6.4.2.1.1" style="width:96.7pt;">Frequent vomiting</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.6.4.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.6.4.3.1">
+<span class="ltx_p" id="S4.T2.1.1.6.4.3.1.1" style="width:284.5pt;">Vomiting persists over time without significant breaks as opposed to vomiting that happens many times.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.1.7.5">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S4.T2.1.1.7.5.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.7.5.1.1">
+<span class="ltx_p" id="S4.T2.1.1.7.5.1.1.1" style="width:96.7pt;">Neonatal death</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.7.5.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.7.5.2.1">
+<span class="ltx_p" id="S4.T2.1.1.7.5.2.1.1" style="width:96.7pt;">Neonatal lethal</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.7.5.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.7.5.3.1">
+<span class="ltx_p" id="S4.T2.1.1.7.5.3.1.1" style="width:284.5pt;">The first description refers to the observed (confirmed) outcome, the second - to a severe condition likely causing death.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.1.8.6">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S4.T2.1.1.8.6.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.8.6.1.1">
+<span class="ltx_p" id="S4.T2.1.1.8.6.1.1.1" style="width:96.7pt;">Respiratory</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.8.6.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.8.6.2.1">
+<span class="ltx_p" id="S4.T2.1.1.8.6.2.1.1" style="width:96.7pt;">Respiratory infections</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.8.6.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.8.6.3.1">
+<span class="ltx_p" id="S4.T2.1.1.8.6.3.1.1" style="width:284.5pt;">Respiratory problems are not necessarily caused by infections, the second description is more restrictive.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.1.9.7">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S4.T2.1.1.9.7.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.9.7.1.1">
+<span class="ltx_p" id="S4.T2.1.1.9.7.1.1.1" style="width:96.7pt;">Loose stools</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.9.7.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.9.7.2.1">
+<span class="ltx_p" id="S4.T2.1.1.9.7.2.1.1" style="width:96.7pt;">Frequent stools</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T2.1.1.9.7.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.9.7.3.1">
+<span class="ltx_p" id="S4.T2.1.1.9.7.3.1.1" style="width:284.5pt;">The first description refers to consistency, the second to frequency (it may be normal in consistency but happens more often than normal)</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.1.10.8">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_l ltx_border_r ltx_border_t" id="S4.T2.1.1.10.8.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.10.8.1.1">
+<span class="ltx_p" id="S4.T2.1.1.10.8.1.1.1" style="width:96.7pt;">Pharmacologic treatment of Nas</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r ltx_border_t" id="S4.T2.1.1.10.8.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.10.8.2.1">
+<span class="ltx_p" id="S4.T2.1.1.10.8.2.1.1" style="width:96.7pt;">Nasal congestion</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r ltx_border_t" id="S4.T2.1.1.10.8.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T2.1.1.10.8.3.1">
+<span class="ltx_p" id="S4.T2.1.1.10.8.3.1.1" style="width:284.5pt;">NAS (Neonatal Abstinence Syndrome) refers to the use of medications to manage withdrawal symptoms in newborns who have been exposed to opioids or other substances in utero.</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="S4.T3">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">TABLE III: </span>Examples of mismatched conditions by the human expert (revised after criteria clarification)</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S4.T3.1.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T3.1.1.2.1">
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_t" id="S4.T3.1.1.2.1.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.2.1.1.1">
+<span class="ltx_p" id="S4.T3.1.1.2.1.1.1.1" style="width:76.8pt;"><span class="ltx_text ltx_font_bold" id="S4.T3.1.1.2.1.1.1.1.1">Patient record</span></span>
+</span>
+</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S4.T3.1.1.2.1.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.2.1.2.1">
+<span class="ltx_p" id="S4.T3.1.1.2.1.2.1.1" style="width:99.6pt;"><span class="ltx_text ltx_font_bold" id="S4.T3.1.1.2.1.2.1.1.1">Suggested mapping</span></span>
+</span>
+</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S4.T3.1.1.2.1.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.2.1.3.1">
+<span class="ltx_p" id="S4.T3.1.1.2.1.3.1.1" style="width:301.6pt;"><span class="ltx_text ltx_font_bold" id="S4.T3.1.1.2.1.3.1.1.1">Explanation</span></span>
+</span>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T3.1.1.3.1">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S4.T3.1.1.3.1.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.3.1.1.1">
+<span class="ltx_p" id="S4.T3.1.1.3.1.1.1.1" style="width:76.8pt;">Severe intraventricular haemorrhage</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T3.1.1.3.1.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.3.1.2.1">
+<span class="ltx_p" id="S4.T3.1.1.3.1.2.1.1" style="width:99.6pt;">Grade IV preterm intraventricular haemorrhage</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T3.1.1.3.1.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.3.1.3.1">
+<span class="ltx_p" id="S4.T3.1.1.3.1.3.1.1" style="width:301.6pt;">Although the second description refers to a more specific condition, Grade IV implies that it is severe, hence the MD accepted this mapping.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.1.4.2">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S4.T3.1.1.4.2.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.4.2.1.1">
+<span class="ltx_p" id="S4.T3.1.1.4.2.1.1.1" style="width:76.8pt;">Mechanical ventilation</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T3.1.1.4.2.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.4.2.2.1">
+<span class="ltx_p" id="S4.T3.1.1.4.2.2.1.1" style="width:99.6pt;">Respiratory failure requiring assisted ventilation</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T3.1.1.4.2.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.4.2.3.1">
+<span class="ltx_p" id="S4.T3.1.1.4.2.3.1.1" style="width:301.6pt;">The second description refers specifically to respiratory failure, whereas mechanical ventilation is a method of treatment. Since it is mentioned in the EHR, it implies the patient’s respiratory failure, hence the MD accepted this mapping.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.1.5.3">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S4.T3.1.1.5.3.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.5.3.1.1">
+<span class="ltx_p" id="S4.T3.1.1.5.3.1.1.1" style="width:76.8pt;">Adverse events (AEs)</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T3.1.1.5.3.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.5.3.2.1">
+<span class="ltx_p" id="S4.T3.1.1.5.3.2.1.1" style="width:99.6pt;">Adverse drug reaction (ADR)</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T3.1.1.5.3.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.5.3.3.1">
+<span class="ltx_p" id="S4.T3.1.1.5.3.3.1.1" style="width:301.6pt;">AEs are any undesirable medical occurrences, not necessarily caused by the drug. Since our dataset describes outcomes of drug use in pregnancy, the MD assumed the AE is an ADR.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.1.1">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_l ltx_border_r ltx_border_t" id="S4.T3.1.1.1.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.1.1.1">
+<span class="ltx_p" id="S4.T3.1.1.1.1.1.1" style="width:76.8pt;">5-minutes Apgar <math alttext="&lt;7" class="ltx_Math" display="inline" id="S4.T3.1.1.1.1.1.1.m1.1"><semantics id="S4.T3.1.1.1.1.1.1.m1.1a"><mrow id="S4.T3.1.1.1.1.1.1.m1.1.1" xref="S4.T3.1.1.1.1.1.1.m1.1.1.cmml"><mi id="S4.T3.1.1.1.1.1.1.m1.1.1.2" xref="S4.T3.1.1.1.1.1.1.m1.1.1.2.cmml"></mi><mo id="S4.T3.1.1.1.1.1.1.m1.1.1.1" xref="S4.T3.1.1.1.1.1.1.m1.1.1.1.cmml">&lt;</mo><mn id="S4.T3.1.1.1.1.1.1.m1.1.1.3" xref="S4.T3.1.1.1.1.1.1.m1.1.1.3.cmml">7</mn></mrow><annotation-xml encoding="MathML-Content" id="S4.T3.1.1.1.1.1.1.m1.1b"><apply id="S4.T3.1.1.1.1.1.1.m1.1.1.cmml" xref="S4.T3.1.1.1.1.1.1.m1.1.1"><lt id="S4.T3.1.1.1.1.1.1.m1.1.1.1.cmml" xref="S4.T3.1.1.1.1.1.1.m1.1.1.1"></lt><csymbol cd="latexml" id="S4.T3.1.1.1.1.1.1.m1.1.1.2.cmml" xref="S4.T3.1.1.1.1.1.1.m1.1.1.2">absent</csymbol><cn id="S4.T3.1.1.1.1.1.1.m1.1.1.3.cmml" type="integer" xref="S4.T3.1.1.1.1.1.1.m1.1.1.3">7</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.1.1.1.1.1.1.m1.1c">&lt;7</annotation><annotation encoding="application/x-llamapun" id="S4.T3.1.1.1.1.1.1.m1.1d">&lt; 7</annotation></semantics></math></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r ltx_border_t" id="S4.T3.1.1.1.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.1.2.1">
+<span class="ltx_p" id="S4.T3.1.1.1.2.1.1" style="width:99.6pt;">5-minute APGAR score of 0</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r ltx_border_t" id="S4.T3.1.1.1.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T3.1.1.1.3.1">
+<span class="ltx_p" id="S4.T3.1.1.1.3.1.1" style="width:301.6pt;">The first description is more generic.</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para" id="S4.SS1.p9">
+<p class="ltx_p" id="S4.SS1.p9.1">To summarize, the mapping of this dataset would be a much harder task without the generated suggestions based on vector embeddings. The medical researchers did not know how to reliably map these data using conventional ontology-based search methods.
+The patient records for mapping are not easy to interpret: some of them are very short, others include abbreviations or ambiguous syntax. As we showed via our evaluation, the suggested mappings based on the vector space similarity alone is not good enough.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p10">
+<p class="ltx_p" id="S4.SS1.p10.1">Based on this study, we conclude that validation of the mappings with an LLM significantly improves the mapping precision. We observed that the LLM had certain difficulties in deciding whether to accept mappings for similar but not identical records. It is important to formulate acceptance criteria for most basic ontological relations (such as the subtype- or class-inclusion-relation and the part-whole relation).</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS2.4.1.1">IV-B</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS2.5.2">Annotated dataset</span>
+</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">The second dataset included information similar to that of the previous experiment, but the outcomes were already annotated with ICD-10 ontology codes. Hence, to align this dataset with the target ontologies, it was sufficient to translate 1162 unique ICD-10 codes featured in the dataset to the corresponding alternatives in MONDO and/or HPO.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p2">
+<p class="ltx_p" id="S4.SS2.p2.1">Although MONDO and HPO provision fields for cross-references to other ontologies, a quick search revealed that in the case of mapping from/to ICD-10, these references are available only for a small fraction of diseases, namely, 1840 for MONDO, and 39 for HPO. Considering the size of these ontologies (HPO currently contains over 13,000 terms and over 156,000 annotations to hereditary diseases, MONDO defines approximately 25,600 disease terms, and the ICD-10 classification allows for more than 14,000 different codes), it is not an exaggeration to say that the identifier-based mapping between them is not directly available.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p3">
+<p class="ltx_p" id="S4.SS2.p3.1">To bridge the annotations, we used two methods:</p>
+<ul class="ltx_itemize" id="S4.I1">
+<li class="ltx_item" id="S4.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I1.i1.p1">
+<p class="ltx_p" id="S4.I1.i1.p1.1">The RAG-based method relies on the embedded vector search, as in the previous example. Similarly, we searched for 3 best matches. This generator produced 3129 candidate pairs.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I1.i2.p1">
+<p class="ltx_p" id="S4.I1.i2.p1.1">The SNOMED-based generator, outlined in Figure <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4.F7" title="Figure 7 ‣ IV-B Annotated dataset ‣ IV Data alignment for drug reporting use case ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">7</span></a>, connects the input ICD-10 codes to the target MONDO/HPO codes via the SNOMED CT database. This database provides references to ICD-10 while MONDO and HPO have cross-references with SNOMED.
+This method had no limit on how many mappings to produce for each ICD-10 code, we paired all ICD-10 codes with all MONDO/HPO codes related to the same SNOMED identifier. This generator produced 7787 candidate pairs.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ltx_para" id="S4.SS2.p4">
+<p class="ltx_p" id="S4.SS2.p4.1">It is important to emphasize that mapping SNOMED CT to ICD-10 presents several challenges due to differences in structure, granularity, and intended use between the two systems. SNOMED CT is a comprehensive clinical terminology designed for detailed patient records, while ICD-10 is a classification system primarily used for statistical and billing purposes.
+The study by Wang and Bodenreider <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib63" title="">63</a>]</cite> concludes that a single SNOMED CT concept may require multiple ICD-10 codes to fully represent its meaning. Furthermore, the appropriate ICD-10 code can depend on patient-specific factors such as age and comorbidities, which require rule-based mapping approaches. Another study <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib43" title="">43</a>]</cite> emphasizes the practical difficulties in mapping and highlights the need for careful consideration of the clinical context.
+Due to these reasons, not all pairs of ICD-10 and MONDO/HPO codes formed by the cross-reference search on SNOMED CT refer to the same disease, and validation via the acceptance prompt is still necessary.</p>
+</div>
+<figure class="ltx_figure" id="S4.F7"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="150" id="S4.F7.g1" src="extracted/6480224/images/icd10-snomed.png" width="287"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 7: </span>ICD-10-to-MONDO/HPO conversion via SNOMED, candidate pair generation</figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS2.p5">
+<p class="ltx_p" id="S4.SS2.p5.1">The mapping method outlined in Figure <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4.F7" title="Figure 7 ‣ IV-B Annotated dataset ‣ IV Data alignment for drug reporting use case ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">7</span></a> produced 7787 matching pairs involving 800 original ICD-10 codes. For 362 ICD-10 codes no results were retrieved, either because (i) ICD-10 was not mentioned in SNOMED CT (192 cases) or (ii) SNOMED CT code was not mentioned in MONDO and HPO references (170 cases). Figure <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4.F8" title="Figure 8 ‣ IV-B Annotated dataset ‣ IV Data alignment for drug reporting use case ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">8</span></a> shows part of the distribution of the number of relevant matches per input code retrieved via the SNOMED CT database. This distribution is extremely right-skewed; the image omits the entries that map into 20 or more codes. Although most of the ICD-10 codes (98%) map to 10 MONDO and HPO terms or less, 2% of ICD-10 conditions translate into 10 or more relevant MONDO and HPO terms, with extreme cases reaching over hundred of relevant mappings (see Table <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4.T4" title="TABLE IV ‣ IV-B Annotated dataset ‣ IV Data alignment for drug reporting use case ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">IV</span></a>).</p>
+</div>
+<figure class="ltx_table" id="S4.T4">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">TABLE IV: </span>Examples of ICD-10 codes with the large number of relevant MONDO and HPO terms</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S4.T4.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T4.1.1.1">
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_t" id="S4.T4.1.1.1.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.1.1.1.1">
+<span class="ltx_p" id="S4.T4.1.1.1.1.1.1" style="width:28.5pt;">ICD-10</span>
+</span>
+</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S4.T4.1.1.1.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.1.1.2.1">
+<span class="ltx_p" id="S4.T4.1.1.1.2.1.1" style="width:170.7pt;">ICD-10 label</span>
+</span>
+</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S4.T4.1.1.1.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.1.1.3.1">
+<span class="ltx_p" id="S4.T4.1.1.1.3.1.1" style="width:14.2pt;">n</span>
+</span>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T4.1.2.1">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S4.T4.1.2.1.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.2.1.1.1">
+<span class="ltx_p" id="S4.T4.1.2.1.1.1.1" style="width:28.5pt;">Q878</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T4.1.2.1.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.2.1.2.1">
+<span class="ltx_p" id="S4.T4.1.2.1.2.1.1" style="width:170.7pt;">Other specified congenital malformation syndromes, not elsewhere classified</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S4.T4.1.2.1.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.2.1.3.1">
+<span class="ltx_p" id="S4.T4.1.2.1.3.1.1" style="width:14.2pt;">329</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.3.2">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r" id="S4.T4.1.3.2.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.3.2.1.1">
+<span class="ltx_p" id="S4.T4.1.3.2.1.1.1" style="width:28.5pt;">Q870</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="S4.T4.1.3.2.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.3.2.2.1">
+<span class="ltx_p" id="S4.T4.1.3.2.2.1.1" style="width:170.7pt;">Congenital malformation syndromes predominantly affecting facial appearance</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="S4.T4.1.3.2.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.3.2.3.1">
+<span class="ltx_p" id="S4.T4.1.3.2.3.1.1" style="width:14.2pt;">287</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.4.3">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r" id="S4.T4.1.4.3.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.4.3.1.1">
+<span class="ltx_p" id="S4.T4.1.4.3.1.1.1" style="width:28.5pt;">Q828</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="S4.T4.1.4.3.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.4.3.2.1">
+<span class="ltx_p" id="S4.T4.1.4.3.2.1.1" style="width:170.7pt;">Other specified congenital malformations of skin</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="S4.T4.1.4.3.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.4.3.3.1">
+<span class="ltx_p" id="S4.T4.1.4.3.3.1.1" style="width:14.2pt;">195</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.5.4">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r" id="S4.T4.1.5.4.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.5.4.1.1">
+<span class="ltx_p" id="S4.T4.1.5.4.1.1.1" style="width:28.5pt;">Q788</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="S4.T4.1.5.4.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.5.4.2.1">
+<span class="ltx_p" id="S4.T4.1.5.4.2.1.1" style="width:170.7pt;">Other specified osteochondrodysplasias</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="S4.T4.1.5.4.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.5.4.3.1">
+<span class="ltx_p" id="S4.T4.1.5.4.3.1.1" style="width:14.2pt;">143</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.6.5">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_l ltx_border_r" id="S4.T4.1.6.5.1">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.6.5.1.1">
+<span class="ltx_p" id="S4.T4.1.6.5.1.1.1" style="width:28.5pt;">Q872</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r" id="S4.T4.1.6.5.2">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.6.5.2.1">
+<span class="ltx_p" id="S4.T4.1.6.5.2.1.1" style="width:170.7pt;">Congenital malformation syndromes predominantly involving limbs</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r" id="S4.T4.1.6.5.3">
+<span class="ltx_inline-block ltx_align_top" id="S4.T4.1.6.5.3.1">
+<span class="ltx_p" id="S4.T4.1.6.5.3.1.1" style="width:14.2pt;">136</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_figure" id="S4.F8"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="97" id="S4.F8.g1" src="extracted/6480224/images/histogram.png" width="287"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 8: </span>ICD-10-to-MONDO/HPO conversion via SNOMED, number of inputs vs target mappings</figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS2.p6">
+<p class="ltx_p" id="S4.SS2.p6.1">In both cases, LLM was making the final decision whether to accept or reject the mappings, accepting pairs with an equivalent or more generic output. In the case of embedding-based matching, 42.3% of matching pairs were accepted. In the case of the SNOMED-based conversion, 14.7% of the matching pairs were accepted. Figure <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#S4.F9" title="Figure 9 ‣ IV-B Annotated dataset ‣ IV Data alignment for drug reporting use case ‣ Ontology- and LLM-based Data Harmonization for Federated Learning in Healthcare"><span class="ltx_text ltx_ref_tag">9</span></a> shows the precision assessment of human expert versus LLM for subsets (728 and 915 random records, respectively) of the records in both versions of ICD-10 to MONDO and HPO matching sets. In the RAG-generated pipeline, MD and LLM agree on 78% of decisions. With SNOMED-based matching pair generation, MD and LLM agree on 91% of the entries. The evaluation datasets and scripts to implement the presented mapping pipeline are available in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib28" title="">28</a>]</cite>.</p>
+</div>
+<figure class="ltx_figure" id="S4.F9">
+<div class="ltx_block" id="S4.F9.1">
+<figure class="ltx_figure ltx_align_center" id="S4.F9.sf1"><svg class="ltx_picture" height="1" id="S4.F9.sf1.pic1" overflow="visible" version="1.1" width="1"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,1) matrix(1 0 0 -1 0 0)"><foreignobject height="0" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="0"><span class="ltx_ERROR undefined" id="S4.F9.sf1.pic1.1.1.1.1">\pie</span><span class="ltx_ERROR undefined" id="S4.F9.sf1.pic1.2.2.2.2">\pie</span><!-- %This is a trick to hide number on the thin fraction --></foreignobject></g></svg>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F9.sf1.2.1.1" style="font-size:80%;">(a)</span> </span><span class="ltx_text" id="S4.F9.sf1.3.2" style="font-size:80%;">RAG-based generator</span></figcaption>
+</figure>
+<figure class="ltx_figure ltx_align_center" id="S4.F9.sf2"><svg class="ltx_picture" height="1" id="S4.F9.sf2.pic1" overflow="visible" version="1.1" width="1"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,1) matrix(1 0 0 -1 0 0)"><foreignobject height="0" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="0"><span class="ltx_ERROR undefined" id="S4.F9.sf2.pic1.1.1.1.1">\pie</span><!-- %**** main.tex Line 475 **** --><span class="ltx_ERROR undefined" id="S4.F9.sf2.pic1.2.2.2.2">\pie</span></foreignobject></g></svg>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F9.sf2.2.1.1" style="font-size:80%;">(b)</span> </span><span class="ltx_text" id="S4.F9.sf2.3.2" style="font-size:80%;">SNOMED-generator</span></figcaption>
+</figure>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 9: </span>Number of data record mappings approved and rejected by a human expert vs LLM. </figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS2.p7">
+<p class="ltx_p" id="S4.SS2.p7.1">For more relaxed acceptance criteria, i.e., whether both descriptions refer to the same disease or to the related but more general or more specific condition, the acceptance ratios were 71% and 80%, respectively. Both RAG and SNOMED-based methods generated good candidate pairs, but the output condition was often more restrictive.
+Interestingly, the target datasets produced by two pair generation methods differed significantly: only for 475 ICD-10 codes (out of 1162) a MONDO or an HPO term generated by the RAG-based method was also among the codes produced by the SNOMED-based method. This can be explained by the following observations:</p>
+<ul class="ltx_itemize" id="S4.I2">
+<li class="ltx_item" id="S4.I2.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I2.i1.p1">
+<p class="ltx_p" id="S4.I2.i1.p1.1">The recall of the RAG-based mapping pipeline may be compromised by our decision to retrieve only three relevant terms. As the alternative mapping method revealed, only 54% of the ICD-10 codes were mapped to 3 or less terms via SNOMED. Retrieving 10 top matching pairs would ensure better recall by producing relevant options for 98% of entries. However, this would significantly increase the workload on the human expert evaluating LLM’s precision and result into a lower acceptance rate like in the case of the SNOMED-based generator.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I2.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I2.i2.p1">
+<p class="ltx_p" id="S4.I2.i2.p1.1">The SNOMED-based mapping did not produce any suggestions for 31% ICD-10 codes.</p>
+</div>
+</li>
+</ul>
+<p class="ltx_p" id="S4.SS2.p7.2">Hence, to improve mapping recall, it is useful to combine candidate pairs from both generators and rely on the LLM to filter out mappings not suitable for a particular research question.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">V </span><span class="ltx_text ltx_font_smallcaps" id="S5.1.1">Related work</span>
+</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">Data harmonization in FL is complex due to varying formats, terminologies, and standards across decentralized data sources. In sensitive domains like pediatric care, this is further complicated by privacy and consent requirements, necessitating standardized frameworks and interoperable validation to enable compliant, collaborative research.</p>
+</div>
+<div class="ltx_para" id="S5.p2">
+<p class="ltx_p" id="S5.p2.1">Schmidt et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib56" title="">56</a>]</cite> survey published research papers to identify common definitions, goals, and workflows for data harmonization in healthcare. The review identified six common terms for data harmonization, including record linkage and health information exchange, and outlined nine key components such as integrating multiple databases, using unique patient identifiers, and involving data across various levels and institutions. The report concludes that data completeness, quality, and coding were common barriers to effective use in clinical decision-making.</p>
+</div>
+<div class="ltx_para" id="S5.p3">
+<p class="ltx_p" id="S5.p3.1">Nan et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib46" title="">46</a>]</cite> provide a comprehensive review of data harmonization techniques in digital healthcare, highlighting methodological trends, challenges, and a proposed checklist to guide future fusion-based applications. The review focuses on the computational data harmonization approaches for multi-modal data. Rolland et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib54" title="">54</a>]</cite> propose a structured, six-step process to harmonize cancer epidemiology data, aiming to improve the reproducibility and rigor of pooled multi-study analyses.</p>
+</div>
+<div class="ltx_para" id="S5.p4">
+<p class="ltx_p" id="S5.p4.1">The CVD-COVID-UK consortium developed a four-layer harmonization method using large-scale EHRs to enable efficient analysis of COVID-19 and cardiovascular diseases across the UK <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib1" title="">1</a>]</cite>. The method successfully harmonized data for over 59 million individuals, offering a transparent, scalable approach for multi-nation research, which has supported various studies, particularly on COVID-19’s cardiovascular impact. Adhikari et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib3" title="">3</a>]</cite> focuses on cohort studies, offering practical guidance for managing and harmonizing data to enable multi-study integration and improve statistical power.</p>
+</div>
+<div class="ltx_para" id="S5.p5">
+<p class="ltx_p" id="S5.p5.1">Topaloglu and Palchuk present TriNetX<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib59" title="">59</a>]</cite>, a clinical research collaboration platform that enables data-driven study design without requiring centralized data pooling. This application highlights the growing need for secure and privacy-preserving federated data analysis. The deployment in a secure, standards-compliant virtual cloud environment further underscores the critical role of secure infrastructure in supporting federated research networks.</p>
+</div>
+<div class="ltx_para" id="S5.p6">
+<p class="ltx_p" id="S5.p6.1">Swarm Learning <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib65" title="">65</a>]</cite> is a decentralized ML approach designed to enable the use of sensitive medical data across institutions without violating privacy laws. Unlike traditional FL, it uses edge computing and blockchain-based coordination without a central server. Results showed that Swarm Learning models outperformed local models while preserving data confidentiality, offering a promising path for privacy-preserving precision medicine.</p>
+</div>
+<div class="ltx_para" id="S5.p7">
+<p class="ltx_p" id="S5.p7.1">Stonebraker and Ilyas <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib58" title="">58</a>]</cite> review the evolution of data integration systems, highlighting the limitations of traditional approaches such as ETL (extract, transform, and load) pipelines and federated databases. They emphasize the growing importance of addressing semantic heterogeneity and the need for more automated, scalable ML-driven methods. The authors propose a shift toward declarative, AI-assisted solutions to manage the increasing complexity and volume of heterogeneous data sources.</p>
+</div>
+<div class="ltx_para" id="S5.p8">
+<p class="ltx_p" id="S5.p8.1">Gibson et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib19" title="">19</a>]</cite> explore the feasibility of employing ML techniques to develop claims-based algorithms for identifying health outcomes of interest (HOIs), specifically focusing on rhabdomyolysis (a condition in which damaged skeletal muscle breaks down rapidly). The study demonstrated that ML models, particularly the Super Learner ensemble, achieved higher positive predictive values compared to traditional expert-developed models, indicating the potential of these techniques to enhance the accuracy and efficiency of electronic phenotyping in healthcare research.</p>
+</div>
+<div class="ltx_para" id="S5.p9">
+<p class="ltx_p" id="S5.p9.1">Prisma <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib22" title="">22</a>]</cite> is a generic schema matching approach that leverages functional dependencies (FDs) to capture relationships between columns, even in cases where data is encrypted or column names are cryptic. Prisma uses a four-step process involving profiling databases, filtering FDs, creating graph-based representations, and comparing column embeddings to generate column correspondences.</p>
+</div>
+<div class="ltx_para" id="S5.p10">
+<p class="ltx_p" id="S5.p10.1">Several recent scientific studies have explored the application of LLMs in harmonizing healthcare data.
+Fernandez et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib17" title="">17</a>]</cite> predicted that LLMs would disrupt data management in two key ways: by enabling semantic understanding to advance long-standing challenges such as entity resolution and schema matching, and by blurring the line between traditional databases and information retrieval systems.</p>
+</div>
+<div class="ltx_para" id="S5.p11">
+<p class="ltx_p" id="S5.p11.1">A. Santos et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib55" title="">55</a>]</cite> introduce a system that combines LLM-based reasoning with an interactive user interface and a library of data harmonization primitives. The system uses the top-k best matches between the source schema and the target schema.
+Matos et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib40" title="">40</a>]</cite> presents a framework that leverages LLMs to abstract medical concepts from EHRs. Evaluating five LLMs on tasks such as free-text extraction and binary classification, the research demonstrates that models like GPT-4o can achieve high accuracy in identifying generic route names and drug classifications, significantly enhancing efficiency in EHR data abstraction.</p>
+</div>
+<div class="ltx_para" id="S5.p12">
+<p class="ltx_p" id="S5.p12.1">A study by Yikuan Li et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib34" title="">34</a>]</cite> investigates the capability of LLMs to enhance healthcare data interoperability by converting clinical texts into Fast Healthcare Interoperability Resources (FHIR) standards. The presented experiments demonstrate that LLMs can streamline natural language processing and achieve an exceptional accuracy rate in exact matches compared to human annotations. Arindam Sett et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib57" title="">57</a>]</cite> also explore the use of LLMs to standardize healthcare data by mapping clinical data schemata to established data standards like FHIR. The results indicate that the use of LLMs significantly reduces the need for manual data curation and improves the efficiency of the data standardization process, potentially accelerating the integration of AI in healthcare. Dukyong Yoon et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib68" title="">68</a>]</cite> evaluated the performance of LLM in the transformation and transfer of healthcare data to support interoperability. Using MIMIC-III <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib25" title="">25</a>]</cite> and UK Biobank datasets, the research demonstrates that LLMs can significantly improve data transformation and exchange, achieving high accuracy and efficiency without complex standardization processes.</p>
+</div>
+<div class="ltx_para" id="S5.p13">
+<p class="ltx_p" id="S5.p13.1">Recent studies have explored the integration of LLMs like ChatGPT into healthcare <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib62" title="">62</a>, <a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib2" title="">2</a>]</cite>.
+Wang et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib62" title="">62</a>]</cite> screened 820 articles and included into the review 65 articles. Although LLMs have demonstrated potential in improving access to general medical information, medical knowledge retrieval, summarization, and administrative tasks, they are not always able to provide reliable answers to complex health-related tasks, e.g., diagnosis. Moreover, concerns persist regarding their reliability, biases, and privacy risks.</p>
+</div>
+<div class="ltx_para" id="S5.p14">
+<p class="ltx_p" id="S5.p14.1">Bhanbhro et at. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib7" title="">7</a>]</cite> investigate FL challenges, focusing on data heterogeneity, client weighting, and resource disparities. Through experiments on datasets like MNIST, CIFAR-10, and brain MRI scans, the study demonstrates how non-IID (Independent and Identically Distributed) data distributions and varying client capabilities can adversely affect global model performance and convergence. The authors explore mitigation strategies such as weighted aggregation and model personalization, highlighting the trade-offs between data diversity, model accuracy, and system efficiency in FL environments.</p>
+</div>
+<div class="ltx_para" id="S5.p15">
+<p class="ltx_p" id="S5.p15.1">Nasarian et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib47" title="">47</a>]</cite> review methods and challenges in implementing interpretable ML and explainable AI within healthcare. They propose a three-level interpretability process, preprocessing, modeling, and post-processing, to enhance clinician-AI communication and trust, offering a step-by-step roadmap for integrating responsible AI into clinical decision support systems.</p>
+</div>
+<div class="ltx_para" id="S5.p16">
+<p class="ltx_p" id="S5.p16.1">Zhang et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib69" title="">69</a>]</cite> address ethical concerns in healthcare AI by introducing a resource-adaptive FL framework that promotes fairness and privacy. The proposed approach promises equitable participation across institutions with varying computational resources, improving model performance while protecting patient data.</p>
+</div>
+<div class="ltx_para" id="S5.p17">
+<p class="ltx_p" id="S5.p17.1">Currently, the best-performing LLM models are commonly accessed via API requests. This practice raises concerns about data privacy, and organizations with strict data protection policies, such as healthcare centers, are hesitant to adopt LLM-based pipelines.
+This motivates the need for better open-source models which are competitive with closed-source models. Another solution is to use private LLMs instances and/or couple RAG and LLMs with differential privacy solutions <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2505.20020v1#bib.bib38" title="">38</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S5.p18">
+<p class="ltx_p" id="S5.p18.1">While existing frameworks and studies have made significant progress in addressing specific challenges in data harmonization for FL – ranging from schema alignment and semantic interoperability to privacy-preserving infrastructure and the integration of LLMs – most have been tailored to particular domains, use cases, or workflows. In contrast, our work on the Brane/EPI frameworks proposes a more generalizable approach: a configurable programming environment designed to support a wide range of research workflows. By introducing a generic recipe for ontology-based data mapping and leveraging LLMs as semantic adjudicators, we aim to enable scalable, interpretable, and ontology-aligned federated research across heterogeneous datasets.</p>
+</div>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">VI </span><span class="ltx_text ltx_font_smallcaps" id="S6.1.1">Conclusions</span>
+</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p" id="S6.p1.1">Human experts have the ability to analyze domain-specific and semantic content and perform data transformation. Often a team of researchers is involved (e.g., medical professional, ontology expert, data analyst, software developer), it is expensive and not reusable. LLM-assisted pipelines have a lot of potential in automating data alignment for federated research on private data that health organizations are not willing to disclose or do so only under rigid conditions within limited funded initiatives.</p>
+</div>
+<div class="ltx_para" id="S6.p2">
+<p class="ltx_p" id="S6.p2.1">A repository of ready-to-use data alignment functions that convert biomedical data between the most commonly accepted ontologies would be a valuable resource for any project that involves FL in healthcare. We showed that the two-step LLM-assisted conversion of data can be used effectively to align heterogeneous datasets to standardized vocabulary (the mapping precision in our experiments ranged from 78% to 92%), without or with very limited involvement of human expertise.</p>
+</div>
+<div class="ltx_para" id="S6.p3">
+<p class="ltx_p" id="S6.p3.1">Our future work aims at designing a low-code environment to foster FL within the Brane/EPI framework. This includes adoption of data-agnostic AI methods that can be integrated into scientific workflows as-is, model aggregation techniques, and LLM-based assistants to simplify the tasks performed by data scientists, such as workflow and policy definition or data alignment.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+Abbasizanjani, H., Torabi, F., Bedston, e.a.: Harmonising electronic health records for reproducible research: challenges, solutions and recommendations from a UK-wide COVID-19 research collaboration.
+
+</span>
+<span class="ltx_bibblock">BMC Medical Informatics and Decision Making <span class="ltx_text ltx_font_bold" id="bib.bib1.1.1">23</span>(1), 8 (2023).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1186/s12911-022-02093-0
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+Abdullahi, T., Singh, R., Eickhoff, C.: Learning to Make Rare and Complex Diagnoses With Generative AI Assistance: Qualitative Study of Popular Large Language Models.
+
+</span>
+<span class="ltx_bibblock">JMIR Medical Education <span class="ltx_text ltx_font_bold" id="bib.bib2.1.1">10</span>, e51391 (2024).
+
+</span>
+<span class="ltx_bibblock">DOI 10.2196/51391
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+Adhikari, K., Patten, S., Patel, A., Premji, S., Tough, S., Letourneau, N., Giesbrecht, G., Metcalfe, A.: Data harmonization and data pooling from cohort studies: a practical approach for data management.
+
+</span>
+<span class="ltx_bibblock">International Journal of Population Data Science <span class="ltx_text ltx_font_bold" id="bib.bib3.1.1">5</span>(1) (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+Ajay: A Deep Dive into Qdrant, the Rust-Based Vector Database.
+
+</span>
+<span class="ltx_bibblock">Analytics Vidhya, unpublished (2023).
+
+</span>
+<span class="ltx_bibblock">URL https://www.analyticsvidhya.com/blog/2023/11/a-deep-dive-into-qdrant-the-rust-based-vector-database/
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+Albahri, A., Duhaim, A.M., Fadhel, M.A., Alnoor, A., Baqer, N.S., Alzubaidi, L., Albahri, O., Alamoodi, A., Bai, J., Salhi, A., Santamaría, J., Ouyang, C., Gupta, A., Gu, Y., Deveci, M.: A systematic review of trustworthy and explainable artificial intelligence in healthcare: Assessment of quality, bias risk, and data fusion.
+
+</span>
+<span class="ltx_bibblock">Information Fusion <span class="ltx_text ltx_font_bold" id="bib.bib5.1.1">96</span>, 156–191 (2023).
+
+</span>
+<span class="ltx_bibblock">DOI https://doi.org/10.1016/j.inffus.2023.03.008
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">
+Alsayed Kassem, J., Allaart, C., Amiri, S., Kebede, M., Müller, T., Turner, R., Belloum, A., van Binsbergen, L.T., Grunwald, P., van Halteren, A., Grosso, P., de Laat, C., Klous, S.: Building a Digital Health Twin for Personalized Intervention: The EPI Project.
+
+</span>
+<span class="ltx_bibblock">In: B.R. Haverkort, A. de Jongste, P. van Kuilenburg, R.D. Vromans (eds.) Commit2Data, <em class="ltx_emph ltx_font_italic" id="bib.bib6.1.1">Open Access Series in Informatics (OASIcs)</em>, vol. 124, pp. 2:1–2:18. Schloss Dagstuhl – Leibniz-Zentrum für Informatik, Dagstuhl, Germany (2024).
+
+</span>
+<span class="ltx_bibblock">DOI 10.4230/OASIcs.Commit2Data.2
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+Bhanbhro, J., Nisticò, S., Palopoli, L.: Issues in federated learning: some experiments and preliminary results.
+
+</span>
+<span class="ltx_bibblock">Scientific Reports <span class="ltx_text ltx_font_bold" id="bib.bib7.1.1">14</span>(1), 29881 (2024).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1038/s41598-024-81732-0
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+van Binsbergen, L.T., Liu, L.C., van Doesburg, R., van Engers, T.: eflint: a domain-specific language for executable norm specifications.
+
+</span>
+<span class="ltx_bibblock">In: Proceedings of the 19th ACM SIGPLAN International Conference on Generative Programming: Concepts and Experiences, GPCE 2020, p. 124–136. Association for Computing Machinery, New York, NY, USA (2020).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1145/3425898.3426958
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">
+Brown, E.G., Wood, L., Wood, S.: The medical dictionary for regulatory activities (meddra).
+
+</span>
+<span class="ltx_bibblock">Drug Safety <span class="ltx_text ltx_font_bold" id="bib.bib9.1.1">20</span>(2), 109–117 (1999).
+
+</span>
+<span class="ltx_bibblock">DOI 10.2165/00002018-199920020-00002
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+Burns, B., Grant, B., Oppenheimer, D., Brewer, E., Wilkes, J.: Borg, omega, and kubernetes: Lessons learned from three container-management systems over a decade.
+
+</span>
+<span class="ltx_bibblock">In: Proceedings of the 10th USENIX Conference on Operating Systems Design and Implementation (OSDI), pp. 51–66. USENIX Association (2016).
+
+</span>
+<span class="ltx_bibblock">URL https://www.usenix.org/system/files/conference/osdi16/osdi16-burns.pdf
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock">
+Chen, C., Feng, X., Li, Y., Lyu, L., Zhou, J., Zheng, X., Yin, J.: Integration of large language models and federated learning.
+
+</span>
+<span class="ltx_bibblock">Patterns (N Y) <span class="ltx_text ltx_font_bold" id="bib.bib11.1.1">5</span>(12), 101098 (2024).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1016/j.patter.2024.101098
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock">
+Dhooper, G.: Understanding agnostic approach in machine learning.
+
+</span>
+<span class="ltx_bibblock">Analytics India Magazine (2020).
+
+</span>
+<span class="ltx_bibblock">URL https://analyticsindiamag.com/ai-features/understanding-agnostic-approach-in-machine-learning/
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock">
+Doan, A., Halevy, A.Y., Ives, Z.G.: Principles of Data Integration.
+
+</span>
+<span class="ltx_bibblock">Morgan Kaufmann (2012)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock">
+Donnelly, K.: Snomed-ct: The advanced terminology and coding system for ehealth.
+
+</span>
+<span class="ltx_bibblock">Studies in Health Technology and Informatics <span class="ltx_text ltx_font_bold" id="bib.bib14.1.1">121</span>, 279–290 (2006).
+
+</span>
+<span class="ltx_bibblock">DOI 10.3233/978-1-58603-622-8-279
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock">
+Edemekong, P.F., Annamaraju, P., Afzal, M., Haydel, M.J.: Health Insurance Portability and Accountability Act (HIPAA) Compliance.
+
+</span>
+<span class="ltx_bibblock">StatPearls [Internet]. StatPearls Publishing, Treasure Island, FL (2024).
+
+</span>
+<span class="ltx_bibblock">PMID: 29763195
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock">
+Esterhuyse, C.A., Müller, T., van Binsbergen, L.T.: Justact+: Justified and accountable actions in policy-regulated, multi-domain data processing (2025).
+
+</span>
+<span class="ltx_bibblock">DOI 10.48550/arXiv.2502.00138
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock">
+Fernandez, R.C., Elmore, A.J., Franklin, M.J., Krishnan, S., Tan, C.: How large language models will disrupt data management.
+
+</span>
+<span class="ltx_bibblock">Proc. VLDB Endow. <span class="ltx_text ltx_font_bold" id="bib.bib17.1.1">16</span>(11), 3302–3309 (2023).
+
+</span>
+<span class="ltx_bibblock">DOI 10.14778/3611479.3611527
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock">
+Gartner, Inc.: Enterprise Low-Code Application Platforms Reviews and Ratings (2025).
+
+</span>
+<span class="ltx_bibblock">URL https://www.gartner.com/reviews/market/enterprise-low-code-application-platform.
+
+</span>
+<span class="ltx_bibblock">Accessed: 2025-04-11
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock">
+Gibson, T.B., Nguyen, M.D., Burrell, T., Yoon, F., Wong, J., Dharmarajan, S., Ouellet-Hellstrom, R., Hua, W., Ma, Y., Baro, E., Bloemers, S., Pack, C., Kennedy, A., Toh, S., Ball, R.: Electronic phenotyping of health outcomes of interest using a linked claims-electronic health record database: Findings from a machine learning pilot project.
+
+</span>
+<span class="ltx_bibblock">Journal of the American Medical Informatics Association <span class="ltx_text ltx_font_bold" id="bib.bib19.1.1">28</span>(7), 1507–1517 (2021).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1093/jamia/ocab036
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock">
+Grand View Research, Inc.: Low-code application development platform market size, share &amp; trends analysis report by component (platform, services), by application, by deployment, by organization size, by region, and segment forecasts, 2024 - 2030 (2024).
+
+</span>
+<span class="ltx_bibblock">URL https://www.grandviewresearch.com/industry-analysis/low-code-application-development-platform-market.
+
+</span>
+<span class="ltx_bibblock">Accessed: 2025-04-11
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock">
+Haendel, M.A., Chute, C.G., Robinson, P.N.: Classification, ontology, and precision medicine.
+
+</span>
+<span class="ltx_bibblock">New England Journal of Medicine <span class="ltx_text ltx_font_bold" id="bib.bib21.1.1">379</span>(15), 1452–1462 (2018).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1056/NEJMra1615014
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock">
+Hellenberg, J.E., Mahling, F.D., Laskowski, L., Naumann, F., Paganelli, M., Panse, F.: Prisma: A privacy-preserving schema matcher using functional dependencies.
+
+</span>
+<span class="ltx_bibblock">In: International Conference on Extending Database Technology (2025).
+
+</span>
+<span class="ltx_bibblock">URL https://api.semanticscholar.org/CorpusID:274142317
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock">
+Inc., D.: Docker: Enterprise container platform.
+
+</span>
+<span class="ltx_bibblock">https://www.docker.com/ (2024).
+
+</span>
+<span class="ltx_bibblock">Accessed: 2025-04-10
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock">
+Jahan, I., Laskar, M.T.R., Peng, C., Huang, J.X.: A comprehensive evaluation of large language models on benchmark biomedical text processing tasks.
+
+</span>
+<span class="ltx_bibblock">Computers in Biology and Medicine <span class="ltx_text ltx_font_bold" id="bib.bib24.1.1">171</span>, 108189 (2024).
+
+</span>
+<span class="ltx_bibblock">DOI https://doi.org/10.1016/j.compbiomed.2024.108189
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock">
+Johnson, A.E.W., Pollard, T.J., Mark, R.G.: MIMIC-III clinical database (version 1.4) (2016).
+
+</span>
+<span class="ltx_bibblock">URL https://doi.org/10.13026/C2XW26.
+
+</span>
+<span class="ltx_bibblock">Accessed: 2025-04-10
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock">
+Kassem, J., Garcia, D., Drouhin, F., Medjaher, K., Belhaj, A., Belqasmi, F., Glitho, R.: EPI Framework: Approach for Traffic Redirection through Containerized Network Functions.
+
+</span>
+<span class="ltx_bibblock">In: 2021 IEEE 17th International Conference on eScience (eScience), pp. 118–127. IEEE (2021).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1109/eScience51609.2021.00018
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock">
+Kids First Data Resource Center.
+
+</span>
+<span class="ltx_bibblock">https://kidsfirstdrc.org/.
+
+</span>
+<span class="ltx_bibblock">Accessed: 2025-04-11
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock">
+Kokash, N., de Bono, B.: Ontology- and LLM-based Data Alignment Evaluation: Mapping Patient Outcomes and ICD-10 codes to MONDO and HPO ontologies (2025).
+
+</span>
+<span class="ltx_bibblock">DOI 10.5281/zenodo.15411810.
+
+</span>
+<span class="ltx_bibblock">Version 1.0.0
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock">
+Kurtzer, G.M., Sochat, V., Bauer, M.W.: Singularity: Scientific containers for mobility of compute.
+
+</span>
+<span class="ltx_bibblock">PLOS ONE <span class="ltx_text ltx_font_bold" id="bib.bib29.1.1">12</span>(5), e0177459 (2017).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1371/journal.pone.0177459
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock">
+Köhler, S., et al.: The human phenotype ontology in 2021.
+
+</span>
+<span class="ltx_bibblock">Nucleic Acids Research <span class="ltx_text ltx_font_bold" id="bib.bib30.1.1">49</span>(D1), D1207–D1217 (2021).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1093/nar/gkaa1043
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock">
+Lee, D., Cornet, R., Lau, F., de Keizer, N.: A survey of snomed ct implementations.
+
+</span>
+<span class="ltx_bibblock">Journal of Biomedical Informatics <span class="ltx_text ltx_font_bold" id="bib.bib31.1.1">46</span>(1), 87–96 (2013).
+
+</span>
+<span class="ltx_bibblock">DOI https://doi.org/10.1016/j.jbi.2012.09.006
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock">
+Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W.t., Rocktäschel, T., Riedel, S., Kiela, D.: Retrieval-augmented generation for knowledge-intensive NLP tasks.
+
+</span>
+<span class="ltx_bibblock">In: Proceedings of the 34th International Conference on Neural Information Processing Systems, NIPS ’20. Curran Associates Inc., Red Hook, NY, USA (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_tag_bibitem">[33]</span>
+<span class="ltx_bibblock">
+Li, T., Sahu, A.K., Talwalkar, A., Smith, V.: Federated learning: Challenges, methods, and future directions.
+
+</span>
+<span class="ltx_bibblock">IEEE Signal Processing Magazine <span class="ltx_text ltx_font_bold" id="bib.bib33.1.1">37</span>(3), 50–60 (2020).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1109/MSP.2020.2975749
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_tag_bibitem">[34]</span>
+<span class="ltx_bibblock">
+Li, Y., Wang, Z., Wang, Y., Rasmy, L., Nguyen, P., Wang, Y., Zhang, Y., Liu, H.: Enhancing Health Data Interoperability with Large Language Models: A FHIR Study.
+
+</span>
+<span class="ltx_bibblock">arXiv preprint, unpublished (2023).
+
+</span>
+<span class="ltx_bibblock">URL https://arxiv.org/abs/2310.12989
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_tag_bibitem">[35]</span>
+<span class="ltx_bibblock">
+Liu, L.: Implementing a federated machine learning scenario using vantage6 and brane.
+
+</span>
+<span class="ltx_bibblock">Master’s thesis, University of Amsterdam and Vrije Universiteit Amsterdam, Amsterdam, The Netherlands (2021).
+
+</span>
+<span class="ltx_bibblock">URL https://staff.fnwi.uva.nl/a.s.z.belloum/MSctheses/MSchesis_Leyu-Liu.pdf.
+
+</span>
+<span class="ltx_bibblock">Joint UvA-VU Master of Science in Computer Science
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_tag_bibitem">[36]</span>
+<span class="ltx_bibblock">
+Liu, Y., Lo, S.K., Lu, Q., Zhu, L., Zhao, D., Xu, X., Harrer, S., Whittle, J.: Agent design pattern catalogue: A collection of architectural patterns for foundation model based agents.
+
+</span>
+<span class="ltx_bibblock">Journal of Systems and Software <span class="ltx_text ltx_font_bold" id="bib.bib36.1.1">220</span>, 112278 (2024).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1016/j.jss.2024.112278
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_tag_bibitem">[37]</span>
+<span class="ltx_bibblock">
+Lo, S.K., Lu, Q., Zhu, L., Paik, H.y., Xu, X., Wang, C.: Architectural patterns for the design of federated learning systems.
+
+</span>
+<span class="ltx_bibblock">Journal of Systems and Software <span class="ltx_text ltx_font_bold" id="bib.bib37.1.1">192</span>, 111357 (2022).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1016/j.jss.2022.111357
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_tag_bibitem">[38]</span>
+<span class="ltx_bibblock">
+Majmudar, J., Dupuy, C., Peris, C., Smaili, S., Gupta, R., Zemel, R.: Differentially private decoding in large language models.
+
+</span>
+<span class="ltx_bibblock">arXiv preprint arXiv:2205.13621 (2022).
+
+</span>
+<span class="ltx_bibblock">URL https://arxiv.org/abs/2205.13621
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_tag_bibitem">[39]</span>
+<span class="ltx_bibblock">
+Manning, C.D., Raghavan, P., Schütze, H.: Introduction to Information Retrieval.
+
+</span>
+<span class="ltx_bibblock">Cambridge University Press (2008)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_tag_bibitem">[40]</span>
+<span class="ltx_bibblock">
+Matos, J., Hughes, M.C., Lehman, L.w.H., Szolovits, P., Chen, I.Y.: EHRmonize: A Framework for Medical Concept Abstraction from Electronic Health Records using Large Language Models.
+
+</span>
+<span class="ltx_bibblock">arXiv preprint, unpublished (2024).
+
+</span>
+<span class="ltx_bibblock">URL https://arxiv.org/abs/2407.00242
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib41">
+<span class="ltx_tag ltx_tag_bibitem">[41]</span>
+<span class="ltx_bibblock">
+Meystre, S.M., Savova, G.K., Kipper-Schuler, K.C., Hurdle, J.F.: Extracting information from textual documents in the electronic health record: A review of recent research.
+
+</span>
+<span class="ltx_bibblock">Yearbook of Medical Informatics <span class="ltx_text ltx_font_bold" id="bib.bib41.1.1">17</span>(01), 128–144 (2008)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib42">
+<span class="ltx_tag ltx_tag_bibitem">[42]</span>
+<span class="ltx_bibblock">
+Mikolov, T., Chen, K., Corrado, G., Dean, J.: Efficient estimation of word representations in vector space.
+
+</span>
+<span class="ltx_bibblock">CoRR <span class="ltx_text ltx_font_bold" id="bib.bib42.1.1">abs/1301.3781</span> (2013)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib43">
+<span class="ltx_tag ltx_tag_bibitem">[43]</span>
+<span class="ltx_bibblock">
+Miller, R.A., Wright, A., Payne, T.H., Sittig, D.F., Ash, J.S.: Using snomed ct-encoded problems to improve icd-10-cm coding.
+
+</span>
+<span class="ltx_bibblock">Journal of the American Medical Informatics Association <span class="ltx_text ltx_font_bold" id="bib.bib43.1.1">26</span>(6), 491–495 (2019).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1093/jamia/ocz017
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib44">
+<span class="ltx_tag ltx_tag_bibitem">[44]</span>
+<span class="ltx_bibblock">
+Moncada-Torres, A., Martin, F., Sieswerda, M., Van Soest, J., Geleijnse, G.: VANTAGE6: an open source priVAcy preserviNg federaTed leArninG infrastructurE for Secure Insight eXchange.
+
+</span>
+<span class="ltx_bibblock">AMIA Annual Symposium Proceedings <span class="ltx_text ltx_font_bold" id="bib.bib44.1.1">2020</span>, 870–877 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib45">
+<span class="ltx_tag ltx_tag_bibitem">[45]</span>
+<span class="ltx_bibblock">
+Mungall, C.J., et al.: Mondo: Unifying disease ontology representation through logical definitions.
+
+</span>
+<span class="ltx_bibblock">Database <span class="ltx_text ltx_font_bold" id="bib.bib45.1.1">2022</span>, baac041 (2022).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1093/database/baac041
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib46">
+<span class="ltx_tag ltx_tag_bibitem">[46]</span>
+<span class="ltx_bibblock">
+Nan, Y., Ser, J.D., Walsh, S., et al.: Data harmonisation for information fusion in digital healthcare: A state-of-the-art systematic review, meta-analysis and future research directions.
+
+</span>
+<span class="ltx_bibblock">Information Fusion <span class="ltx_text ltx_font_bold" id="bib.bib46.1.1">82</span>, 99–122 (2022).
+
+</span>
+<span class="ltx_bibblock">DOI https://doi.org/10.1016/j.inffus.2022.01.001
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib47">
+<span class="ltx_tag ltx_tag_bibitem">[47]</span>
+<span class="ltx_bibblock">
+Nasarian, E., Alizadehsani, R., Acharya, U., Tsui, K.L.: Designing interpretable ML system to enhance trust in healthcare: A systematic review to proposed responsible clinician-AI-collaboration framework.
+
+</span>
+<span class="ltx_bibblock">Information Fusion <span class="ltx_text ltx_font_bold" id="bib.bib47.1.1">108</span>, 102412 (2024).
+
+</span>
+<span class="ltx_bibblock">DOI https://doi.org/10.1016/j.inffus.2024.102412
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib48">
+<span class="ltx_tag ltx_tag_bibitem">[48]</span>
+<span class="ltx_bibblock">
+Nelson, S.J., et al.: Rxnorm: A standardized nomenclature for clinical drugs.
+
+</span>
+<span class="ltx_bibblock">Journal of the American Medical Informatics Association <span class="ltx_text ltx_font_bold" id="bib.bib48.1.1">18</span>(4), 441–448 (2011).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1136/amiajnl-2011-000149
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib49">
+<span class="ltx_tag ltx_tag_bibitem">[49]</span>
+<span class="ltx_bibblock">
+Open Container Initiative: Open container initiative (oci).
+
+</span>
+<span class="ltx_bibblock">https://opencontainers.org/ (2015).
+
+</span>
+<span class="ltx_bibblock">Accessed: 2025-04-11
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib50">
+<span class="ltx_tag ltx_tag_bibitem">[50]</span>
+<span class="ltx_bibblock">
+P. Kairouz H. Brendan McMahan, e.a.: Advances and Open Problems in Federated Learning.
+
+</span>
+<span class="ltx_bibblock">Foundations and Trends in Machine Learning <span class="ltx_text ltx_font_bold" id="bib.bib50.1.1">14</span> (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib51">
+<span class="ltx_tag ltx_tag_bibitem">[51]</span>
+<span class="ltx_bibblock">
+Pytorch interface for Brane.
+
+</span>
+<span class="ltx_bibblock">https://github.com/YAMWD/PyTorch_interface_for_Brane (2024).
+
+</span>
+<span class="ltx_bibblock">Accessed: 2025-04-16
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib52">
+<span class="ltx_tag ltx_tag_bibitem">[52]</span>
+<span class="ltx_bibblock">
+Ren, Z., Bremer, A.A., Pawlyk, A.C., et al.: The mprint hub data, model, knowledge and research coordination center: Bridging the gap in maternal–pediatric therapeutics research through data integration and pharmacometrics.
+
+</span>
+<span class="ltx_bibblock">Pharmacotherapy: The Journal of Human Pharmacology and Drug Therapy <span class="ltx_text ltx_font_bold" id="bib.bib52.1.1">43</span>(1), e14–e25 (2023).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1002/phar.2765
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib53">
+<span class="ltx_tag ltx_tag_bibitem">[53]</span>
+<span class="ltx_bibblock">
+Rieke, N., Hancox, J., Li, W., Milletari, e.a.: The future of digital health with federated learning.
+
+</span>
+<span class="ltx_bibblock">npj Digital Medicine <span class="ltx_text ltx_font_bold" id="bib.bib53.1.1">3</span>(1), 119 (2020).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1038/s41746-020-00323-1
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib54">
+<span class="ltx_tag ltx_tag_bibitem">[54]</span>
+<span class="ltx_bibblock">
+Rolland, B., Smith, B.R., Potter, J.D., Mbah, A.K., Rutter, C.M.: Toward rigorous data harmonization in cancer epidemiology research: one approach.
+
+</span>
+<span class="ltx_bibblock">American journal of epidemiology <span class="ltx_text ltx_font_bold" id="bib.bib54.1.1">182</span>(12), 1033–1038 (2015)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib55">
+<span class="ltx_tag ltx_tag_bibitem">[55]</span>
+<span class="ltx_bibblock">
+Santos, A., Garcia, A., Strubell, E., Rekatsinas, T., Li, F.T., Altman, R.B.: Interactive Data Harmonization with LLM Agents.
+
+</span>
+<span class="ltx_bibblock">arXiv preprint, unpublished (2025).
+
+</span>
+<span class="ltx_bibblock">URL https://arxiv.org/abs/2502.07132
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib56">
+<span class="ltx_tag ltx_tag_bibitem">[56]</span>
+<span class="ltx_bibblock">
+Schmidt, B., Colvin, C., Hohlfeld, A., Leon, N.: Definitions, components and processes of data harmonisation in healthcare: a scoping review.
+
+</span>
+<span class="ltx_bibblock">BMC Medical Informatics and Decision Making <span class="ltx_text ltx_font_bold" id="bib.bib56.1.1">20</span>(1), 222 (2020).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1186/s12911-020-01218-7
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib57">
+<span class="ltx_tag ltx_tag_bibitem">[57]</span>
+<span class="ltx_bibblock">
+Sett, A., Bhooshan, S., Xie, B., Pfohl, S., Marotta, T., Rajkomar, A.: Speaking the Same Language: Leveraging LLMs in Standardizing Clinical Data for AI.
+
+</span>
+<span class="ltx_bibblock">arXiv preprint, unpublished (2024).
+
+</span>
+<span class="ltx_bibblock">URL https://arxiv.org/abs/2408.11861
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib58">
+<span class="ltx_tag ltx_tag_bibitem">[58]</span>
+<span class="ltx_bibblock">
+Stonebraker, M., Ilyas, I.: Data integration: The current status and the way forward.
+
+</span>
+<span class="ltx_bibblock">IEEE Data Engineering Bulletin (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib59">
+<span class="ltx_tag ltx_tag_bibitem">[59]</span>
+<span class="ltx_bibblock">
+Topaloglu, U., Palchuk, M.B.: Using a federated network of real-world data to optimize clinical trials operations.
+
+</span>
+<span class="ltx_bibblock">JCO Clinical Cancer Informatics <span class="ltx_text ltx_font_bold" id="bib.bib59.1.1">2</span>, 1–10 (2018).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1200/CCI.17.00067.
+
+</span>
+<span class="ltx_bibblock">PMID: 30652541
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib60">
+<span class="ltx_tag ltx_tag_bibitem">[60]</span>
+<span class="ltx_bibblock">
+Union, E.: General Data Protection Regulation (GDPR).
+
+</span>
+<span class="ltx_bibblock">Official Journal of the European Union (2016)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib61">
+<span class="ltx_tag ltx_tag_bibitem">[61]</span>
+<span class="ltx_bibblock">
+Valkering, O., Cushing, R., Belloum, A.: Brane: A framework for programmable orchestration of multi-site applications.
+
+</span>
+<span class="ltx_bibblock">In: 2021 IEEE 17th International Conference on eScience (eScience), pp. 277–282 (2021).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1109/eScience51609.2021.00056
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib62">
+<span class="ltx_tag ltx_tag_bibitem">[62]</span>
+<span class="ltx_bibblock">
+Wang, L., Wan, Z., Ni, C., Song, Q., Li, Y., Clayton, E., Malin, B., Yin, Z.: Applications and Concerns of ChatGPT and Other Conversational Large Language Models in Health Care: Systematic Review.
+
+</span>
+<span class="ltx_bibblock">J Med Internet Res <span class="ltx_text ltx_font_bold" id="bib.bib62.1.1">26</span>, e22769 (2024).
+
+</span>
+<span class="ltx_bibblock">DOI 10.2196/22769
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib63">
+<span class="ltx_tag ltx_tag_bibitem">[63]</span>
+<span class="ltx_bibblock">
+Wang, Y., Bodenreider, O.: Synergism between the mapping projects from SNOMED CT to ICD-10 and ICD-10-CM.
+
+</span>
+<span class="ltx_bibblock">Studies in Health Technology and Informatics <span class="ltx_text ltx_font_bold" id="bib.bib63.1.1">192</span>, 682–686 (2013).
+
+</span>
+<span class="ltx_bibblock">URL https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3540534/
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib64">
+<span class="ltx_tag ltx_tag_bibitem">[64]</span>
+<span class="ltx_bibblock">
+Wang, Y., Wang, L., Rastegar-Mojarad, M., Liu, S., Shen, F., Liu, H.: Clinical information extraction applications: A literature review.
+
+</span>
+<span class="ltx_bibblock">Journal of Biomedical Informatics <span class="ltx_text ltx_font_bold" id="bib.bib64.1.1">77</span>, 34–49 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib65">
+<span class="ltx_tag ltx_tag_bibitem">[65]</span>
+<span class="ltx_bibblock">
+Warnat-Herresthal, S., Schultze, H., Shastry, e.a.: Swarm learning for decentralized and confidential clinical machine learning.
+
+</span>
+<span class="ltx_bibblock">Nature <span class="ltx_text ltx_font_bold" id="bib.bib65.1.1">594</span>(7862), 265—270 (2021).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1038/s41586-021-03583-3
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib66">
+<span class="ltx_tag ltx_tag_bibitem">[66]</span>
+<span class="ltx_bibblock">
+World Health Organization: International Statistical Classification of Diseases and Related Health Problems, 10th Revision (ICD-10).
+
+</span>
+<span class="ltx_bibblock">World Health Organization (2004)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib67">
+<span class="ltx_tag ltx_tag_bibitem">[67]</span>
+<span class="ltx_bibblock">
+World Health Organization: The Anatomical Therapeutic Chemical (ATC) Classification System.
+
+</span>
+<span class="ltx_bibblock">WHO Technical Report Series <span class="ltx_text ltx_font_bold" id="bib.bib67.1.1">1030</span> (2021).
+
+</span>
+<span class="ltx_bibblock">URL https://www.who.int/tools/atc-ddd-toolkit
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib68">
+<span class="ltx_tag ltx_tag_bibitem">[68]</span>
+<span class="ltx_bibblock">
+Yoon, D., Jeong, J., Kim, S., Song, M., Lee, S., Cho, I., Kim, H.Y., Oh, J.Y., Kim, H.H., Kim, G.H., et al.: Redefining health care data interoperability: Empirical exploration of large language models in information exchange.
+
+</span>
+<span class="ltx_bibblock">Journal of Medical Internet Research <span class="ltx_text ltx_font_bold" id="bib.bib68.1.1">26</span>, e56614 (2024).
+
+</span>
+<span class="ltx_bibblock">DOI 10.2196/56614
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib69">
+<span class="ltx_tag ltx_tag_bibitem">[69]</span>
+<span class="ltx_bibblock">
+Zhang, F., Zhai, D., Bai, G., Jiang, J., Ye, Q., Ji, X., Liu, X.: Towards fairness-aware and privacy-preserving enhanced collaborative learning for healthcare.
+
+</span>
+<span class="ltx_bibblock">Nature Communications <span class="ltx_text ltx_font_bold" id="bib.bib69.1.1">16</span>(1), 2852 (2025).
+
+</span>
+<span class="ltx_bibblock">DOI 10.1038/s41467-025-58055-3
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib70">
+<span class="ltx_tag ltx_tag_bibitem">[70]</span>
+<span class="ltx_bibblock">
+Zhang, R., Elhadad, N.: Unsupervised biomedical named entity recognition: Experiments with clinical and biological texts.
+
+</span>
+<span class="ltx_bibblock">Journal of Biomedical Informatics <span class="ltx_text ltx_font_bold" id="bib.bib70.1.1">46</span>(6), 1088–1098 (2013)
+
+</span>
+</li>
+</ul>
+</section>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Mon May 26 14:01:00 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

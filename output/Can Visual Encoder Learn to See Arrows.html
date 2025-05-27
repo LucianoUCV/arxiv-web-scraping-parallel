@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Can Visual Encoder Learn to See Arrows?</title>
+<!--Generated on Mon May 26 11:52:07 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2505.19944v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S1" title="In Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S2" title="In Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Work</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S3" title="In Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Learning with Debiased Diagram Dataset</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S3.SS1" title="In 3 Learning with Debiased Diagram Dataset ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Diagram Dataset without Positional and Textual Biases</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S3.SS2" title="In 3 Learning with Debiased Diagram Dataset ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Training Encoders via Contrastive Learning</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S4" title="In Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Evaluation of Image Encoder</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S4.SS1" title="In 4 Evaluation of Image Encoder ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Linear Probing</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S4.SS2" title="In 4 Evaluation of Image Encoder ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Image Retrieval</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S4.SS3" title="In 4 Evaluation of Image Encoder ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.3 </span>Diagram Captioning</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S5" title="In Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Conclusion</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Can Visual Encoder Learn to See Arrows?</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+Naoyuki Terashita<sup class="ltx_sup" id="id11.11.id1"><span class="ltx_text ltx_font_italic" id="id11.11.id1.1">1</span></sup> Yusuke Tozaki<sup class="ltx_sup" id="id12.12.id2"><span class="ltx_text ltx_font_italic" id="id12.12.id2.1">1,2</span></sup> Hideaki Omote<sup class="ltx_sup" id="id13.13.id3"><span class="ltx_text ltx_font_italic" id="id13.13.id3.1">1,3</span></sup><span class="ltx_note ltx_role_footnotemark" id="footnotex1"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_note_type">footnotemark: </span><span class="ltx_tag ltx_tag_note">2</span></span></span></span> Congkha Nguyen<sup class="ltx_sup" id="id14.14.id4"><span class="ltx_text ltx_font_italic" id="id14.14.id4.1">1</span></sup>
+<br class="ltx_break"/>Ryosuke Nakamoto<sup class="ltx_sup" id="id15.15.id5"><span class="ltx_text ltx_font_italic" id="id15.15.id5.1">1</span></sup> Yuta Koreeda<sup class="ltx_sup" id="id16.16.id6"><span class="ltx_text ltx_font_italic" id="id16.16.id6.1">1</span></sup> Hiroaki Ozaki<sup class="ltx_sup" id="id17.17.id7"><span class="ltx_text ltx_font_italic" id="id17.17.id7.1">1</span></sup>
+<br class="ltx_break"/><sup class="ltx_sup" id="id18.18.id8"><span class="ltx_text ltx_font_italic" id="id18.18.id8.1">1</span></sup>Hitachi, Ltd. <sup class="ltx_sup" id="id19.19.id9"><span class="ltx_text ltx_font_italic" id="id19.19.id9.1">2</span></sup>Kyoto Sangyo University <sup class="ltx_sup" id="id20.20.id10"><span class="ltx_text ltx_font_italic" id="id20.20.id10.1">3</span></sup>Gifu University
+</span><span class="ltx_author_notes">E-mail: <a class="ltx_ref ltx_href ltx_font_typewriter" href="mailto:naoyuki.terashita.sk@hitachi.com" title="">naoyuki.terashita.sk@hitachi.com</a>This work was done while the authors were interns at Hitachi, Ltd.</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id21.id1">The diagram is a visual representation of a relationship illustrated with edges (lines or arrows), which is widely used in industrial and scientific communication.
+Although recognizing diagrams is essential for vision language models (VLMs) to comprehend domain-specific knowledge, recent studies reveal that many VLMs fail to identify edges in images.
+We hypothesize that these failures stem from an over-reliance on textual and positional biases, preventing VLMs from learning explicit edge features.
+Based on this idea, we empirically investigate whether the image encoder in VLMs can learn edge representation through training on a diagram dataset in which edges are biased neither by textual nor positional information.
+To this end, we conduct contrastive learning on an artificially generated diagram–caption dataset to train an image encoder and evaluate its diagram-related features on three tasks: probing, image retrieval, and captioning.
+Our results show that the finetuned model outperforms pretrained CLIP in all tasks and surpasses zero-shot GPT-4o and LLaVA-Mistral in the captioning task.
+These findings confirm that eliminating textual and positional biases fosters accurate edge recognition in VLMs, offering a promising path for advancing diagram understanding.</p>
+</div>
+<span class="ltx_note ltx_role_footnotetext" id="footnotex2"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">footnotetext: </span>This work has been accepted for poster presentation at the <span class="ltx_text ltx_font_italic" id="footnotex2.1">Second Workshop on Visual Concepts in CVPR 2025</span>.</span></span></span>
+<figure class="ltx_figure" id="S0.F1">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S0.F1.sf1"><svg class="ltx_picture ltx_centering" height="760.2" id="S0.F1.sf1.pic1" overflow="visible" version="1.1" width="214.5"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,760.2) matrix(1 0 0 -1 0 0) translate(107.25,0) translate(0,426.63)"><g fill="#808080" fill-opacity="0.5" stroke="#CCCCCC" stroke-opacity="0.5" transform="matrix(1.0 0.0 0.0 1.0 2.98 -2.98)"><path d="M 100.06 333.29 L -100.06 333.29 C -103.88 333.29 -106.97 330.19 -106.97 326.37 L -106.97 -326.37 C -106.97 -330.19 -103.88 -333.29 -100.06 -333.29 L 100.06 -333.29 C 103.88 -333.29 106.97 -330.19 106.97 -326.37 L 106.97 326.37 C 106.97 330.19 103.88 333.29 100.06 333.29 Z M -106.97 -333.29" style="stroke:none"></path></g><g fill="#F2F2F2" stroke="#CCCCCC"><path d="M 100.06 333.29 L -100.06 333.29 C -103.88 333.29 -106.97 330.19 -106.97 326.37 L -106.97 -326.37 C -106.97 -330.19 -103.88 -333.29 -100.06 -333.29 L 100.06 -333.29 C 103.88 -333.29 106.97 -330.19 106.97 -326.37 L 106.97 326.37 C 106.97 330.19 103.88 333.29 100.06 333.29 Z M -106.97 -333.29"></path></g><g fill="#000000" stroke="#000000" transform="matrix(1.0 0.0 0.0 1.0 -102.36 318.99)"><foreignobject height="657.36" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="204.72">
+<span class="ltx_inline-block ltx_minipage ltx_align_top" id="S0.F1.sf1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1" style="width:148.0pt;">
+<span class="ltx_p" id="S0.F1.sf1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2"></span>
+<span class="ltx_p ltx_align_left" id="S0.F1.sf1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1"><span class="ltx_text ltx_font_sansserif ltx_font_bold" id="S0.F1.sf1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1" style="font-size:90%;">User<span class="ltx_text ltx_font_medium" id="S0.F1.sf1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1">
+<br class="ltx_break"/>
+<span class="ltx_inline-block ltx_minipage ltx_align_middle" id="S0.F1.sf1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1" style="width:151.8pt;"><svg class="ltx_picture" height="608.93" id="S0.F1.sf1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.pic1" overflow="visible" version="1.1" width="600.55"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,608.93) matrix(1 0 0 -1 0 0) translate(0.28,0) translate(0,4.47)"><clippath id="pgfcp9"><path d="M 0 0 M 0 4.15 L 0 595.85 C 0 598.14 1.86 600 4.15 600 L 595.85 600 C 598.14 600 600 598.14 600 595.85 L 600 4.15 C 600 1.86 598.14 0 595.85 0 L 4.15 0 C 1.86 0 0 1.86 0 4.15 Z M 600 600"></path></clippath><g clip-path="url(#pgfcp9)"><g></g><g fill="#000000" stroke="#000000" transform="matrix(1.0 0.0 0.0 1.0 1 -4.47)"><g class="ltx_tikzmatrix" transform="matrix(1 0 0 -1 0 309.93)"><g class="ltx_tikzmatrix_row" transform="matrix(1 0 0 1 0 8.51)"><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" transform="matrix(1 0 0 -1 0 0)"><foreignobject height="10.93" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="21.1"><span class="ltx_ERROR undefined" id="S0.F1.sf1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.pic1.2.2.2.2.2.2.1.1.1">\pgfmathresult</span>pt</foreignobject></g></g><g class="ltx_tikzmatrix_row" transform="matrix(1 0 0 1 0 608.93)"><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" transform="matrix(1 0 0 -1 0 0)"><foreignobject height="598" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="598"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S0.F1.sf1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/sample_tree.png" width="598"/></foreignobject></g></g></g></g><g></g></g><g color="#CCCCCC" fill="#CCCCCC" stroke="#CCCCCC"><path d="M 0 0 M 0 4.15 L 0 595.85 C 0 598.14 1.86 600 4.15 600 L 595.85 600 C 598.14 600 600 598.14 600 595.85 L 600 4.15 C 600 1.86 598.14 0 595.85 0 L 4.15 0 C 1.86 0 0 1.86 0 4.15 Z M 600 600" style="fill:none"></path></g></g></svg>
+</span>
+<span class="ltx_inline-block ltx_minipage ltx_align_middle" id="S0.F1.sf1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2" style="width:260.2pt;">
+<span class="ltx_p" id="S0.F1.sf1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.1">Write Mermaid code of this diagram.</span>
+<span class="ltx_p" id="S0.F1.sf1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.2">No explanation.</span>
+</span></span></span></span>
+</span></foreignobject></g><g fill="#808080" fill-opacity="0.5" stroke="#4DC94D" stroke-opacity="0.5" transform="matrix(1.0 0.0 0.0 1.0 2.98 -2.98)"><path d="M 100.06 -341.72 L -100.06 -341.72 C -103.88 -341.72 -106.97 -344.82 -106.97 -348.64 L -106.97 -419.44 C -106.97 -423.26 -103.88 -426.36 -100.06 -426.36 L 100.06 -426.36 C 103.88 -426.36 106.97 -423.26 106.97 -419.44 L 106.97 -348.64 C 106.97 -344.82 103.88 -341.72 100.06 -341.72 Z M -106.97 -426.36" style="stroke:none"></path></g><g fill="#E6FFE6" stroke="#4DC94D"><path d="M 100.06 -341.72 L -100.06 -341.72 C -103.88 -341.72 -106.97 -344.82 -106.97 -348.64 L -106.97 -419.44 C -106.97 -423.26 -103.88 -426.36 -100.06 -426.36 L 100.06 -426.36 C 103.88 -426.36 106.97 -423.26 106.97 -419.44 L 106.97 -348.64 C 106.97 -344.82 103.88 -341.72 100.06 -341.72 Z M -106.97 -426.36"></path></g><g fill="#000000" stroke="#000000" transform="matrix(1.0 0.0 0.0 1.0 -102.36 -356.02)"><foreignobject height="75.41" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="204.72">
+<span class="ltx_inline-block ltx_minipage ltx_align_top" id="S0.F1.sf1.pic1.2.2.2.1.1" style="width:148.0pt;">
+<span class="ltx_p" id="S0.F1.sf1.pic1.2.2.2.1.1.1"></span>
+<span class="ltx_p ltx_align_left" id="S0.F1.sf1.pic1.2.2.2.1.1.2"><span class="ltx_text ltx_font_sansserif ltx_font_bold" id="S0.F1.sf1.pic1.2.2.2.1.1.2.1" style="font-size:90%;">GPT-4o<span class="ltx_text ltx_font_medium" id="S0.F1.sf1.pic1.2.2.2.1.1.2.1.1">
+<br class="ltx_break"/><span class="ltx_text ltx_font_typewriter" id="S0.F1.sf1.pic1.2.2.2.1.1.2.1.1.1">graph TD
+<br class="ltx_break"/>     D --&gt; C
+<br class="ltx_break"/>     D --&gt; E
+<br class="ltx_break"/>     D --&gt; A</span></span></span></span>
+</span></foreignobject></g><g fill="#00B300" stroke="#00B300" transform="matrix(1.0 0.0 0.0 1.0 77.88 -368)"><foreignobject color="#00B300" height="13.79" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="16.6"><span class="ltx_text ltx_font_sansserif" id="S0.F1.sf1.pic1.3.3.3.1.1" style="font-size:144%;">✓</span></foreignobject></g></g></svg>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S0.F1.sf1.2.1.1" style="font-size:90%;">(a)</span> </span><span class="ltx_text" id="S0.F1.sf1.3.2" style="font-size:90%;">Exploiting positional bias</span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="S0.F1.sf2"><svg class="ltx_picture ltx_centering" height="760.2" id="S0.F1.sf2.pic1" overflow="visible" version="1.1" width="214.5"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,760.2) matrix(1 0 0 -1 0 0) translate(107.25,0) translate(0,426.63)"><g fill="#808080" fill-opacity="0.5" stroke="#CCCCCC" stroke-opacity="0.5" transform="matrix(1.0 0.0 0.0 1.0 2.98 -2.98)"><path d="M 100.06 333.29 L -100.06 333.29 C -103.88 333.29 -106.97 330.19 -106.97 326.37 L -106.97 -326.37 C -106.97 -330.19 -103.88 -333.29 -100.06 -333.29 L 100.06 -333.29 C 103.88 -333.29 106.97 -330.19 106.97 -326.37 L 106.97 326.37 C 106.97 330.19 103.88 333.29 100.06 333.29 Z M -106.97 -333.29" style="stroke:none"></path></g><g fill="#F2F2F2" stroke="#CCCCCC"><path d="M 100.06 333.29 L -100.06 333.29 C -103.88 333.29 -106.97 330.19 -106.97 326.37 L -106.97 -326.37 C -106.97 -330.19 -103.88 -333.29 -100.06 -333.29 L 100.06 -333.29 C 103.88 -333.29 106.97 -330.19 106.97 -326.37 L 106.97 326.37 C 106.97 330.19 103.88 333.29 100.06 333.29 Z M -106.97 -333.29"></path></g><g fill="#000000" stroke="#000000" transform="matrix(1.0 0.0 0.0 1.0 -102.36 318.99)"><foreignobject height="657.36" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="204.72">
+<span class="ltx_inline-block ltx_minipage ltx_align_top" id="S0.F1.sf2.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1" style="width:148.0pt;">
+<span class="ltx_p" id="S0.F1.sf2.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2"></span>
+<span class="ltx_p ltx_align_left" id="S0.F1.sf2.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1"><span class="ltx_text ltx_font_sansserif ltx_font_bold" id="S0.F1.sf2.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1" style="font-size:90%;">User<span class="ltx_text ltx_font_medium" id="S0.F1.sf2.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1">
+<br class="ltx_break"/>
+<span class="ltx_inline-block ltx_minipage ltx_align_middle" id="S0.F1.sf2.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1" style="width:151.8pt;"><svg class="ltx_picture" height="608.93" id="S0.F1.sf2.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.pic1" overflow="visible" version="1.1" width="600.55"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,608.93) matrix(1 0 0 -1 0 0) translate(0.28,0) translate(0,4.47)"><clippath id="pgfcp10"><path d="M 0 0 M 0 4.15 L 0 595.85 C 0 598.14 1.86 600 4.15 600 L 595.85 600 C 598.14 600 600 598.14 600 595.85 L 600 4.15 C 600 1.86 598.14 0 595.85 0 L 4.15 0 C 1.86 0 0 1.86 0 4.15 Z M 600 600"></path></clippath><g clip-path="url(#pgfcp10)"><g></g><g fill="#000000" stroke="#000000" transform="matrix(1.0 0.0 0.0 1.0 1 -4.47)"><g class="ltx_tikzmatrix" transform="matrix(1 0 0 -1 0 309.93)"><g class="ltx_tikzmatrix_row" transform="matrix(1 0 0 1 0 8.51)"><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" transform="matrix(1 0 0 -1 0 0)"><foreignobject height="10.93" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="21.1"><span class="ltx_ERROR undefined" id="S0.F1.sf2.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.pic1.2.2.2.2.2.2.1.1.1">\pgfmathresult</span>pt</foreignobject></g></g><g class="ltx_tikzmatrix_row" transform="matrix(1 0 0 1 0 608.93)"><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" transform="matrix(1 0 0 -1 0 0)"><foreignobject height="598" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="598"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S0.F1.sf2.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/sample_hub.png" width="598"/></foreignobject></g></g></g></g><g></g></g><g color="#CCCCCC" fill="#CCCCCC" stroke="#CCCCCC"><path d="M 0 0 M 0 4.15 L 0 595.85 C 0 598.14 1.86 600 4.15 600 L 595.85 600 C 598.14 600 600 598.14 600 595.85 L 600 4.15 C 600 1.86 598.14 0 595.85 0 L 4.15 0 C 1.86 0 0 1.86 0 4.15 Z M 600 600" style="fill:none"></path></g></g></svg>
+</span>
+<span class="ltx_inline-block ltx_minipage ltx_align_middle" id="S0.F1.sf2.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2" style="width:260.2pt;">
+<span class="ltx_p" id="S0.F1.sf2.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.1">Write Mermaid code of this diagram.</span>
+<span class="ltx_p" id="S0.F1.sf2.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.2">No explanation.</span>
+</span></span></span></span>
+</span></foreignobject></g><g fill="#808080" fill-opacity="0.5" stroke="#4DC94D" stroke-opacity="0.5" transform="matrix(1.0 0.0 0.0 1.0 2.98 -2.98)"><path d="M 100.06 -341.72 L -100.06 -341.72 C -103.88 -341.72 -106.97 -344.82 -106.97 -348.64 L -106.97 -419.44 C -106.97 -423.26 -103.88 -426.36 -100.06 -426.36 L 100.06 -426.36 C 103.88 -426.36 106.97 -423.26 106.97 -419.44 L 106.97 -348.64 C 106.97 -344.82 103.88 -341.72 100.06 -341.72 Z M -106.97 -426.36" style="stroke:none"></path></g><g fill="#E6FFE6" stroke="#4DC94D"><path d="M 100.06 -341.72 L -100.06 -341.72 C -103.88 -341.72 -106.97 -344.82 -106.97 -348.64 L -106.97 -419.44 C -106.97 -423.26 -103.88 -426.36 -100.06 -426.36 L 100.06 -426.36 C 103.88 -426.36 106.97 -423.26 106.97 -419.44 L 106.97 -348.64 C 106.97 -344.82 103.88 -341.72 100.06 -341.72 Z M -106.97 -426.36"></path></g><g fill="#000000" stroke="#000000" transform="matrix(1.0 0.0 0.0 1.0 -102.36 -356.02)"><foreignobject height="75.41" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="204.72">
+<span class="ltx_inline-block ltx_minipage ltx_align_top" id="S0.F1.sf2.pic1.2.2.2.1.1" style="width:148.0pt;">
+<span class="ltx_p" id="S0.F1.sf2.pic1.2.2.2.1.1.1"></span>
+<span class="ltx_p ltx_align_left" id="S0.F1.sf2.pic1.2.2.2.1.1.2"><span class="ltx_text ltx_font_sansserif ltx_font_bold" id="S0.F1.sf2.pic1.2.2.2.1.1.2.1" style="font-size:90%;">GPT-4o<span class="ltx_text ltx_font_medium" id="S0.F1.sf2.pic1.2.2.2.1.1.2.1.1">
+<br class="ltx_break"/><span class="ltx_text ltx_font_typewriter" id="S0.F1.sf2.pic1.2.2.2.1.1.2.1.1.1">graph TD
+<br class="ltx_break"/>     HUB --&gt; C
+<br class="ltx_break"/>     HUB --&gt; E
+<br class="ltx_break"/>     HUB --&gt; A</span></span></span></span>
+</span></foreignobject></g><g fill="#00B300" stroke="#00B300" transform="matrix(1.0 0.0 0.0 1.0 77.88 -368)"><foreignobject color="#00B300" height="13.79" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="16.6"><span class="ltx_text ltx_font_sansserif" id="S0.F1.sf2.pic1.3.3.3.1.1" style="font-size:144%;">✓</span></foreignobject></g></g></svg>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S0.F1.sf2.2.1.1" style="font-size:90%;">(b)</span> </span><span class="ltx_text" id="S0.F1.sf2.3.2" style="font-size:90%;">Exploiting textual bias</span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="S0.F1.sf3"><svg class="ltx_picture ltx_centering" height="758.82" id="S0.F1.sf3.pic1" overflow="visible" version="1.1" width="214.5"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,758.82) matrix(1 0 0 -1 0 0) translate(107.25,0) translate(0,425.94)"><g fill="#808080" fill-opacity="0.5" stroke="#CCCCCC" stroke-opacity="0.5" transform="matrix(1.0 0.0 0.0 1.0 2.98 -2.98)"><path d="M 100.06 332.6 L -100.06 332.6 C -103.88 332.6 -106.97 329.5 -106.97 325.68 L -106.97 -325.68 C -106.97 -329.5 -103.88 -332.6 -100.06 -332.6 L 100.06 -332.6 C 103.88 -332.6 106.97 -329.5 106.97 -325.68 L 106.97 325.68 C 106.97 329.5 103.88 332.6 100.06 332.6 Z M -106.97 -332.6" style="stroke:none"></path></g><g fill="#F2F2F2" stroke="#CCCCCC"><path d="M 100.06 332.6 L -100.06 332.6 C -103.88 332.6 -106.97 329.5 -106.97 325.68 L -106.97 -325.68 C -106.97 -329.5 -103.88 -332.6 -100.06 -332.6 L 100.06 -332.6 C 103.88 -332.6 106.97 -329.5 106.97 -325.68 L 106.97 325.68 C 106.97 329.5 103.88 332.6 100.06 332.6 Z M -106.97 -332.6"></path></g><g fill="#000000" stroke="#000000" transform="matrix(1.0 0.0 0.0 1.0 -102.36 318.3)"><foreignobject height="655.98" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="204.72">
+<span class="ltx_inline-block ltx_minipage ltx_align_top" id="S0.F1.sf3.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1" style="width:148.0pt;">
+<span class="ltx_p" id="S0.F1.sf3.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2"></span>
+<span class="ltx_p ltx_align_left" id="S0.F1.sf3.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1"><span class="ltx_text ltx_font_sansserif ltx_font_bold" id="S0.F1.sf3.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1" style="font-size:90%;">User<span class="ltx_text ltx_font_medium" id="S0.F1.sf3.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1">
+<br class="ltx_break"/>
+<span class="ltx_inline-block ltx_minipage ltx_align_middle" id="S0.F1.sf3.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1" style="width:151.8pt;"><svg class="ltx_picture" height="608.93" id="S0.F1.sf3.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.pic1" overflow="visible" version="1.1" width="600.55"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,608.93) matrix(1 0 0 -1 0 0) translate(0.28,0) translate(0,4.47)"><clippath id="pgfcp11"><path d="M 0 0 M 0 4.15 L 0 595.85 C 0 598.14 1.86 600 4.15 600 L 595.85 600 C 598.14 600 600 598.14 600 595.85 L 600 4.15 C 600 1.86 598.14 0 595.85 0 L 4.15 0 C 1.86 0 0 1.86 0 4.15 Z M 600 600"></path></clippath><g clip-path="url(#pgfcp11)"><g></g><g fill="#000000" stroke="#000000" transform="matrix(1.0 0.0 0.0 1.0 1 -4.47)"><g class="ltx_tikzmatrix" transform="matrix(1 0 0 -1 0 309.93)"><g class="ltx_tikzmatrix_row" transform="matrix(1 0 0 1 0 8.51)"><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" transform="matrix(1 0 0 -1 0 0)"><foreignobject height="10.93" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="21.1"><span class="ltx_ERROR undefined" id="S0.F1.sf3.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.pic1.2.2.2.2.2.2.1.1.1">\pgfmathresult</span>pt</foreignobject></g></g><g class="ltx_tikzmatrix_row" transform="matrix(1 0 0 1 0 608.93)"><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" transform="matrix(1 0 0 -1 0 0)"><foreignobject height="598" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="598"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S0.F1.sf3.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/sample.png" width="598"/></foreignobject></g></g></g></g><g></g></g><g color="#CCCCCC" fill="#CCCCCC" stroke="#CCCCCC"><path d="M 0 0 M 0 4.15 L 0 595.85 C 0 598.14 1.86 600 4.15 600 L 595.85 600 C 598.14 600 600 598.14 600 595.85 L 600 4.15 C 600 1.86 598.14 0 595.85 0 L 4.15 0 C 1.86 0 0 1.86 0 4.15 Z M 600 600" style="fill:none"></path></g></g></svg>
+</span>
+<span class="ltx_inline-block ltx_minipage ltx_align_middle" id="S0.F1.sf3.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2" style="width:260.2pt;">
+<span class="ltx_p" id="S0.F1.sf3.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.1">Write Mermaid code of this diagram.</span>
+<span class="ltx_p" id="S0.F1.sf3.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.2">No explanation.</span>
+</span></span></span></span>
+</span></foreignobject></g><g fill="#808080" fill-opacity="0.5" stroke="#FF8080" stroke-opacity="0.5" transform="matrix(1.0 0.0 0.0 1.0 2.98 -2.98)"><path d="M 100.06 -341.03 L -100.06 -341.03 C -103.88 -341.03 -106.97 -344.13 -106.97 -347.95 L -106.97 -418.75 C -106.97 -422.57 -103.88 -425.67 -100.06 -425.67 L 100.06 -425.67 C 103.88 -425.67 106.97 -422.57 106.97 -418.75 L 106.97 -347.95 C 106.97 -344.13 103.88 -341.03 100.06 -341.03 Z M -106.97 -425.67" style="stroke:none"></path></g><g fill="#FFE6E6" stroke="#FF8080"><path d="M 100.06 -341.03 L -100.06 -341.03 C -103.88 -341.03 -106.97 -344.13 -106.97 -347.95 L -106.97 -418.75 C -106.97 -422.57 -103.88 -425.67 -100.06 -425.67 L 100.06 -425.67 C 103.88 -425.67 106.97 -422.57 106.97 -418.75 L 106.97 -347.95 C 106.97 -344.13 103.88 -341.03 100.06 -341.03 Z M -106.97 -425.67"></path></g><g fill="#000000" stroke="#000000" transform="matrix(1.0 0.0 0.0 1.0 -102.36 -355.33)"><foreignobject height="75.41" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="204.72">
+<span class="ltx_inline-block ltx_minipage ltx_align_top" id="S0.F1.sf3.pic1.2.2.2.1.1" style="width:148.0pt;">
+<span class="ltx_p" id="S0.F1.sf3.pic1.2.2.2.1.1.1"></span>
+<span class="ltx_p ltx_align_left" id="S0.F1.sf3.pic1.2.2.2.1.1.2"><span class="ltx_text ltx_font_sansserif ltx_font_bold" id="S0.F1.sf3.pic1.2.2.2.1.1.2.1" style="font-size:90%;">GPT-4o<span class="ltx_text ltx_font_medium" id="S0.F1.sf3.pic1.2.2.2.1.1.2.1.1">
+<br class="ltx_break"/><span class="ltx_text ltx_font_typewriter" id="S0.F1.sf3.pic1.2.2.2.1.1.2.1.1.1">graph TD
+<br class="ltx_break"/>     C --&gt; D
+<br class="ltx_break"/>     E --&gt; D
+<br class="ltx_break"/>     D --&gt; A</span></span></span></span>
+</span></foreignobject></g><g fill="#FF0000" stroke="#FF0000" transform="matrix(1.0 0.0 0.0 1.0 79.54 -367.46)"><foreignobject color="#FF0000" height="17.93" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="14.94"><span class="ltx_text ltx_font_sansserif" id="S0.F1.sf3.pic1.3.3.3.1.1" style="font-size:144%;">✗</span></foreignobject></g></g></svg>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S0.F1.sf3.2.1.1" style="font-size:90%;">(c)</span> </span><span class="ltx_text" id="S0.F1.sf3.3.2" style="font-size:90%;">No bias to exploit</span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S0.F1.3.1.1" style="font-size:90%;">Figure 1</span>: </span><span class="ltx_text" id="S0.F1.4.2" style="font-size:90%;">Examples of diagram captioning by GPT-4o <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">gpt4o</span>]</cite>: (a) inferring relationships based on conventional top-down hierarchies, (b) leveraging semantic relationships between node labels, and (c) struggling when neither positional nor textual biases are available. All results were produced by <span class="ltx_text ltx_font_typewriter" id="S0.F1.4.2.1">gpt-4o-2024-08-06</span> with temperature 0.</span></figcaption>
+</figure>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Diagram is a simplified and structured visual representation of relationships using shapes connected by edges (lines or arrows).
+Flowcharts, electronic circuits, and chemical structure diagrams are all examples of diagrams, and they play a major role in industrial and scientific communication.
+For a vision language model (VLM) to fully understand the context and knowledge in such domains, it is critical to accurately recognize diagram images.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">However, recent studies suggest that VLMs might not accurately recognize edges in diagram images.
+Yoshida et al. <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">yoshida-etal-2024-how</span>]</cite> have indicated that the feature representations of the CLIP <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">radford2021learning</span>]</cite> encoder, widely used in VLMs, may not contain sufficient information to classify the presence and direction of arrows in diagram images.
+From a similar motivation, Rahmanzadehgervi et al. <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">rahmanzadehgervi2024vision</span>]</cite> proposed a VLM benchmark that requires the model to answer questions about lines and shapes, demonstrating even large VLMs such as GPT-4o <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">gpt4o</span>]</cite> and Gemini-1.5 Pro <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">team2024gemini</span>]</cite> can sometimes fail on even simple questions.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">One reason VLMs often fail to recognize edges is that their visual training relies too heavily on positional or textual biases, hindering VLMs from learning edge features.
+This can be demonstrated through a simple experiment shown in <a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S2.F2" title="In 2 Related Work ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Fig.</span> <span class="ltx_text ltx_ref_tag">2</span></a>; GPT-4o succeeds in describing a diagram when it can rely on common-sense biases derived from node positions <a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S0.F1.sf1" title="Figure 1(a) ‣ Figure 1 ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">1(a)</span></a> or textual cues <a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S0.F1.sf2" title="Figure 1(b) ‣ Figure 1 ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">1(b)</span></a>, but fails when no such clues are available <a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S0.F1.sf3" title="Figure 1(c) ‣ Figure 1 ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">1(c)</span></a>.
+Recent benchmarks on visual math problems <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2024mathverse</span>]</cite> and flowchart VQA <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">flowvqa2023</span>]</cite> have also shown that VLMs tend to rely on textual and positional biases.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">Based on these observations, this study experimentally demonstrates that eliminating textual and positional biases during training enables visual models to learn edge features.
+To this end, we artificially generate a dataset of diagram images and text captions designed so that the presence and direction of edges cannot be inferred from text or position.
+We train CLIP, a common image encoder in VLMs, through contrastive learning on this dataset, then evaluate how well it captures edge information using three tasks: linear probing, image retrieval, and a newly proposed task called diagram captioning.
+In the linear probing, we classify edge existence and direction with acquired features, while the image retrieval evaluates the model’s ability to find images representing the identical graph with possibly different visual layout.
+In our diagram captioning, we train a text decoder on the image encoder to predict the edge sets that appear in given diagram images.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">Results from all three tasks show that our finetuned model substantially outperforms the original pretrained CLIP, indicating that our approach encourages acquiring edge representations invariant with textual and positional information.
+On our diagram captioning, the finetuned models also exceed the zero-shot performance of GPT-4o and LLaVA-Mistral, highlighting the current limitation of large VLMs and the effectiveness of our approach.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related Work</h2>
+<div class="ltx_para" id="S2.p1">
+<p class="ltx_p" id="S2.p1.1">Recently, large vision language models (LVLMs) have achieved human-level performance on a variety of VQA tasks <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">gpt4o</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">team2024gemini</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Chen2023PaLI-X</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">liu2023visual</span>]</cite>, yet it has become clear that they rely heavily on textual content and positional layout to answer.</p>
+</div>
+<div class="ltx_para" id="S2.p2">
+<p class="ltx_p" id="S2.p2.1">Chen et al.<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">chen2024are</span>]</cite> demonstrated that GeminiPro <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">team2024gemini</span>]</cite> solves 42.90% of MMMU tasks <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">yue2024mmmu</span>]</cite> without any image inputs.
+This reveals that existing results of common VQA benchmarks might not reflect the actual vision capability of LVLMs.
+Further, in visual math benchmarks <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">chen2021geoqa</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">lu2024mathvista</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">yue2024mmmu</span>]</cite>, removing problem texts regarding visual information substantially drops performance <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2024mathverse</span>]</cite>, indicating that many LVLMs merely rely on textual information.
+The limited capability in figure recognition is further illustrated by Rahmanzadehgervi et al. <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">rahmanzadehgervi2024vision</span>]</cite>, who reveal that even state-of-the-art models like GPT-4V <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">achiam2023gpt</span>]</cite> fail at simple visual tasks such as counting overlapping shapes or determining line segment intersections.
+LVLMs also tend to rely on layout information.
+In a flowchart VQA task, simply flipping the layout vertically significantly degrades performance <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">flowvqa2023</span>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.p3">
+<p class="ltx_p" id="S2.p3.1">In this work, we show that by removing biases tied to text or positional information, VLMs can learn to recognize lines and arrows purely from visual inputs.</p>
+</div>
+<figure class="ltx_figure" id="S2.F2">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_2">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="S2.F2.sf1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="420" id="S2.F2.sf1.g1" src="x1.png" width="831"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F2.sf1.2.1.1" style="font-size:90%;">(a)</span> </span><span class="ltx_text" id="S2.F2.sf1.3.2" style="font-size:90%;">Training</span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_2">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="S2.F2.sf2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="329" id="S2.F2.sf2.g1" src="x2.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F2.sf2.2.1.1" style="font-size:90%;">(b)</span> </span><span class="ltx_text" id="S2.F2.sf2.3.2" style="font-size:90%;">Evaluation</span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F2.2.1.1" style="font-size:90%;">Figure 2</span>: </span><span class="ltx_text" id="S2.F2.3.2" style="font-size:90%;">Overview of our approach: (a) training a CLIP model with diagram–caption pairs that eliminate positional and textual biases, and (b) evaluating the model on three tasks: linear probing, image retrieval, and diagram captioning.</span></figcaption>
+</figure>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Learning with Debiased Diagram Dataset</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">As shown in <a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S2.F2" title="In 2 Related Work ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Fig.</span> <span class="ltx_text ltx_ref_tag">2</span></a>, our approach consists of artificially generating diagram–text pairs that exclude text and positional biases (<a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S3.SS1" title="3.1 Diagram Dataset without Positional and Textual Biases ‣ 3 Learning with Debiased Diagram Dataset ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Sec.</span> <span class="ltx_text ltx_ref_tag">3.1</span></a>), followed by contrastive learning to finetune CLIP (<a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S3.SS2" title="3.2 Training Encoders via Contrastive Learning ‣ 3 Learning with Debiased Diagram Dataset ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Sec.</span> <span class="ltx_text ltx_ref_tag">3.2</span></a>).</p>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Diagram Dataset without Positional and Textual Biases</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">We aim to build an image dataset with captions that eliminate biases arising from text and positional information.
+To have such a dataset with sufficient diversity, we generate diagram images and their Mermaid-style captions from randomly generated directed graphs.
+Note that we use ”graph” to refer to the abstract mathematical structure and ”diagram” to denote its visual representation.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p2">
+<p class="ltx_p" id="S3.SS1.p2.1">Each sample in our dataset pairs an image with text representing a directed graph containing different numbers of alphabet-labeled nodes.
+The directed graphs are generated so that their edges are generated independently with a fixed probability for each pair among eight nodes, excluding self-loops and bidirectional edges.
+When a generated graph has more than one weakly connected component, we keep only the largest one, having graphs with different numbers of nodes (two to eight).
+For each graph, we draw a diagram image as in <a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S2.F2" title="In 2 Related Work ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Fig.</span> <span class="ltx_text ltx_ref_tag">2</span></a> whose node positions are laid out by the force-directed placement <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">fdp</span>]</cite> with a random initial node layout.
+This initialization ensures that the same graph can produce diagram images with different layouts.
+The captions describe the generated directed graph in Mermaid format, where each line denotes a directed edge; e.g., <span class="ltx_text ltx_font_typewriter" id="S3.SS1.p2.1.1">A --&gt; B</span> indicates an edge from node “A” to node “B”.
+We generate 100k image–caption pairs and use 10% of them as a test set.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Training Encoders via Contrastive Learning</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">We finetune pretrained CLIP models using contrastive learning on our artificially generated dataset.
+CLIP <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">radford2021learning</span>]</cite> is a dual-encoder architecture, comprising an image and text encoder, that learns joint representations from pairs of images and their captions.
+During training, CLIP minimizes a contrastive loss that brings the embeddings of matching image–text pairs closer while pushing apart the embeddings of non-matching pairs.
+We specifically target CLIP for our approach because its image encoders serve as foundational components in numerous state-of-the-art large vision language models <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhu2023minigpt4</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">li2023blip2</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">liu2023visual</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">awadalla2023openflamingo</span>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.1">For our experiments, we adopt two pretrained CLIP models with different image encoder sizes: CLIP-ViT-B/32 <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">clip-vit-base-patch32</span>]</cite> and CLIP-ViT-L/14 <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">clip-vit-large-patch14-336</span>]</cite>.
+CLIP-ViT-B/32 has 12 hidden layers and outputs 512-dimensional embeddings, whereas CLIP-ViT-L/14 has twice as many hidden layers and outputs 768-dimensional embeddings.
+We implement standard contrastive learning using our artificial dataset with a sufficiently large number of training steps.</p>
+</div>
+<figure class="ltx_table" id="S3.T1">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S3.T1.2.1.1" style="font-size:90%;">Table 1</span>: </span><span class="ltx_text" id="S3.T1.3.2" style="font-size:90%;">Performance comparison of pretrained and finetuned CLIP models on diagram understanding tasks.</span></figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S3.T1.4">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S3.T1.4.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S3.T1.4.1.1.1" rowspan="2"><span class="ltx_text" id="S3.T1.4.1.1.1.1">Method</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="3" id="S3.T1.4.1.1.2">Linear Probing (Mean Accuracy)</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="2" id="S3.T1.4.1.1.3">Image Retrieval</th>
+</tr>
+<tr class="ltx_tr" id="S3.T1.4.2.2">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.4.2.2.1">Node existence</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.4.2.2.2">Edge existence</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.4.2.2.3">Edge direction</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.4.2.2.4">MAP@100</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.4.2.2.5">MRR@100</th>
+</tr>
+<tr class="ltx_tr" id="S3.T1.4.3.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_t" id="S3.T1.4.3.3.1">Random</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.4.3.3.2">0.500</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.4.3.3.3">0.500</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.4.3.3.4">0.500</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.4.3.3.5">0.0004</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.4.3.3.6">0.001</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.T1.4.4.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S3.T1.4.4.1.1">Pretrained ViT-B/32</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.4.4.1.2">0.959</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.4.4.1.3">0.639</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.4.4.1.4">0.518</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.4.4.1.5">0.067</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.4.4.1.6">0.108</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.4.5.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.T1.4.5.2.1">Pretrained ViT-L/14</th>
+<td class="ltx_td ltx_align_center" id="S3.T1.4.5.2.2">0.999</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.4.5.2.3">0.725</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.4.5.2.4">0.509</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.4.5.2.5">0.131</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.4.5.2.6">0.170</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.4.6.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.T1.4.6.3.1"><span class="ltx_text ltx_font_bold" id="S3.T1.4.6.3.1.1">Finetuned ViT-B/32</span></th>
+<td class="ltx_td ltx_align_center" id="S3.T1.4.6.3.2">0.994</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.4.6.3.3">0.726</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.4.6.3.4">0.857</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.4.6.3.5">0.973</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.4.6.3.6">0.973</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.4.7.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb" id="S3.T1.4.7.4.1"><span class="ltx_text ltx_font_bold" id="S3.T1.4.7.4.1.1">Finetuned ViT-L/14</span></th>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.4.7.4.2"><span class="ltx_text ltx_font_bold" id="S3.T1.4.7.4.2.1">1.000</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.4.7.4.3"><span class="ltx_text ltx_font_bold" id="S3.T1.4.7.4.3.1">0.735</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.4.7.4.4"><span class="ltx_text ltx_font_bold" id="S3.T1.4.7.4.4.1">0.860</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.4.7.4.5"><span class="ltx_text ltx_font_bold" id="S3.T1.4.7.4.5.1">0.996</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.4.7.4.6"><span class="ltx_text ltx_font_bold" id="S3.T1.4.7.4.6.1">0.996</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Evaluation of Image Encoder</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">We evaluate the finetuned image encoder on three tasks that rely on diagram recognition: the linear probing (<a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S4.SS1" title="4.1 Linear Probing ‣ 4 Evaluation of Image Encoder ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Sec.</span> <span class="ltx_text ltx_ref_tag">4.1</span></a>), image retrieval (<a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S4.SS2" title="4.2 Image Retrieval ‣ 4 Evaluation of Image Encoder ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Sec.</span> <span class="ltx_text ltx_ref_tag">4.2</span></a>), and diagram captioning (<a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S4.SS3" title="4.3 Diagram Captioning ‣ 4 Evaluation of Image Encoder ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Sec.</span> <span class="ltx_text ltx_ref_tag">4.3</span></a>).</p>
+</div>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Linear Probing</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">Linear probing <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">alain2016understanding</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">conneau-etal-2018-cram</span>]</cite> measures how well the extracted features encode information through classification tasks on features.
+In this study, we train and evaluate a simple logistic regression on top of the frozen image encoder to quantify the recognition capability of nodes and edges.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p2">
+<p class="ltx_p" id="S4.SS1.p2.1">We define three binary classification tasks: <em class="ltx_emph ltx_font_italic" id="S4.SS1.p2.1.1">node existence</em>, <em class="ltx_emph ltx_font_italic" id="S4.SS1.p2.1.2">edge existence</em>, and <em class="ltx_emph ltx_font_italic" id="S4.SS1.p2.1.3">edge direction</em> classification.
+In node existence classification, for a given node label (“A” to “H”), we predict whether it appears in the diagram.
+Edge existence classification is a task to predict if an undirected edge exists between a given pair of nodes (ignoring direction).
+If either node is missing from the graph, that test sample is excluded to purely evaluate the edge recognition ability.
+Finally, in edge direction classification, we check whether a specific directed edge exists (e.g., from A to B).
+If no edge exists in either direction between the given two nodes, we skip that sample to solely evaluate the direction-related performance.
+We compute the accuracy for every possible label, node pair, or directed edge to report the average.
+For all tasks, we use balanced undersampling to ensure that the accuracies of all tasks can be compared to the chance rate (0.5).</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p3">
+<p class="ltx_p" id="S4.SS1.p3.1">To see the effect of our additional contrastive learning, we adopt pretrained CLIP-ViT-B/32 and CLIP-ViT-L/14 without additional contrastive training as baselines.
+As shown in <a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S3.T1" title="In 3.2 Training Encoders via Contrastive Learning ‣ 3 Learning with Debiased Diagram Dataset ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">1</span></a>, the pretrained baseline models perform poorly at edge direction classification (roughly at chance level), although they excel at text recognition (node labels).
+In contrast, both finetuned models show significant improvements from their baselines, especially in edge-direction classification (e.g., ViT-L/14 jumps from near-chance to 86% accuracy).
+These results indicate that removing textual and positional biases via contrastive learning lets the image encoder acquire edge-related features.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Image Retrieval</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">Our image retrieval task requires the model to retrieve all diagram images that represent the same directed graph as a given query image, which falls within the broader task category called content-based image retrieval <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">sharif2014cnn</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">babenko2014neural</span>]</cite>.
+This task tests whether the learned features are invariant to node positions, as the query and target diagrams can have different layouts while representing identical graph structures.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p2">
+<p class="ltx_p" id="S4.SS2.p2.1">We newly generate 1,000 query graphs using the same method in <a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S3.SS1" title="3.1 Diagram Dataset without Positional and Textual Biases ‣ 3 Learning with Debiased Diagram Dataset ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Sec.</span> <span class="ltx_text ltx_ref_tag">3.1</span></a> ensuring each query graph appears in our test dataset (but possibly with a different layout).
+We encode both the query and all test images with the same image encoder, rank them by cosine similarity, and measure Mean Average Precision (MAP) and Mean Reciprocal Rank (MRR) up to the top 100 results.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p3">
+<p class="ltx_p" id="S4.SS2.p3.1">As shown in <a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S3.T1" title="In 3.2 Training Encoders via Contrastive Learning ‣ 3 Learning with Debiased Diagram Dataset ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">1</span></a>, our finetuned ViT-B/32 and ViT-L/14 achieve MAP and MRR scores above 0.97, indicating that they successfully learn diagram features that are invariant to node positions.
+<a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S4.F3" title="In 4.2 Image Retrieval ‣ 4 Evaluation of Image Encoder ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Fig.</span> <span class="ltx_text ltx_ref_tag">3</span></a> shows examples of query images and retrieval results from finetuned and pretrained ViT-L/14.
+The pretrained image encoder mostly tends to focus on text and layout similarity, and it succeeds only when the node layouts are extremely similar.
+By contrast, the finetuned models correctly retrieve matching graphs even if the node layouts differ significantly.</p>
+</div>
+<figure class="ltx_figure" id="S4.F3"><svg class="ltx_picture ltx_centering" height="222.04" id="S4.F3.pic1" overflow="visible" version="1.1" width="365.79"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,222.04) matrix(1 0 0 -1 0 0) translate(182.89,0) translate(0,111.02)"><g transform="matrix(1.0 0.0 0.0 1.0 -180.93 -109.05)"><g class="ltx_tikzmatrix" transform="matrix(1 0 0 -1 0 181.8)"><g class="ltx_tikzmatrix_row" transform="matrix(1 0 0 1 0 35.47)"><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 0 0) translate(17.28,0) matrix(1.0 0.0 0.0 1.0 -15.31 -16.79)"><foreignobject height="33.59" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="30.63">
+<div class="ltx_inline-block ltx_transformed_outer" id="S4.F3.pic1.13.13.13.13.13.5.1.1" style="width:18.8pt;height:24.3pt;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="width:24.3pt;transform:translate(-2.74pt,-2.74pt) rotate(-90deg) ;">
+<span class="ltx_inline-block" id="S4.F3.pic1.13.13.13.13.13.5.1.1.1">
+<span class="ltx_p" id="S4.F3.pic1.13.13.13.13.13.5.1.1.1.1"><span class="ltx_text" id="S4.F3.pic1.13.13.13.13.13.5.1.1.1.1.1" style="font-size:90%;">Query</span></span>
+<span class="ltx_p" id="S4.F3.pic1.13.13.13.13.13.5.1.1.1.2"><span class="ltx_text" id="S4.F3.pic1.13.13.13.13.13.5.1.1.1.2.1" style="font-size:90%;">Image</span></span>
+</span>
+</span></div>
+<span class="ltx_text" id="S4.F3.pic1.14.14.14.14.14.6.2.2"> </span></foreignobject></g><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 37.7 0) translate(37.77,0) matrix(1.0 0.0 0.0 1.0 -35.81 -33.5)"><foreignobject height="67" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="71.61"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="67" id="S4.F3.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/query_1.png" width="67"/><span class="ltx_text" id="S4.F3.pic1.15.15.15.15.15.7.2.1"> </span></foreignobject></g><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 119.52 0) translate(37.77,0) matrix(1.0 0.0 0.0 1.0 -35.81 -33.5)"><foreignobject height="67" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="71.61"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="67" id="S4.F3.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/query_2.png" width="67"/><span class="ltx_text" id="S4.F3.pic1.16.16.16.16.16.8.2.1"> </span></foreignobject></g><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 201.34 0) translate(37.77,0) matrix(1.0 0.0 0.0 1.0 -35.81 -33.5)"><foreignobject height="67" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="71.61"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="67" id="S4.F3.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/query_3.png" width="67"/><span class="ltx_text" id="S4.F3.pic1.17.17.17.17.17.9.2.1"> </span></foreignobject></g><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 283.17 0) translate(37.77,0) matrix(1.0 0.0 0.0 1.0 -35.81 -33.5)"><foreignobject height="67" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="71.61"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="67" id="S4.F3.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/query_4.png" width="67"/><span class="ltx_text" id="S4.F3.pic1.18.18.18.18.18.10.2.1"> </span></foreignobject></g></g><g class="ltx_tikzmatrix_row" transform="matrix(1 0 0 1 0 109.21)"><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 0.38 0) translate(16.9,0) matrix(1.0 0.0 0.0 1.0 -14.93 -28.83)"><foreignobject height="57.67" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="29.86">
+<div class="ltx_inline-block ltx_transformed_outer" id="S4.F3.pic1.19.19.19.19.19.5.1.1" style="width:18.3pt;height:41.7pt;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="width:41.7pt;transform:translate(-11.71pt,-11.71pt) rotate(-90deg) ;">
+<span class="ltx_inline-block" id="S4.F3.pic1.19.19.19.19.19.5.1.1.1">
+<span class="ltx_p" id="S4.F3.pic1.19.19.19.19.19.5.1.1.1.1"><span class="ltx_text" id="S4.F3.pic1.19.19.19.19.19.5.1.1.1.1.1" style="font-size:90%;">Pretrained</span></span>
+<span class="ltx_p" id="S4.F3.pic1.19.19.19.19.19.5.1.1.1.2"><span class="ltx_text" id="S4.F3.pic1.19.19.19.19.19.5.1.1.1.2.1" style="font-size:90%;">ViT-L/14</span></span>
+</span>
+</span></div>
+<span class="ltx_text" id="S4.F3.pic1.20.20.20.20.20.6.2.2"> </span></foreignobject></g><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 37.7 0) translate(37.77,0) matrix(1.0 0.0 0.0 1.0 -35.81 -33.5)"><foreignobject height="67" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="71.61"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="67" id="S4.F3.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.1.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/retrieved_1_large_ori.png" width="67"/><span class="ltx_text" id="S4.F3.pic1.21.21.21.21.21.7.2.1"> </span></foreignobject></g><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 119.52 0) translate(37.77,0) matrix(1.0 0.0 0.0 1.0 -35.81 -33.5)"><foreignobject height="67" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="71.61"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="67" id="S4.F3.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.2.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/retrieved_2_large_ori.png" width="67"/><span class="ltx_text" id="S4.F3.pic1.22.22.22.22.22.8.2.1"> </span></foreignobject></g><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 201.34 0) translate(37.77,0) matrix(1.0 0.0 0.0 1.0 -35.81 -33.5)"><foreignobject height="67" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="71.61"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="67" id="S4.F3.pic1.7.7.7.7.7.7.7.7.7.7.7.7.7.7.7.7.7.7.7.7.3.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/retrieved_3_large_ori.png" width="67"/><span class="ltx_text" id="S4.F3.pic1.23.23.23.23.23.9.2.1"> </span></foreignobject></g><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 280.03 0) translate(40.91,0) matrix(1.0 0.0 0.0 1.0 -38.94 -34.33)"><g class="ltx_nestedsvg" transform="matrix(1 0 0 1 0 0) translate(34.33,0) translate(0,34.33)"><g fill="#000000" stroke="#FF8000" stroke-width="1.2pt"><path d="M -33.5 -33.5 h 67 v 67 h -67 Z" style="fill:none"></path></g><g fill="#000000" stroke="#000000" stroke-width="1.2pt" transform="matrix(1.0 0.0 0.0 1.0 -33.5 -33.5)"><foreignobject height="67" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="67"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="67" id="S4.F3.pic1.8.8.8.8.8.8.8.8.8.8.8.8.8.8.8.8.8.8.8.8.4.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/retrieved_4_large_ori.png" width="67"/></foreignobject></g></g></g></g><g class="ltx_tikzmatrix_row" transform="matrix(1 0 0 1 0 181.8)"><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 0.38 0) translate(16.9,0) matrix(1.0 0.0 0.0 1.0 -14.93 -27.59)"><foreignobject height="55.18" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="29.86">
+<div class="ltx_inline-block ltx_transformed_outer" id="S4.F3.pic1.24.24.24.24.24.5.1.1" style="width:18.3pt;height:39.9pt;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="width:39.9pt;transform:translate(-10.81pt,-10.81pt) rotate(-90deg) ;">
+<span class="ltx_inline-block" id="S4.F3.pic1.24.24.24.24.24.5.1.1.1">
+<span class="ltx_p" id="S4.F3.pic1.24.24.24.24.24.5.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.F3.pic1.24.24.24.24.24.5.1.1.1.1.1" style="font-size:90%;">Finetuned</span></span>
+<span class="ltx_p" id="S4.F3.pic1.24.24.24.24.24.5.1.1.1.2"><span class="ltx_text ltx_font_bold" id="S4.F3.pic1.24.24.24.24.24.5.1.1.1.2.1" style="font-size:90%;">ViT-L/14</span></span>
+</span>
+</span></div>
+<span class="ltx_text" id="S4.F3.pic1.25.25.25.25.25.6.2.2"> </span></foreignobject></g><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 34.56 0) translate(40.91,0) matrix(1.0 0.0 0.0 1.0 -38.94 -34.33)"><g class="ltx_nestedsvg" transform="matrix(1 0 0 1 0 0) translate(34.33,0) translate(0,34.33)"><g fill="#000000" stroke="#FF8000" stroke-width="1.2pt"><path d="M -33.5 -33.5 h 67 v 67 h -67 Z" style="fill:none"></path></g><g fill="#000000" stroke="#000000" stroke-width="1.2pt" transform="matrix(1.0 0.0 0.0 1.0 -33.5 -33.5)"><foreignobject height="67" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="67"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="67" id="S4.F3.pic1.9.9.9.9.9.9.9.9.9.9.9.9.9.9.9.9.9.9.9.9.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/retrieved_1_large_finetuned.png" width="67"/></foreignobject></g></g></g><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 116.38 0) translate(40.91,0) matrix(1.0 0.0 0.0 1.0 -38.94 -34.33)"><g class="ltx_nestedsvg" transform="matrix(1 0 0 1 0 0) translate(34.33,0) translate(0,34.33)"><g fill="#000000" stroke="#FF8000" stroke-width="1.2pt"><path d="M -33.5 -33.5 h 67 v 67 h -67 Z" style="fill:none"></path></g><g fill="#000000" stroke="#000000" stroke-width="1.2pt" transform="matrix(1.0 0.0 0.0 1.0 -33.5 -33.5)"><foreignobject height="67" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="67"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="67" id="S4.F3.pic1.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.10.2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/retrieved_2_large_finetuned.png" width="67"/></foreignobject></g></g></g><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 198.21 0) translate(40.91,0) matrix(1.0 0.0 0.0 1.0 -38.94 -34.33)"><g class="ltx_nestedsvg" transform="matrix(1 0 0 1 0 0) translate(34.33,0) translate(0,34.33)"><g fill="#000000" stroke="#FF8000" stroke-width="1.2pt"><path d="M -33.5 -33.5 h 67 v 67 h -67 Z" style="fill:none"></path></g><g fill="#000000" stroke="#000000" stroke-width="1.2pt" transform="matrix(1.0 0.0 0.0 1.0 -33.5 -33.5)"><foreignobject height="67" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="67"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="67" id="S4.F3.pic1.11.11.11.11.11.11.11.11.11.11.11.11.11.11.11.11.11.11.11.11.3.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/retrieved_3_large_finetuned.png" width="67"/></foreignobject></g></g></g><g class="ltx_tikzmatrix_col ltx_nopad_l ltx_nopad_r" fill="#000000" stroke="#000000" transform="matrix(1 0 0 -1 280.03 0) translate(40.91,0) matrix(1.0 0.0 0.0 1.0 -38.94 -34.33)"><g class="ltx_nestedsvg" transform="matrix(1 0 0 1 0 0) translate(34.33,0) translate(0,34.33)"><g fill="#000000" stroke="#FF8000" stroke-width="1.2pt"><path d="M -33.5 -33.5 h 67 v 67 h -67 Z" style="fill:none"></path></g><g fill="#000000" stroke="#000000" stroke-width="1.2pt" transform="matrix(1.0 0.0 0.0 1.0 -33.5 -33.5)"><foreignobject height="67" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="67"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="67" id="S4.F3.pic1.12.12.12.12.12.12.12.12.12.12.12.12.12.12.12.12.12.12.12.12.4.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.g1" src="extracted/6479594/figs/retrieved_4_large_finetuned.png" width="67"/></foreignobject></g></g></g></g></g></g><path d="M -175 1.54 L 178.07 1.54" style="fill:none"></path></g></svg>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F3.2.1.1" style="font-size:90%;">Figure 3</span>: </span><span class="ltx_text" id="S4.F3.3.2" style="font-size:90%;">Examples of query images (top row) and the top retrieved images using the pretrained ViT-L/14 (middle row) and finetuned ViT-L/14 (bottom row). Images surrounded by orange lines represent true positives that share the same directed graph structures as the queries.</span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.3 </span>Diagram Captioning</h3>
+<div class="ltx_para" id="S4.SS3.p1">
+<p class="ltx_p" id="S4.SS3.p1.1">This section proposes a new task called diagram captioning that requires a VLM to describe the edges in a given diagram image, accompanied by training a text decoder.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p2">
+<p class="ltx_p" id="S4.SS3.p2.1">Our diagram captioning is a task to predict a Mermaid-style description of the diagram presented in an input image.
+Performance is measured by the micro F1-score of the predicted edge set, obtained by parsing edge descriptions in the predicted Mermaid text (e.g., <span class="ltx_text ltx_font_typewriter" id="S4.SS3.p2.1.1">A --&gt; B</span>).</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p3">
+<p class="ltx_p" id="S4.SS3.p3.1">To construct our VLM, we pair CLIP’s image embeddings with GPT-2 <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">radford2019language</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">hf_canonical_model_maintainers_2022</span>]</cite> as a text decoder.
+Our GPT-2 uses cross-attention on the image embeddings and previous tokens, predicting the next token probabilities.
+We train on our artificial image–caption dataset with cross-entropy loss, freezing the image encoder’s weights, and select checkpoints based on validation loss from 1% of the training set.
+We compare the finetuned models with baselines that use the original CLIP encoders for image features, as well as with zero-shot inference from large VLMs, namely GPT-4o <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">gpt4o</span>]</cite> (<span class="ltx_text ltx_font_typewriter" id="S4.SS3.p3.1.1">gpt-4o-2024-08-06</span>) and LLaVA-Mistral <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">liu2024llavanext</span>]</cite> (which also uses CLIP-ViT-L/14).
+Zero-shot inference is prompted to generate a Mermaid-format caption describing the given diagram image.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p4">
+<p class="ltx_p" id="S4.SS3.p4.1"><a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S4.T2" title="In 4.3 Diagram Captioning ‣ 4 Evaluation of Image Encoder ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">2</span></a> shows that the finetuned ViT-L/14 encoder achieves an F1 of 0.966, outperforming pretrained ViT-L/14 and clearly beating GPT-4o with zero-shot.
+This indicates that the improved edge representation confirmed by the linear probing and image retrieval also benefits practical downstream tasks.
+The lower performance of the pretrained ViT-L/14 in both the diagram captioning and linear probing (<a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S3.T1" title="In 3.2 Training Encoders via Contrastive Learning ‣ 3 Learning with Debiased Diagram Dataset ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">1</span></a>) indicates that simply adapting the decoder is not enough; the bottleneck lies in the image encoder.
+GPT-4o and LLaVA-Mistral were shown to struggle with tasks that have no textual and positional cues to rely on, which is consistent with our findings in <a class="ltx_ref" href="https://arxiv.org/html/2505.19944v1#S2.F2" title="In 2 Related Work ‣ Can Visual Encoder Learn to See Arrows?"><span class="ltx_text ltx_ref_tag">Fig.</span> <span class="ltx_text ltx_ref_tag">2</span></a>.
+Although a supervised instruction tuning on these models would likely improve performance and provide insightful results, we leave this for our future work.
+We also tested our models on diagram images whose graphs are non-isomorphic to any training sample (even as unlabeled and undirected).
+Despite a slight performance degradation, our finetuned models still significantly outperformed the baselines, showing their strong generalization to unseen graph structures.</p>
+</div>
+<figure class="ltx_table" id="S4.T2">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S4.T2.2.1.1" style="font-size:90%;">Table 2</span>: </span><span class="ltx_text" id="S4.T2.3.2" style="font-size:90%;">Diagram captioning performance comparison.</span></figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S4.T2.4">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T2.4.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S4.T2.4.1.1.1">Method</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S4.T2.4.1.1.2">F1-score</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T2.4.2.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S4.T2.4.2.1.1">Llava-Mistral <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">liu2024llavanext</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T2.4.2.1.2">0.118</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.4.3.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S4.T2.4.3.2.1">GPT-4o <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">gpt4o</span>]</cite>
+</th>
+<td class="ltx_td ltx_align_center" id="S4.T2.4.3.2.2">0.500</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.4.4.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S4.T2.4.4.3.1">Pretrained ViT-B/32 (+GPT-2)</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T2.4.4.3.2">0.413</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.4.5.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S4.T2.4.5.4.1">Pretrained ViT-L/14 (+GPT-2)</th>
+<td class="ltx_td ltx_align_center" id="S4.T2.4.5.4.2">0.668</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.4.6.5">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S4.T2.4.6.5.1"><span class="ltx_text ltx_font_bold" id="S4.T2.4.6.5.1.1">Finetuned ViT-B/32 (+GPT-2)</span></th>
+<td class="ltx_td ltx_align_center" id="S4.T2.4.6.5.2">0.516</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.4.7.6">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb" id="S4.T2.4.7.6.1"><span class="ltx_text ltx_font_bold" id="S4.T2.4.7.6.1.1">Finetuned ViT-L/14 (+GPT-2)</span></th>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S4.T2.4.7.6.2"><span class="ltx_text ltx_font_bold" id="S4.T2.4.7.6.2.1">0.966</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Conclusion</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">We showed that removing textual and positional biases enables VLMs to learn edge recognition in diagrams.
+Using a synthetic dataset and contrastive learning on CLIP-based encoders, our finetuned models outperformed pretrained baselines across linear probing, image retrieval, and diagram captioning.
+This highlights the effectiveness of removing textual and positional biases for teaching VLMs to capture diagram structure.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography" style="font-size:90%;">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib1.4.4.1" style="font-size:90%;">Alain and Bengio [2016]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.6.1" style="font-size:90%;">
+Guillaume Alain and Yoshua Bengio.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.7.1" style="font-size:90%;">Understanding intermediate layers using linear classifier probes.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib1.8.1" style="font-size:90%;">arXiv preprint arXiv:1610.01644</em><span class="ltx_text" id="bib.bib1.9.2" style="font-size:90%;">, 2016.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib2.5.5.1" style="font-size:90%;">Awadalla et al. [2023]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.7.1" style="font-size:90%;">
+Adham Awadalla, Iris Gao, Jonathan Gardner, Jack Hessel, Younes Hanafy,
+Wenzheng Zhu, Karan Marathe, Yacine Bitton, Samir Gadre, Shixiang Sagawa,
+et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.8.1" style="font-size:90%;">OpenFlamingo: An open-source framework for training large
+autoregressive vision-language models.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib2.9.1" style="font-size:90%;">arXiv preprint arXiv:2308.01390</em><span class="ltx_text" id="bib.bib2.10.2" style="font-size:90%;">, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib3.5.5.1" style="font-size:90%;">Babenko et al. [2014]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.7.1" style="font-size:90%;">
+Artem Babenko, Anton Slesarev, Alexandr Chigorin, and Victor Lempitsky.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.8.1" style="font-size:90%;">Neural codes for image retrieval.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.9.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib3.10.2" style="font-size:90%;">Eur. Conf. Comput. Vis.</em><span class="ltx_text" id="bib.bib3.11.3" style="font-size:90%;">, pages 584–599. Springer, 2014.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib4.5.5.1" style="font-size:90%;">Chen et al. [2021]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.7.1" style="font-size:90%;">
+Jiaqi Chen, Jianheng Tang, Jinghui Qin, Xiaodan Liang, Lingbo Liu, Eric P Xing,
+and Liang Lin.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.8.1" style="font-size:90%;">GeoQA: A geometric question answering benchmark towards multimodal
+numerical reasoning.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib4.9.1" style="font-size:90%;">arXiv preprint arXiv:2105.14517</em><span class="ltx_text" id="bib.bib4.10.2" style="font-size:90%;">, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib5.5.5.1" style="font-size:90%;">Chen et al. [2024]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.7.1" style="font-size:90%;">
+Lin Chen, Jinsong Li, Xiaoyi Dong, Pan Zhang, Yuhang Zang, Zehui Chen, Haodong
+Duan, Jiaqi Wang, Yu Qiao, Dahua Lin, and Feng Zhao.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.8.1" style="font-size:90%;">Are we on the right way for evaluating large vision-language models?
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.9.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib5.10.2" style="font-size:90%;">Adv. Neural Inform. Process. Syst.</em><span class="ltx_text" id="bib.bib5.11.3" style="font-size:90%;">, 2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib6.5.5.1" style="font-size:90%;">Chen et al. [2023]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.7.1" style="font-size:90%;">
+Xi Chen, Josip Djolonga, Piotr Padlewski, Basil Mustafa, Soravit Changpinyo,
+Jialin Wu, Carlos Riquelme, Sebastian Goodman, Xiao Wang, Yi Tay, Siamak
+Shakeri, Mostafa Dehghani, Daniel Salz, Mario Lučić, Michael Tschannen,
+Arsha Nagrani, Hexiang Hu, Mandar Joshi, Bo Pang, Ceslee Montgomery, Paulina
+Pietrzyk, Marvin Ritter, Alexander J. Piergiovanni, Matthias Minderer, Filip
+Pavetić, Austin Waters, Gang Li, Ibrahim Alabdulmohsin, Lucas Beyer, Julien
+Amelot, Kenton Lee, Andreas Steiner, Yang Li, Daniel Keysers, Anurag Arnab,
+Yuanzhong Xu, Keran Rong, Alexander Kolesnikov, Mojtaba Seyedhosseini, Anelia
+Angelova, Xiaohua Zhai, Neil Houlsby, and Radu Soricut.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.8.1" style="font-size:90%;">PaLI-X: On scaling up a multilingual vision and language model.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib6.9.1" style="font-size:90%;">arXiv preprint arXiv:2305.18565</em><span class="ltx_text" id="bib.bib6.10.2" style="font-size:90%;">, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib7.5.5.1" style="font-size:90%;">Conneau et al. [2018]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.7.1" style="font-size:90%;">
+Alexis Conneau, German Kruszewski, Guillaume Lample, Loïc Barrault, and
+Marco Baroni.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.8.1" style="font-size:90%;">What you can cram into a single $&amp;!#* vector: Probing
+sentence embeddings for linguistic properties.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.9.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib7.10.2" style="font-size:90%;">Annu. Meet. Assoc. Comput. Linguist.</em><span class="ltx_text" id="bib.bib7.11.3" style="font-size:90%;">, pages 2126–2136,
+Melbourne, Australia, 2018. Association for Computational Linguistics.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib8.4.4.1" style="font-size:90%;">Fruchterman and Reingold [1991]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.6.1" style="font-size:90%;">
+Thomas M. J. Fruchterman and Edward M. Reingold.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.7.1" style="font-size:90%;">Graph drawing by force-directed placement.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib8.8.1" style="font-size:90%;">Software: Practice and Experience</em><span class="ltx_text" id="bib.bib8.9.2" style="font-size:90%;">, 21(11):1129–1164, 1991.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib9.4.4.1" style="font-size:90%;">HF Canonical Model
+Maintainers [2022]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib9.6.1" style="font-size:90%;">
+HF Canonical Model Maintainers.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_typewriter" id="bib.bib9.7.1" style="font-size:90%;">gpt2</span><span class="ltx_text" id="bib.bib9.8.2" style="font-size:90%;"> (revision 909a290), URL:
+</span><span class="ltx_text ltx_font_typewriter" id="bib.bib9.9.3" style="font-size:90%;">https://huggingface.co/gpt2</span><span class="ltx_text" id="bib.bib9.10.4" style="font-size:90%;">, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib10.5.5.1" style="font-size:90%;">Li et al. [2023]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.7.1" style="font-size:90%;">
+Junnan Li, Dongxu Li, Silvio Savarese, and Steven C. H. Hoi.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.8.1" style="font-size:90%;">BLIP-2: Bootstrapping language-image pre-training with frozen image
+encoders and large language models.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib10.9.1" style="font-size:90%;">arXiv preprint arXiv:2301.12597</em><span class="ltx_text" id="bib.bib10.10.2" style="font-size:90%;">, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib11.5.5.1" style="font-size:90%;">Liu et al. [2023]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.7.1" style="font-size:90%;">
+Haotian Liu, Chunyuan Li, Qingyang Wu, and Yong Jae Lee.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.8.1" style="font-size:90%;">Visual instruction tuning.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib11.9.1" style="font-size:90%;">arXiv preprint arXiv:2304.08485</em><span class="ltx_text" id="bib.bib11.10.2" style="font-size:90%;">, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib12.5.5.1" style="font-size:90%;">Liu et al. [2024]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib12.7.1" style="font-size:90%;">
+Haotian Liu, Chunyuan Li, Yuheng Li, Bo Li, Yuanhan Zhang, Sheng Shen, and
+Yong Jae Lee.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib12.8.1" style="font-size:90%;">LLaVA-NeXT: Improved reasoning, OCR, and world knowledge.
+</span>
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_url ltx_font_typewriter" href="https://llava-vl.github.io/blog/2024-01-30-llava-next/" style="font-size:90%;" title="">https://llava-vl.github.io/blog/2024-01-30-llava-next/</a><span class="ltx_text" id="bib.bib12.9.1" style="font-size:90%;">, 2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib13.5.5.1" style="font-size:90%;">Lu et al. [2024]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib13.7.1" style="font-size:90%;">
+Pan Lu, Hritik Bansal, Tony Xia, Jiacheng Liu, Chunyuan Li, Hannaneh
+Hajishirzi, Hao Cheng, Kai-Wei Chang, Michel Galley, and Jianfeng Gao.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib13.8.1" style="font-size:90%;">MathVista: Evaluating mathematical reasoning of foundation models
+in visual contexts.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib13.9.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib13.10.2" style="font-size:90%;">Int. Conf. Learn. Represent.</em><span class="ltx_text" id="bib.bib13.11.3" style="font-size:90%;">, 2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib14.4.4.1" style="font-size:90%;">OpenAI [2021a]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib14.6.1" style="font-size:90%;">
+OpenAI.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib14.7.1" style="font-size:90%;">CLIP ViT-B/32.
+</span>
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_url ltx_font_typewriter" href="https://huggingface.co/openai/clip-vit-base-patch32" style="font-size:90%;" title="">https://huggingface.co/openai/clip-vit-base-patch32</a><span class="ltx_text" id="bib.bib14.8.1" style="font-size:90%;">,
+2021a.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib14.9.1" style="font-size:90%;">Hugging Face Model Hub. Accessed: 2025-04-12.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib15.4.4.1" style="font-size:90%;">OpenAI [2021b]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.6.1" style="font-size:90%;">
+OpenAI.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.7.1" style="font-size:90%;">CLIP ViT-L/14-336.
+</span>
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_url ltx_font_typewriter" href="https://huggingface.co/openai/clip-vit-large-patch14-336" style="font-size:90%;" title="">https://huggingface.co/openai/clip-vit-large-patch14-336</a><span class="ltx_text" id="bib.bib15.8.1" style="font-size:90%;">,
+2021b.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.9.1" style="font-size:90%;">Hugging Face Model Hub. Accessed: 2025-04-12.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib16.4.4.1" style="font-size:90%;">OpenAI [2023a]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib16.6.1" style="font-size:90%;">
+OpenAI.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib16.7.1" style="font-size:90%;">Gpt-4 technical report.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib16.8.1" style="font-size:90%;">arXiv preprint arXiv:2303.08774</em><span class="ltx_text" id="bib.bib16.9.2" style="font-size:90%;">, 2023a.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib17.4.4.1" style="font-size:90%;">OpenAI [2023b]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib17.6.1" style="font-size:90%;">
+OpenAI.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib17.7.1" style="font-size:90%;">Hello, GPT-4o, 2023b.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib17.8.1" style="font-size:90%;">URL: </span><span class="ltx_text ltx_font_typewriter" id="bib.bib17.9.2" style="font-size:90%;">https://openai.com/index/hello-gpt-4o/</span><span class="ltx_text" id="bib.bib17.10.3" style="font-size:90%;">, Accessed:
+2025-02-14.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib18.5.5.1" style="font-size:90%;">Radford et al. [2019]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib18.7.1" style="font-size:90%;">
+Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, Ilya
+Sutskever, et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib18.8.1" style="font-size:90%;">Language models are unsupervised multitask learners.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib18.9.1" style="font-size:90%;">OpenAI blog</em><span class="ltx_text" id="bib.bib18.10.2" style="font-size:90%;">, 1(8):9, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib19.5.5.1" style="font-size:90%;">Radford et al. [2021]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib19.7.1" style="font-size:90%;">
+Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh,
+Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark,
+et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib19.8.1" style="font-size:90%;">Learning transferable visual models from natural language
+supervision.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib19.9.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib19.10.2" style="font-size:90%;">International conference on machine learning</em><span class="ltx_text" id="bib.bib19.11.3" style="font-size:90%;">, pages
+8748–8763. PMLR, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib20.5.5.1" style="font-size:90%;">Rahmanzadehgervi et al. [2024]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib20.7.1" style="font-size:90%;">
+Pooyan Rahmanzadehgervi, Logan Bolton, Mohammad Reza Taesiri, and Anh Totti
+Nguyen.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib20.8.1" style="font-size:90%;">Vision language models are blind.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib20.9.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib20.10.2" style="font-size:90%;">ACCV</em><span class="ltx_text" id="bib.bib20.11.3" style="font-size:90%;">, pages 18–34, 2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib21.5.5.1" style="font-size:90%;">Sharif Razavian et al. [2014]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib21.7.1" style="font-size:90%;">
+Ali Sharif Razavian, Hossein Azizpour, Josephine Sullivan, and Stefan Carlsson.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib21.8.1" style="font-size:90%;">CNN features off-the-shelf: an astounding baseline for recognition.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib21.9.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib21.10.2" style="font-size:90%;">IEEE Conf. Comput. Vis. Pattern Recog. Worksh.</em><span class="ltx_text" id="bib.bib21.11.3" style="font-size:90%;">, pages
+806–813, 2014.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib22.5.5.1" style="font-size:90%;">Singh et al. [2024]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib22.7.1" style="font-size:90%;">
+Shubhankar Singh, Purvi Chaurasia, Yerram Varun, Pranshu Pandya, Vatsal Gupta,
+Vivek Gupta, and Dan Roth.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib22.8.1" style="font-size:90%;">FlowVQA: Mapping multimodal logic in visual question answering with
+flowcharts.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib22.9.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib22.10.2" style="font-size:90%;">Annu. Meet. Assoc. Comput. Linguist.</em><span class="ltx_text" id="bib.bib22.11.3" style="font-size:90%;">, pages 1330–1350,
+2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib23.5.5.1" style="font-size:90%;">Team Gemini et al. [2024]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib23.7.1" style="font-size:90%;">
+Team Gemini, Petko Georgiev, Ving Ian Lei, Ryan Burnell, Libin Bai, Anmol
+Gulati, Garrett Tanzer, Damien Vincent, Zhufeng Pan, Shibo Wang, et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib23.8.1" style="font-size:90%;">Gemini 1.5: Unlocking multimodal understanding across millions of
+tokens of context.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib23.9.1" style="font-size:90%;">arXiv preprint arXiv:2403.05530</em><span class="ltx_text" id="bib.bib23.10.2" style="font-size:90%;">, 2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib24.5.5.1" style="font-size:90%;">Yoshida et al. [2024]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib24.7.1" style="font-size:90%;">
+Haruto Yoshida, Keito Kudo, Yoichi Aoki, Ryota Tanaka, Itsumi Saito, Keisuke
+Sakaguchi, and Kentaro Inui.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib24.8.1" style="font-size:90%;">How well do vision models encode diagram attributes?
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib24.9.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib24.10.2" style="font-size:90%;">the ACL 2024 Student Research Workshop</em><span class="ltx_text" id="bib.bib24.11.3" style="font-size:90%;">, 2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib25.5.5.1" style="font-size:90%;">Yue et al. [2024]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib25.7.1" style="font-size:90%;">
+Xiang Yue, Yuansheng Ni, Kai Zhang, Tianyu Zheng, Ruoqi Liu, Ge Zhang, Samuel
+Stevens, Dongfu Jiang, Weiming Ren, Yuxuan Sun, et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib25.8.1" style="font-size:90%;">MMMU: A massive multi-discipline multimodal understanding and
+reasoning benchmark for expert AGI.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib25.9.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib25.10.2" style="font-size:90%;">IEEE Conf. Comput. Vis. Pattern Recog.</em><span class="ltx_text" id="bib.bib25.11.3" style="font-size:90%;">, pages 9556–9567,
+2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib26.5.5.1" style="font-size:90%;">Zhang et al. [2024]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib26.7.1" style="font-size:90%;">
+Renrui Zhang, Dongzhi Jiang, Yichi Zhang, Haokun Lin, Ziyu Guo, Pengshuo Qiu,
+Aojun Zhou, Pan Lu, Kai-Wei Chang, Yu Qiao, et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib26.8.1" style="font-size:90%;">Mathverse: Does your multi-modal llm truly see the diagrams in
+visual math problems?
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib26.9.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib26.10.2" style="font-size:90%;">European Conference on Computer Vision</em><span class="ltx_text" id="bib.bib26.11.3" style="font-size:90%;">, pages 169–186.
+Springer, 2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib27.5.5.1" style="font-size:90%;">Zhu et al. [2023]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib27.7.1" style="font-size:90%;">
+Deyao Zhu, Jiaming Chen, Xiaoqian Shen, Xiatian Li, and Mohamed Elhoseiny.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib27.8.1" style="font-size:90%;">MiniGPT-4: Enhancing vision-language understanding with advanced
+large language models.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib27.9.1" style="font-size:90%;">arXiv preprint arXiv:2304.10592</em><span class="ltx_text" id="bib.bib27.10.2" style="font-size:90%;">, 2023.
+</span>
+</span>
+</li>
+</ul>
+</section>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Mon May 26 11:52:07 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

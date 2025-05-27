@@ -1,5 +1,5 @@
 # arXiv Web Scraper ( Parallel )
-This is a Python project that allows you to scrape research papers from arXiv.org. You can search for papers based on a query and retrieve their metadata (such as authors, abstract, and PDF links) as well as download the content itself in the desired format ( PDF / HTML )
+This is a Python project that allows you to scrape research papers from arXiv.org. You can search for papers based on a query and retrieve their metadata (such as authors, abstract, and PDF links) as well as download the content itself in the desired format ( PDF / HTML ). It has a similar functionality to the Sequential one, but much faster ( especially for large amounts ).
 
 ## Features
 * Search for research papers based on specific keywords on arXiv.
@@ -21,6 +21,7 @@ This is a Python project that allows you to scrape research papers from arXiv.or
 ## Project Structure
 * `main.py`: Main Python script for scraping data.
 * `requirements.txt`: List of the libraries needed to run the app
+* `output`: Example folder of downloaded papers
 * `README.MD`: Project info and user guide.
 
 

@@ -109,14 +109,13 @@ def main():
         query = input("What subject sparks your interest?:\n")
         amount = int(input(f"How many papers matching \"{query}\" would you like?:\n"))
         format_choice = input("Choose format (pdf/html):\n").strip().lower()
+        create_output_folder("output")
     else:
         query = amount = format_choice = None
 
     query = comm.bcast(query, root=0)
     amount = comm.bcast(amount, root=0)
     format_choice = comm.bcast(format_choice, root=0)
-
-    create_output_folder("output")
 
     session = requests.Session()
 
